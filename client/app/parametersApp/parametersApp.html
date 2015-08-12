@@ -1,0 +1,47 @@
+<div id="parameters-header" class="section_title_div" ng-click="showParameters()">
+	<span class="section_title">Do you have app environment variables?</span>
+	<span class="help-block">This is optional, but you can't change it later.</span>
+	<div ng-class="{'glyphicon-chevron-down':checked, 'glyphicon-chevron-up':!checked}"
+	class="glyphicon pull-right"></div>
+</div>
+<div id="parameters-body" ng-show="checked">
+	<button type="button" ng-click="addVariable()" class="btn btn-default">Add Variable</button>
+	<button type="button" ng-clicke="deleteVariable()" class="btn btn-default">Delete Variable</button>
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
+				<th>Name</th>
+				<th>Value</th>
+				<th>Secret</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="param in app.parameters">
+					<td>
+						<input type="checkbox" name="parameter[]" value="{{ param.id }}" ng-model="param.selected" />
+					</td>
+					<td>
+						<div class="goog-inline-block rs-cog" role="button" tabindex="0" aria-haspopup="true" style="-webkit-user-select: none;">
+							<div class="goog-inline-block rs-cog-outer-box">
+								<div class="goog-inline-block rs-cog-inner-box">
+									<div class="goog-inline-block rs-cog-caption"></div>
+									<div class="goog-inline-block rs-cog-dropdown">&nbsp;</div>
+								</div>
+							</div>
+						</div>
+					</td>
+					<td>
+						<input class="form-control" ng-model="param.name" />
+					</td>
+					<td>
+						<input class="form-control" ng-model="param.value" />
+					</td>
+					<td>
+						<input type="checkbox"  ng-model="param.secret" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

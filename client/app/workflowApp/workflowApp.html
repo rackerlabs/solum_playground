@@ -1,0 +1,40 @@
+<div class="section_title_div">
+	<span class="section_title">Where is your code?</span>
+</div>
+<div class="form-horizontal">
+	<div class="form-group">
+		<label for="gitUrl" class="col-sm-3 control-label">Git URL</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" ng-model="app.gitUrl" ng-required placeholder="git url">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="username" class="col-sm-3 control-label">Username</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" ng-model="app.username">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="password" class="col-sm-3 control-label">Password</label>
+		<div class="col-sm-4">
+			<input type="password" class="form-control" ng-model="app.password">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="workflow" class="col-sm-3 control-label">Workflow</label>
+		<div class="col-sm-4">
+			<div class="radio">
+				<label>
+					<input type="radio" ng-model="app.workflow" value="build">Build
+					<p class="help-block">When you push new code, build and test, but don't deploy it.</p>
+				</label>
+			</div>
+			<div class="radio">
+				<label>
+					<input type="radio" ng-model="app.workflow" value="deploy">Deploy
+					<p class="help-block">When you push new code, test and deploy it automatically.</p>
+				</label>
+			</div>
+		</div>
+	</div>
+</div>

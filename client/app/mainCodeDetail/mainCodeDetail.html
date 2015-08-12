@@ -1,0 +1,44 @@
+<div class="section_title_div details_header">
+	<h3>Code Details</h3>
+</div>
+<div class="form-horizontal section_detail">
+	<div class="form-group">
+		<label for="name" class="col-sm-3 control-label">Git URL</label>
+		<div class="col-sm-4">
+			<span class="form-control-static">{{app.git_url }}</span>
+			<!--<input type="text" class="form-control" ng-model="app.name" ng-required ng-disabled="true" placeholder="app name">-->
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="description" class="col-sm-3 control-label">Run Command</label>
+		<div class="col-sm-4">
+			<span class="form-control-static">{{app.run_command }}</span>
+			<!--<input type="text" class="form-control" ng-model="app.description" ng-disabled="true" placeholder="Description">-->
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="language_pack" class="col-sm-3 control-label">Test Command</label>
+		<div class="col-sm-4">
+			<span class="form-control-static">{{app.test_command }}</span>
+			<!--<select class="form-control" ng-model="app.language_pack" ng-options="language_pack.name for language_pack in language_packs track by language_pack.id" ng-disabled="true"></select>-->
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="description" class="col-sm-3 control-label">Workflow</label>
+		<div class="col-sm-4">
+			<span class="form-control-static">{{ app.workflow }}</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="description" class="col-sm-3 control-label">Build Trigger</label>
+		<div class="col-sm-4">
+			<span class="form-control-static">{{ app.build_trigger }}</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="description" class="col-sm-3 control-label">Deploy Trigger</label>
+		<div class="col-sm-4">
+			<span class="form-control-static">{{ app.deploy_trigger }}</span>
+		</div>
+	</div>
+</div>

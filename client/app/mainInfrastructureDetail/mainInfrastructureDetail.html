@@ -1,0 +1,35 @@
+<div class="section_title_div details_header">
+	<h3>Infrastructure Details</h3>
+	<span class="help-block">Includes the stack and all log links</span>
+</div>
+<div id="parameters-body" ng-show="checked">
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<th>&nbsp;</th>
+				<th>Name</th>
+				<th>Type</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="infra in app.infrastructure">
+					<td>
+						<div class="goog-inline-block rs-cog" role="button" tabindex="0" aria-haspopup="true" style="-webkit-user-select: none;">
+							<div class="goog-inline-block rs-cog-outer-box">
+								<div class="goog-inline-block rs-cog-inner-box">
+									<div class="goog-inline-block rs-cog-caption"></div>
+									<div class="goog-inline-block rs-cog-dropdown">&nbsp;</div>
+								</div>
+							</div>
+						</div>
+					</td>
+					<td>
+						<input class="form-control" ng-model="infra.name" />
+					</td>
+					<td>
+						<input class="form-control" ng-model="infra.type" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

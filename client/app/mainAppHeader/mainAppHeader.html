@@ -1,0 +1,21 @@
+<section class="details_section details_header">
+  <div class="btn-group pull-right" dropdown>
+    <button type="button" class="btn rs-btn btn-region goog-menu-button" dropdown-toggle>Actions
+      <span class="caret"></span>
+    </button>
+      <ul class="rs-dropdown-menu dropdown-menu" role="menu" dropdown-menu aria-haspopup="true">
+        <li class="rs-dropdown-item">
+          <span class="rs-dropdown-category">Actions</span>
+        </li>
+        <li class="rs-dropdown-item" role="menuitem">
+          <a class="rs-dropdown-link" href="#" ng-click="deploy(app)">Deploy App</a>
+        </li>
+        <li class="rs-dropdown-item" role="menuitem">
+          <a class="rs-dropdown-link" href="#" ng-click="deleteApp(app)">Delete App</a>
+        </li>
+      </ul>
+  </div>
+  <div class="details_category">App</div>
+  <h1 class="details_title">{{ app.name }}</h1>
+  <a ng-if="app.application_uri" target="_blank" href="http://{{ app.application_uri }}">http://{{ app.application_uri }}<i class="rs-icon-external"></i></a>
+</section>

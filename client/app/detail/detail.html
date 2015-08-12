@@ -1,0 +1,92 @@
+<main-menu></main-menu>
+<div class="solum-wrapper">
+	<div class="row">
+		<div class="col-xs-4 rs-back-link">
+			<a href="/apps">&lt; Back to apps list</a>
+		</div>
+	</div>
+	<div class="row" id="detail">
+		<div class="col-xs-9">
+			<div class="list-group" id="detail-app">
+				<form ng-submit="create(form)" class="form" name="form" novalidate>
+					<div class="list-group-item">
+						<p class="list-group-item-text">
+							<main-app-header></main-app-header>
+						</p>
+					</div>
+					<div class="list-group-item">
+						<p class="list-group-item-text">
+							<main-app-stats></main-app-stats>
+						</p>
+					</div>
+					<div class="list-group-item">
+						<p class="list-group-item-text">
+							<main-app-detail></main-app-detail>
+						</p>
+					</div>
+					<div class="list-group-item">
+						<p class="list-group-item-text">
+							<main-code-detail></main-code-detail>
+						</p>
+					</div>
+					<div class="list-group-item">
+						<p class="list-group-item-text">
+							<main-infrastructure-detail></main-infrastructure-detail>
+						</p>
+					</div>
+					<div class="list-group-item">
+						<p class="list-group-item-text">
+							<main-parameter-detail></main-parameter-detail>
+						</p>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-xs-3" id="sidebar">
+			<div class="section_title">
+				<span>Solution Details and Cost</span>
+			</div>
+			<h4>App Architecture</h4>
+			<div class="well">App diagram</div>
+		</div>
+	</div>
+</div>
+<script type="text/ng-template" id="deployContent.html">
+	<div class="section_title_div details_header modal-header">
+        <h3 class="modal-title">Deploy {{ app.name }}!</h3>
+    </div>
+    <div class="modal-body">
+		<div class="form-horizontal section_detail">
+			<div class="form-group">
+				<label for="name" class="col-sm-3 control-label">App Status</label>
+				<div class="col-sm-4">
+					<span class="form-control-static rs-status {{ app.status | AppStatusFilter }}">{{ app.status }}</span>
+					<span class="pull-right" ng-if="app.application_uri">When ready, access your application at: <a href="app_uri">app_uri<i class="rs-icon-external"></i></a></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="description" class="col-sm-3 control-label">Id</label>
+				<div class="col-sm-4">
+					<span class="form-control-static">{{ app.id }}</span>
+					<!--<input type="text" class="form-control" ng-model="app.description" ng-disabled="true" placeholder="Description">-->
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="description" class="col-sm-3 control-label">Created Date</label>
+				<div class="col-sm-4">
+					<span class="form-control-static">{{ app.created_at }}</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="description" class="col-sm-3 control-label">Last Updated</label>
+				<div class="col-sm-4">
+					<span class="form-control-static">{{ app.updated_at }}</span>
+				</div>
+			</div>
+		</div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="cancel()">Got it</button>
+    </div>
+</script>

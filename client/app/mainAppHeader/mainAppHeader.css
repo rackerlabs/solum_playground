@@ -1,0 +1,15 @@
+.details_category {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 10px;
+  font-size: 12px;
+  line-height: 12px;
+}
+.details_header a {
+	font-size: 12px;
+}
+.details_header h1 {
+	margin: 0;
+  font-weight: 700;
+}

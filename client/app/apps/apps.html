@@ -1,0 +1,33 @@
+<main-menu></main-menu>
+<div id="bootcards">
+  <a class="btn btn-default rs-btn rs-btn-primary save" href="/create" role="button">Create App</a>
+  <div class="row" ng-repeat="app in apps track by $index" ng-if="$index % 4 == 0">
+		<div class="col-xs-3 bootcards-cards" ng-repeat="i in [$index, $index+1, $index+2, $index+3]" ng-if="apps[i] != null">
+			<app-card app="apps[i]"></app-card>
+		</div>
+	</div>	
+</div>
+
+<!-- 
+      <div class=row ng-repeat="app in app_list track by $index"ng-if="$index % 3 == 0" > 
+        <div class="col-xs-4" ng-repeat="i in [$index, $index + 1, $index + 2]" ng-if="app_list[i] != null">
+          <div class="panel panel-default app-card">
+              <div ng-class="{'bs-callout-success': app_list[i].status == 'READY', 'bs-callout-warning': app_list[i].status == 'BUILDING','bs-callout-warning': app_list[i].status == 'DEPLOYING', 'bs-callout-danger': app_list[i].status.indexOf('ERROR_CODE_DEPLOYMENT') > -1}" class="bs-callout">
+                <img ng-src="{{ app_list[i].lp_image }}" ng-if="app_list[i].lp_image"></img>
+                <h4 class="app-heading"><a ng-href="/apps/{{ app_list[i].uuid}}">{{ app_list[i].name }}</a></h4>{{ app_list[i].description }}.
+              </div>
+            <div class="list-group">
+              <div class="list-group-item">
+                <p class="list-group-item-text">App status: {{ app_list[i].status }}<button class="rs-cog solum-gear"></button></p>
+              </div>
+              <div class="list-group-item">
+                <p class="list-group-item-text">App health: 0 alerts</p>
+              </div>
+              <div class="list-group-item" ng-if="app_list[i].application_uri">
+                <p class="list-group-item-text"><a target="_blank" ng-href="http://{{app_list[i].application_uri}}">{{ app_list[i].application_uri }}<i class="rs-icon-external"></i></a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+-->

@@ -1,0 +1,46 @@
+#detail .list-group-item {
+	margin: 0;
+	padding: 20px;
+}
+#detail-app {
+	-webkit-box-shadow: 0 10px 6px -6px #777 !important;
+	-moz-box-shadow: 0 10px 6px -6px #777 !important;
+	box-shadow: 0 10px 6px -6px #777 !important;
+}
+#parameters-header .help-block {
+	font-size: 12px;
+	display: inline;
+}
+#parameters-header {
+	cursor: pointer;
+}
+#sidebar {
+	margin-top: 20px;
+}
+#sidebar .section_title {
+	padding-bottom: 1em;
+}
+#sidebar h4 {
+	font-size: 16px;
+}
+.save-cancel {
+	margin-left: 5%;
+}
+button.save {
+	margin-right: 1em;
+}
+
+div.hover-tip-icon.pricing-icon{
+	background-color: #00a96d;
+	height: 16px;
+	-webkit-border-radius: 18px;
+	width: auto;
+	min-width: 8px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 18px;
+	text-align: center;
+	padding: 0 4px;
+	font-family: "Source Sans Pro","Helvetica Neue",sans-serif;
+}

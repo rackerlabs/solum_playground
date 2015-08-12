@@ -1,0 +1,33 @@
+html, body {
+   height: 100%;
+}
+#login_wrapper{
+  min-height:364px;
+  background-color:#fff;
+  box-shadow:2px 2px 5px 1px rgba(0,0,0,0.15);
+  -moz-box-shadow:2px 2px 5px 1px rgba(0,0,0,0.15);
+  -webkit-box-shadow:2px 2px 5px 1px rgba(0,0,0,0.15);
+  -ms-box-shadow:2px 2px 5px 1px rgba(0,0,0,0.15);
+  padding: 48px 0;
+    position: relative;
+  top: 30%;
+}
+.vertical-align {
+  height: 364px;
+}
+#rackspace_logo_container{
+  background:transparent url('/assets/images/logo-rackspace-managed-cloud-company.png') no-repeat;
+  background-position:center center;
+  width:250px;
+  height:57px;
+  display:inline-block;
+  margin-top:95px;
+  padding:40px 49px
+}
+#auth_login_block{
+  padding:30px 0 30px 49px;
+  float: left;
+  margin: 28px 0;
+  border-left: 1px solid #ddd;
+  font-size: 13px;
+}

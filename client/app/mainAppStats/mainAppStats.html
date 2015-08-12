@@ -1,0 +1,20 @@
+<div class="section_title_div details_header">
+	<h3>App Stats</h3>
+</div>
+<div class="form-horizontal section_detail">
+	<div class="form-group">
+		<label for="name" class="col-sm-3 control-label">App Status</label>
+		<div class="col-sm-4">
+			<span class="form-control-static rs-status {{ app.status | AppStatusFilter }}">{{ app.status }}</span>
+			<!--<input type="text" class="form-control" ng-model="app.name" ng-required ng-disabled="true" placeholder="app name">-->
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="description" class="col-sm-3 control-label">Last Build</label>
+		<div class="col-sm-4">
+			<span class="form-control-static rs-status {{ app.last_build_status.status | AppStatusFilter }}">{{ app.last_build_status.status }}</span>
+				<span class="form-help">({{ app.last_build_status.uuid }})</span>
+			<!--<input type="text" class="form-control" ng-model="app.description" ng-disabled="true" placeholder="Description">-->
+		</div>
+	</div>
+</div>

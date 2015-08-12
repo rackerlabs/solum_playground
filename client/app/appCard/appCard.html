@@ -1,0 +1,28 @@
+<div class="panel panel-default app-card bootstrap-cards">
+  <div class="panel-heading app-card-heading">
+    <span class="pull-left">
+      <img src="{{ app.language_pack | LanguagePackFilter }}" class="thumbnail" alt="Sample Image" width="75px" height="75px">
+    </span>
+    <div class="app-card-heading-body">
+      <h4><a href="/detail/{{ app.id }}">{{ app.name | NameFilter }}</a></h4>
+      <span>Build #745</span>
+    </div>
+  </div>
+  <div class="panel-body">{{ app.description }}</div>
+  <div class="panel-body">
+    <span id="server_status" class="rs-status {{ app.status | AppStatusFilter }}">{{ app.status }}</span>
+    <a href="" ng-if="app.status === 'READY'">stop</a>
+  </div>
+  <div class="panel-body" ng-if="app.assembly_uuid">Latest build: {{app.assembly_uuid}}</div>
+  <div class="panel-body">
+    <a ng-if="app.application_uri" target="_blank" href="http://{{ app.application_uri }}">http://{{ app.application_uri }}<i class="rs-icon-external"></i></a>
+  </div>
+  <div class="panel-footer">
+    <ul class="list-inline bootcard-footer">
+      <li>CPU XX%</li>
+      <li>RAM XX%</li>
+      <li>I/O XX%</li>
+      <li>Net XX%</li>
+    </ul>
+  </div>
+</div>
