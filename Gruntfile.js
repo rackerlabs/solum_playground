@@ -60,9 +60,10 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/**/*.html',
+          '.tmp/styles/**/*.css',
+          '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
+          'app/*.js'
         ]
       }
     },
@@ -351,6 +352,14 @@ module.exports = function (grunt) {
 
     // Copies remaining files to places other tasks can use
     copy: {
+      debug: {
+              files: [{
+                expand: true,
+                dot: true,
+                dest: '<%= yeoman.app %>',
+                src: 'client/**/*'
+              }]
+            },
       dist: {
         files: [{
           expand: true,
@@ -417,6 +426,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'copy:debug',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
@@ -441,6 +451,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'imagemin',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
