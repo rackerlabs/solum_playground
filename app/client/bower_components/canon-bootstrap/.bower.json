@@ -1,0 +1,32 @@
+{
+  "name": "canon-bootstrap",
+  "version": "0.5.0",
+  "license": "MIT",
+  "homepage": "https://github.com/rackerlabs/canon-bootstrap",
+  "description": "Canon Bootstrap is a theme for Twitter Bootstrap based on Canon's visual design.",
+  "authors": [
+    "Brad Gignac <bgignac@bradgignac.com>"
+  ],
+  "keywords": [
+    "bootstrap",
+    "canon"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "main": "build/css/canon-bootstrap.css",
+  "_release": "0.5.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.5.0",
+    "commit": "2af58b0a98c4301e990c4e8b9e77b42f5700a35c"
+  },
+  "_source": "git://github.com/rackerlabs/canon-bootstrap.git",
+  "_target": "~0.5.0",
+  "_originalSource": "canon-bootstrap",
+  "_direct": true
+}
