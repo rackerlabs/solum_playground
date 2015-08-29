@@ -23,13 +23,19 @@ angular.module('reposePlaygroundApp')
         })
         .then( function() {
           // Logged in, redirect to home
+          console.log('just logged in', $location);
           $location.path('/internal');
         })
         .catch( function(err) {
+          console.log(err);
           $scope.errors.other = [];
           for(var e in err){
-            for(var i = 0; i < err[e].length; i ++){
-              $scope.errors.other.push(e + " => " + err[e][i]);
+            if(err[e].message !== "undefined"){
+              $scope.errors.other.push(e + " => " + err[e].message)
+            } else {
+              for(var i = 0; i < err[e].length; i ++){
+                $scope.errors.other.push(e + " => " + err[e][i]);
+              }              
             }
           }
           console.log($scope.errors.other);
