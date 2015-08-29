@@ -26,7 +26,13 @@ angular.module('reposePlaygroundApp')
           $location.path('/internal');
         })
         .catch( function(err) {
-          $scope.errors.other = err.message;
+          $scope.errors.other = [];
+          for(var e in err){
+            for(var i = 0; i < err[e].length; i ++){
+              $scope.errors.other.push(e + " => " + err[e][i]);
+            }
+          }
+          console.log($scope.errors.other);
         });
       }
     };

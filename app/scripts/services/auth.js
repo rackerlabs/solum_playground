@@ -27,7 +27,7 @@ angular.module('reposePlaygroundApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.post('/auth/local', {
+        $http.post('app/auth', {
           username: user.username,
           password: user.password
         }).
