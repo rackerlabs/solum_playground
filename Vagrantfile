@@ -8,7 +8,7 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.network :forwarded_port, guest: 8080, host: 9001, auto_correct: true
-  config.vm.network :forwarded_port, guest: 9000, host: 9000, auto_correct: true
+  config.vm.network :forwarded_port, guest: 10000, host: 9000, auto_correct: true
   config.vm.network :forwarded_port, guest: 22, host: 2223, auto_correct: true
   config.vm.network :forwarded_port, guest: 35729, host: 35729, auto_correct: true
   #config.vm.synced_folder "/Users/dimi5963/projects/solum-ui", "/home/vagrant/solum", create: true

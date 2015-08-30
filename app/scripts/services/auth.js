@@ -11,6 +11,7 @@ angular.module('reposePlaygroundApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
     if($cookieStore.get('token')) {
+      console.log('in auth factory, we have a token', $cookieStore.get('token'))
       currentUser = User.get();
     }
 
@@ -27,11 +28,12 @@ angular.module('reposePlaygroundApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.post('/auth/local', {
+        $http.post('app/auth', {
           username: user.username,
           password: user.password
         }).
         success(function(data) {
+          console.log(data);
           $cookieStore.put('token', data.token);
           currentUser = User.get();
           deferred.resolve(data);
@@ -65,6 +67,7 @@ angular.module('reposePlaygroundApp')
         return currentUser;
       },
 
+
       /**
        * Check if a user is logged in
        *
@@ -78,7 +81,7 @@ angular.module('reposePlaygroundApp')
        * Waits for currentUser to resolve before checking if user is logged in
        */
       isLoggedInAsync: function(cb) {
-        console.log(currentUser);
+        console.log(' in loggedin async ',currentUser);
         if(currentUser.hasOwnProperty('$promise')) {
           currentUser.$promise.then(function() {
             cb(true);
@@ -107,5 +110,6 @@ angular.module('reposePlaygroundApp')
       getToken: function() {
         return $cookieStore.get('token');
       }
+      
     };
   });
