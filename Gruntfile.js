@@ -16,7 +16,8 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
+    cdnify: 'grunt-google-cdn',
+    configureProxies: 'grunt-connect-proxy'
   });
 
   // Configurable paths for the application
@@ -57,7 +58,28 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          open: true,
+
+          middleware: function (connect) {
+            var middlewares = [];
+
+            // Setup the proxy
+            middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
+
+            // Serve static files
+            middlewares.push(connect.static('.tmp'));
+            middlewares.push(connect().use(
+              '/bower_components',
+              connect.static('./bower_components')
+              ));
+            middlewares.push(connect().use(
+              '/app/styles',
+              connect.static('./app/styles')
+              ));
+            middlewares.push(connect.static(appConfig.app));
+
+            return middlewares;
+          }
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
@@ -70,27 +92,42 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 9090,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
+      proxies: [
+        {
+          context: '/app', // the context of the data service
+          host: 'localhost', // wherever the data service is running
+          port: 9000, // the port that the data service is running on
+          changeOrigin: true
+        }
+      ],
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect().use(
-                '/app/styles',
-                connect.static('./app/styles')
-              ),
-              connect.static(appConfig.app)
-            ];
+          base: [
+            '.tmp',
+            '<%= yeoman.app %>'
+          ],
+          middleware: function (connect, options) {
+            var middlewares = [];
+
+            if (!Array.isArray(options.base)) {
+              options.base = [options.base];
+            }
+           
+            // Setup the proxy
+            middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
+ 
+            // Serve static files
+            options.base.forEach(function (base) {
+              middlewares.push(connect.static(base));
+            });
+
+            return middlewares;
           }
         }
       },
@@ -104,7 +141,7 @@ module.exports = function (grunt) {
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
-              ),
+                ),
               connect.static(appConfig.app)
             ];
           }
@@ -117,7 +154,6 @@ module.exports = function (grunt) {
         }
       }
     },
-
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {
@@ -183,23 +219,23 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath: /\.\.\//
       },
       test: {
         devDependencies: true,
         src: '<%= karma.unit.configFile %>',
-        ignorePath:  /\.\.\//,
-        fileTypes:{
+        ignorePath: /\.\.\//,
+        fileTypes: {
           js: {
             block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
-              detect: {
-                js: /'(.*\.js)'/gi
-              },
-              replace: {
-                js: '\'{{filePath}}\','
-              }
+            detect: {
+              js: /'(.*\.js)'/gi
+            },
+            replace: {
+              js: '\'{{filePath}}\','
             }
           }
+        }
       }
     },
 
@@ -351,6 +387,14 @@ module.exports = function (grunt) {
 
     // Copies remaining files to places other tasks can use
     copy: {
+      debug: {
+        files: [{
+          expand: true,
+          dot: true,
+          dest: '<%= yeoman.app %>',
+          src: 'client/**/*'
+        }]
+      },
       dist: {
         files: [{
           expand: true,
@@ -365,16 +409,16 @@ module.exports = function (grunt) {
             'styles/fonts/{,*/}*.*'
           ]
         }, {
-          expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
-          src: ['generated/*']
-        }, {
-          expand: true,
-          cwd: 'bower_components/bootstrap/dist',
-          src: 'fonts/*',
-          dest: '<%= yeoman.dist %>'
-        }]
+            expand: true,
+            cwd: '.tmp/images',
+            dest: '<%= yeoman.dist %>/images',
+            src: ['generated/*']
+          }, {
+            expand: true,
+            cwd: 'bower_components/bootstrap/dist',
+            src: 'fonts/*',
+            dest: '<%= yeoman.dist %>'
+          }]
       },
       styles: {
         expand: true,
@@ -417,8 +461,10 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'copy:debug',
       'concurrent:server',
       'autoprefixer:server',
+      'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);
@@ -441,6 +487,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'imagemin',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
