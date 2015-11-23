@@ -8,10 +8,12 @@
  * Service in the reposePlaygroundApp.
  */
 angular.module('reposePlaygroundApp')
-  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q, $log) {
+    $log.info('In Auth factory')
     var currentUser = {};
+    $log.info('Check token in cookie store: ', $cookieStore.get('token'))
     if($cookieStore.get('token')) {
-      console.log('in auth factory, we have a token', $cookieStore.get('token'))
+      $log.info('We have a token', $cookieStore.get('token'))
       currentUser = User.get();
     }
 
@@ -25,6 +27,7 @@ angular.module('reposePlaygroundApp')
        * @return {Promise}
        */
       login: function(user, callback) {
+        $log.info('In Auth.login().  Try to login with: ', user);
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
@@ -33,13 +36,14 @@ angular.module('reposePlaygroundApp')
           password: user.password
         }).
         success(function(data) {
-          console.log(data);
+          $log.info('Auth.login()::Got back a "successful" response with: ', data);
           $cookieStore.put('token', data.token);
           currentUser = User.get();
           deferred.resolve(data);
           return cb();
         }).
         error(function(err) {
+          $log.error('Auth.login()::Got back a "failed" response with: ', err);
           this.logout();
           deferred.reject(err);
           return cb(err);
@@ -54,6 +58,7 @@ angular.module('reposePlaygroundApp')
        * @param  {Function}
        */
       logout: function() {
+        $log.info('In Auth.logout().  Remove token from cookie store');
         $cookieStore.remove('token');
         currentUser = {};
       },
@@ -64,6 +69,7 @@ angular.module('reposePlaygroundApp')
        * @return {Object} user
        */
       getCurrentUser: function() {
+        $log.info('In Auth.getCurrentUser().  Get current user: ', currentUser);
         return currentUser;
       },
 
@@ -74,6 +80,7 @@ angular.module('reposePlaygroundApp')
        * @return {Boolean}
        */
       isLoggedIn: function() {
+        $log.info('In Auth.isLoggedIn().  Get current user: ', currentUser, 'Check if there is a role assigned to it: ', currentUser.hasOwnProperty('role'));
         return currentUser.hasOwnProperty('role');
       },
 
@@ -81,16 +88,21 @@ angular.module('reposePlaygroundApp')
        * Waits for currentUser to resolve before checking if user is logged in
        */
       isLoggedInAsync: function(cb) {
-        console.log(' in loggedin async ',currentUser);
+        $log.info('In Auth.isLoggedInAsync(). Current user: ', currentUser);
         if(currentUser.hasOwnProperty('$promise')) {
+          $log.info('Auth.isLoggedInAsync()::Current user has a promise property, which means we need to go check if user info is valid and current: ', currentUser.hasOwnProperty('$promise'));
           currentUser.$promise.then(function() {
+            $log.info('Auth.isLoggedInAsync()::Login async call succeeded.  Callback.');
             cb(true);
           }).catch(function() {
+            $log.error('Auth.isLoggedInAsync()::Login async call failed.  Callback.');
             cb(false);
           });
         } else if(currentUser.hasOwnProperty('role')) {
+          $log.info('Auth.isLoggedInAsync()::Current user has a role property, which means we do not need to go check if user info is valid and current: ', currentUser.hasOwnProperty('role'));
           cb(true);
         } else {
+          $log.error('Auth.isLoggedInAsync()::Current user does not have role or $promise.  Fail out: ', currentUser);
           cb(false);
         }
       },

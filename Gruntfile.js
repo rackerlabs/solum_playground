@@ -6,6 +6,7 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
+var modRewrite = require('connect-modrewrite');
 
 module.exports = function (grunt) {
 
@@ -62,9 +63,12 @@ module.exports = function (grunt) {
 
           middleware: function (connect) {
             var middlewares = [];
+            
 
             // Setup the proxy
             middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
+
+            middlewares.push(modRewrite(['^[^\\.]*$ /index.html [L]']));
 
             // Serve static files
             middlewares.push(connect.static('.tmp'));
@@ -118,10 +122,13 @@ module.exports = function (grunt) {
             if (!Array.isArray(options.base)) {
               options.base = [options.base];
             }
-           
+            
             // Setup the proxy
             middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
  
+            middlewares.push(modRewrite(['^[^\\.]*$ /index.html [L]']));
+
+           
             // Serve static files
             options.base.forEach(function (base) {
               middlewares.push(connect.static(base));
@@ -136,6 +143,7 @@ module.exports = function (grunt) {
           port: 9001,
           middleware: function (connect) {
             return [
+              modRewrite(['^[^\\.]*$ /index.html [L]']),
               connect.static('.tmp'),
               connect.static('test'),
               connect().use(

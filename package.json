@@ -36,5 +36,8 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "connect-modrewrite": "^0.8.2"
   }
 }

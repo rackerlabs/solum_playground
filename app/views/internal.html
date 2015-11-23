@@ -1,6 +1,18 @@
 <main-menu></main-menu>
-<div class="rs-table-overlay rs-table-overlay-loading">
+<div data-ng-include="'views/repose-list-cards.html'"></div>
+<div class="rs-table-overlay rs-table-overlay-loading" data-ng-if="ui.waitingForLoad">
   <div class="rs-table-overlay-content">
     <div class="rs-table-overlay-message">Loading&hellip;</div>
+  </div>
+</div>
+<div class="rs-table-overlay" data-ng-if="ui.reposeFetchError">
+  <div class="rs-table-overlay-content">
+    <div class="rs-table-overlay-title"><h3>Sorry, something went wrong when trying to list your Repose instances.</h3></div>
+    <div class="rs-table-overlay-message">
+      <p>You can try to list them again, but you may need to contact support if the problem persists.</p>
+      <p class="table-overlay-btn-group">
+        <button class="rs-btn" data-ng-click="forceFetchReposes()">Try Again</button>
+      </p>
+    </div>
   </div>
 </div>

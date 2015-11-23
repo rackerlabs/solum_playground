@@ -1,0 +1,49 @@
+<div class="repose-cards" data-ng-show="!ui.reposeFetchError && !ui.waitingForLoad">
+  <div class="repose-card" data-ng-repeat="repose in reposes track by repose.repose_name">
+    <div class="card-header">
+      <div class="card-subtitle">Repose Instance</div>
+      <h3 class="card-title">{{ repose.repose_name }}</h3>
+      <div class="card-cog" data-ng-show="repose.status != 'building'">
+        <div class="rs-dropdown" data-rs-dropdown>
+          <div class="rs-cog rs-dropdown-toggle"></div>
+          <ul class="rs-dropdown-menu">
+            <li><span class="rs-dropdown-category"></span></li>
+            <li><a data-ui-sref="reposes.detail({reposeName: repose.repose_name})" class="rs-dropdown-link">Edit Instance</a></li>
+            <li><a data-ng-click="repose.canDoAction('delete') && reposes.activateDeletePopover(repose)" class="rs-dropdown-link" data-ng-class="{'disabled': !repose.canDoAction('delete')}">Delete Instance</a></li>
+          </ul>
+          <div class="rs-popover rs-cog-popover medium" data-rs-popover="{{ repose.repose_name }}-deleteReposeInstance" data-context="repose">
+            <div class="rs-popover-arrow rs-popover-arrow-top-right"></div>
+            <div class="rs-popover-content">
+              <div class="rs-popover-body">
+                Are you really sure?
+              </div>
+              <div class="rs-popover-footer rs-btn-group">
+                <a data-ng-click="popover.resolve()" class="rs-btn rs-btn-primary">Delete Repose</a>
+                <a data-ng-click="popover.reject()" class="rs-btn rs-btn-link">Cancel</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="details-trio">
+        <div class="repose-configs">
+          <div class="details-header">Configurations</div>
+        </div>
+        <div class="repose-autoscale">
+          <div class="details-header">Status</div>
+          <span class="on" title="Enable Instance" data-ng-show="repose.started" data-ng-click="repose.canDoAction('start') && reposes.toggleStatus(repose)">STARTED</span>
+          <span class="off" title="Disable Instance" data-ng-show="!repose.started" data-ng-click="repose.canDoAction('stop') && reposes.toggleStatus(repose)">STOPPED</span>
+        </div>
+        <div class="repose-metrics">
+          <div class="details-header">Data</div>
+          <span class="rs-status" title="{{ repose.status }}" data-ng-class="reposes.getStatus(repose)">{{ repose.status }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-ng-if="reposes..length < 3" class="repose-card add-new" data-ui-sref="reposes.create">
+    Add Repose Instance&hellip;
+  </div>
+</div>
