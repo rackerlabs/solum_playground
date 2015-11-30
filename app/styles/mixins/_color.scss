@@ -1,0 +1,11 @@
+$brown: rgb (123,63,0);
+$green: rgb(86,130,3);
+
+
+@function tint($color, $percentage) {
+  @return mix($color, white, 100% - $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return mix($color, black, 100% - $percentage);
+}

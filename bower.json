@@ -15,6 +15,7 @@
     "angular-ui-router": "~0.2.15",
     "angular-ui-bootstrap": "~0.13.3",
     "canon-bootstrap": "~0.5.0",
+    "canon": "https://github.com/rackerlabs/canon.git#v1.8.1",
     "angular-bootstrap": "~0.13.3",
     "json3": "~3.3.2",
     "angular-socket-io": "~0.7.0"

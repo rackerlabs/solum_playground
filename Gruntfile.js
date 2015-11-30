@@ -33,6 +33,17 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+    sass: {
+      options: {
+        sourcemap: true
+      },
+			dist: {
+				files: {
+					'<%= yeoman.app %>/styles/app.css' : '<%= yeoman.app %>/styles/app.scss'
+				}
+			}
+		},
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -63,7 +74,7 @@ module.exports = function (grunt) {
 
           middleware: function (connect) {
             var middlewares = [];
-            
+
 
             // Setup the proxy
             middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
@@ -122,13 +133,13 @@ module.exports = function (grunt) {
             if (!Array.isArray(options.base)) {
               options.base = [options.base];
             }
-            
+
             // Setup the proxy
             middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
- 
+
             middlewares.push(modRewrite(['^[^\\.]*$ /index.html [L]']));
 
-           
+
             // Serve static files
             options.base.forEach(function (base) {
               middlewares.push(connect.static(base));
@@ -446,8 +457,8 @@ module.exports = function (grunt) {
       ],
       dist: [
         'copy:styles',
-        'imagemin',
-        'svgmin'
+        //'imagemin',
+        //'svgmin'
       ]
     },
 
@@ -468,8 +479,9 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
       'copy:debug',
+      'wiredep',
+      'sass',
       'concurrent:server',
       'autoprefixer:server',
       'configureProxies:server',
@@ -495,7 +507,8 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
-    'imagemin',
+    'sass',
+    //'imagemin',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

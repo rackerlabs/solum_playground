@@ -43,6 +43,5 @@
   },
   "_source": "git://github.com/bestiejs/json3.git",
   "_target": "~3.3.2",
-  "_originalSource": "json3",
-  "_direct": true
+  "_originalSource": "json3"
 }
