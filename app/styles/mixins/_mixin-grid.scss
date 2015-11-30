@@ -1,6 +1,6 @@
 @mixin grid($gutter-width: $gutter-width) {
     display: block;
-    width: calc(100% + $gutter-width);
+    width: calc(#{$gutter-width} + 100%);
     margin-left: ($gutter-width * -1);
     overflow: hidden;
     vertical-align: top;

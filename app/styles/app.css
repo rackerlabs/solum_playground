@@ -3607,10 +3607,11 @@ html, body {
 
 .repose-cards {
   display: block;
-  width: calc(100% + $gutter-width);
+  width: calc(30px + 100%);
   margin-left: -30px;
   overflow: hidden;
   vertical-align: top;
+  margin-top: 50px;
   overflow: visible; }
 
 .repose-card {
@@ -3662,7 +3663,7 @@ html, body {
       right: -26px; }
   .repose-card .details-trio {
     display: block;
-    width: calc(100% + $gutter-width);
+    width: calc(10px + 100%);
     margin-left: -10px;
     overflow: hidden;
     vertical-align: top; }
