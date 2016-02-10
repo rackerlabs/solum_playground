@@ -1,0 +1,24 @@
+<div class="modal-header">
+</div>
+<h3 class="modal-title">Configuration files!</h3>
+<div class="modal-body">
+  <div class="rs-control-group rs-embedded-list-table-wrapper rs-embedded-medium">
+    <table class="rs-list-table rs-embedded-list-table">
+      <thead>
+      <tr>
+        <th><span class="rs-table-sort-text">Name</span></th>
+        <th><span class="rs-table-sort-text">XML</span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="config in configs">
+        <td class="rs-table-text">{{ config.name }}</td>
+        <td class="rs-table-text">{{ config.xml | prettify }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="cancel()">Dismiss</button>
+</div>

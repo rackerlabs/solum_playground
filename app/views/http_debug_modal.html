@@ -1,0 +1,36 @@
+<div class="modal-header">
+</div>
+<h3 class="modal-title">Debug Entries files!</h3>
+<div class="modal-body">
+  <div data-ng-repeat="log_entry in data.poolMessages track by $index">
+    <p>{{ log_entry }}</p>
+  </div>
+
+  <div class="rs-control-group rs-embedded-list-table-wrapper rs-embedded-large">
+    <table class="rs-list-table rs-embedded-list-table">
+      <thead>
+      <tr>
+        <th class="dialog-td"><span class="rs-table-sort-text">Request</span></th>
+        <th class="dialog-td"><span class="rs-table-sort-text">Response</span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="request in data.externalRequests">
+        <td class="rs-table-text dialog-td">
+          <ul data-ng-repeat="entry in request.request">
+            <li ng-bind-html="entry"></li>
+          </ul>
+        </td>
+        <td class="rs-table-text dialog-td">
+          <ul data-ng-repeat="entry in request.response">
+            <li ng-bind-html="entry"></li>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="dismiss()">Dismiss</button>
+</div>

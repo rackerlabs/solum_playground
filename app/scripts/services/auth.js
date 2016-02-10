@@ -122,6 +122,6 @@ angular.module('reposePlaygroundApp')
       getToken: function() {
         return $cookieStore.get('token');
       }
-      
+
     };
   });

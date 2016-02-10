@@ -12,7 +12,7 @@ angular.module('reposePlaygroundApp')
     $log.info('in Login controller');
     $scope.user = {};
     $scope.errors = {};
-    
+
     $scope.login = function(form) {
       $log.info('In LoginCtrl.login.  Try to log in with ', form)
       $scope.submitted = true;
@@ -26,7 +26,7 @@ angular.module('reposePlaygroundApp')
         .then( function() {
           // Logged in, redirect to home
           $log.info('LoginCtrl::Successful response', $location);
-          $location.path('/internal');
+          $location.path('/main');
         })
         .catch( function(err) {
           $log.error('LoginCtrl::Failed response in LoginCtrl.login()', err);
@@ -40,7 +40,7 @@ angular.module('reposePlaygroundApp')
               for(var i = 0; i < err[e].length; i ++){
                 $log.error('LoginCtrl::e will have ', err[e][i]);
                 $scope.errors.other.push(e + " => " + err[e][i]);
-              }              
+              }
             }
           }
           $log.error($scope.errors.other);

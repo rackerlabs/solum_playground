@@ -1,0 +1,12 @@
+<div class="rs-control-group" data-ng-show="ui.versionSelected">
+  <div class="rs-control-group">
+    <label class="rs-control-label">Filters</label>
+    <div class="rs-controls">
+      <label class="rs-checkbox" data-ng-repeat="filter in repose.availableFilters">
+        <input type="checkbox" checklist-model="newInstance.selectedFilters" checklist-value="filter">
+        {{ filter }}
+      </label>
+      <button class="rs-btn rs-btn-primary" type="button"  data-ng-click="getComponent()">Load filters</button>
+    </div>
+  </div>
+</div>

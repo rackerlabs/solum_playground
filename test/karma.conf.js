@@ -39,6 +39,11 @@ module.exports = function(config) {
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/json3/lib/json3.js',
       'client/bower_components/angular-socket-io/socket.js',
+      'client/bower_components/checklist-model/checklist-model.js',
+      'client/bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js',
+      'client/bower_components/angular-bootstrap-slider/slider.js',
+      'client/bower_components/angular-pretty-xml/src/angular-pretty-xml.js',
+      'client/bower_components/vkBeautify-wrapper/dist/vkbeautify.0.99.00.beta.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

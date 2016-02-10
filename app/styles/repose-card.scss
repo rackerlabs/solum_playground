@@ -133,3 +133,11 @@
     text-decoration: underline;
   }
 }
+
+.modal-dialog {
+  width: 1200px;
+}
+
+.modal-dialog td.dialog-td{
+  max-width: 100px !important;
+}

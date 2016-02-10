@@ -1,0 +1,37 @@
+<div class="rs-control-group" style="position:relative; margin-left:2em;"> <!-- repose-list -->
+	<table class="rs-list-table">
+		<thead>
+			<tr>
+				<th ng-repeat="item in fields">
+					<span class="rs-table-sort-text">
+            <repose-label value="{{ item.name }}" required="{{ item.required }}" doc="{{ item.doc }}"/>
+          </span>
+				</th>
+				<th>
+					<span class="rs-table-sort-text">Actions</span>
+				</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="element in list track by $index">
+        <td class="rs-table-text" ng-repeat="field in fields" ng-switch="field.type">
+          <input type="text" ng-switch-when="string" filter-name="{{ filterName }}" xsd-type="{{ element[field.name]['xsd-type'] }}" name="{{ prefix }}{{ element[field.name].name }}[{{ $parent.$parent.$index }}]" value="">
+          <slider ng-switch-when="double" filter-name="filterName" xsd-type="element[field.name]['xsd-type']" ng-model="list['index_' + $parent.$parent.$index]" name="{{ prefix }}{{ element[field.name].name }}[{{ $parent.$parent.$index }}]" min="element[field.name].minInclusive" step="0.1" max="element[field.name].maxInclusive" value="element[field.name].default"></slider>
+          <input ng-switch-when="boolean" filter-name="{{ filterName }}" xsd-type="{{ element[field.name]['xsd-type'] }}" type="checkbox" name="{{ prefix }}{{ element[field.name].name }}[{{ $parent.$parent.$index }}]">
+          <input ng-switch-when="anyURI" filter-name="{{ filterName }}" xsd-type="{{ element[field.name]['xsd-type'] }}" type="url" name="{{ prefix }}{{ element[field.name].name }}[{{ $parent.$parent.$index }}]" value="">
+          <select ng-switch-when="select" filter-name="{{ filterName }}" xsd-type="{{ element[field.name]['xsd-type'] }}" class="rs-input-medium" name="{{ prefix }}{{ element[field.name].name }}[{{ $parent.$parent.$index }}]">
+            <option data-ng-repeat="option in field.enumeration" value="{{option}}">{{option}}</option>
+          </select>
+          <select multiple ng-switch-when="multi-select" filter-name="{{ filterName }}" xsd-type="{{ element[field.name]['xsd-type'] }}" class="rs-input-medium" name="{{ prefix }}{{ element[field.name].name }}[{{ $parent.$parent.$index }}]">
+            <option data-ng-repeat="option in field.enumeration" value="{{option}}">{{option}}</option>
+          </select>
+        </td>
+        <td class="rs-table-text">
+          <button class="rs-btn rs-btn-primary" data-ng-click="addOneToList(list)" ng-if="$last">Add another</button>
+          <button class="rs-btn" data-ng-click="removeOneFromList(list, $index)" ng-if="!$first">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

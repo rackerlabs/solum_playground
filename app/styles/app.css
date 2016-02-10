@@ -3716,6 +3716,12 @@ html, body {
     background: #fafcfd;
     text-decoration: underline; }
 
+.modal-dialog {
+  width: 1200px; }
+
+.modal-dialog td.dialog-td {
+  max-width: 100px !important; }
+
 h2.rs-page-title, .rs-page-title {
   /*padding: 40px;*/ }
 
@@ -3733,17 +3739,8 @@ h2.rs-page-title, .rs-page-title {
   margin: 0 auto;
   width: 80%; }
 
-/*@import "app/components/alerts";*/
-/*@import "app/components/links";
-@import "app/components/rs-butterbar";
-@import "app/components/rs-nav-utility";
-@import "app/components/rs-modal";
-@import "app/components/rs-popover";
-@import "app/components/rs-table";*/
-/*@import "app/app";
-@import "app/account/account";
-@import "app/clusters/clusters";
-@import "app/clusters/detail";*/
-/*@import "app/signup/signup";*/
+.rs-container {
+  padding: 0;
+  width: 90%; }
 
 /*# sourceMappingURL=app.css.map */

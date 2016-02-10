@@ -1,0 +1,78 @@
+<div class="rs-container">
+  <div class="rs-back-link">
+    <a data-ui-sref="main" data-ng-show="ui.isChildState">Back to Instances</a>
+  </div>
+  <div class="rs-main rs-panel">
+    <div class="rs-sidebar rs-pull-right">
+      <div class="rs-inner">
+        <h3>Test your Instance</h3>
+        <h4>Repose Test Instance</h4>
+        <p>To evaluate your Repose instance, you can put in a request and view what Repose does inside!</p>
+        <p><a href="https://repose.atlassian.net/wiki/">Repose wiki</a></p>
+      </div>
+    </div>
+    <div class="rs-content rs-panel">
+      <form name="testReposeForm" id="testReposeForm" data-ng-submit="testReposeForm.$valid && testReposeInstance()" class="rs-form-horizontal" novalidate>
+        <div class="rs-detail-section">
+          <!-- make request -->
+          <make-request></make-request>
+          <div class="rs-detail-section-header rs-btn-group">
+            <button type="submit" class="save rs-btn rs-btn-primary">Test</button>
+          </div>
+        </div>
+      </form>
+      <!-- response list -->
+      <div class="rs-control-group">
+        <div class="rs-control-group">
+          <label class="rs-control-label">Responses</label>
+        </div>
+        <div class="rs-control-group rs-embedded-list-table-wrapper rs-embedded-medium">
+          <table class="rs-list-table rs-embedded-list-table">
+            <thead>
+            <tr>
+              <th><span class="rs-table-sort-text">Request Id</span></th>
+              <th><span class="rs-table-sort-text">Request Method</span></th>
+              <th><span class="rs-table-sort-text">Request URL</span></th>
+              <th><span class="rs-table-sort-text">Request Headers</span></th>
+              <th><span class="rs-table-sort-text">Request Body</span></th>
+              <th><span class="rs-table-sort-text">Response Code</span></th>
+              <th><span class="rs-table-sort-text">Response Body</span></th>
+              <th><span class="rs-table-sort-text">Response Headers</span></th>
+              <th><span class="rs-table-sort-text">Intra Filter</span></th>
+              <th><span class="rs-table-sort-text">Inter service</span></th>
+              <th><span class="rs-table-sort-text">Errors</span></th>
+              <th>
+                <span class="rs-table-sort-text">Actions</span>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="response in responses">
+              <td class="rs-table-text">{{$index }}</td>
+              <td class="rs-table-text">{{response['request']['method']}}</td>
+              <td class="rs-table-text">{{response['request']['url']}}</td>
+              <td class="rs-table-text">{{response['request']['headers'] | requestHeaders }}</td>
+              <td class="rs-table-text">{{response['request']['body']}}</td>
+              <td class="rs-table-text">{{response['response']['responseStatus']}}</td>
+              <td class="rs-table-text">{{response['response']['responseBody']}}</td>
+              <td class="rs-table-text"><p ng-bind-html="response['response']['responseHeaders'] | responseHeaders "></p></td>
+              <td class="rs-table-text">
+                <button class="rs-btn" data-ng-click="showIntraFilter(response)">Show</button>
+              </td>
+              <td class="rs-table-text">
+                <button class="rs-btn" data-ng-click="showHttp(response)">Show</button>
+              </td>
+              <td class="rs-table-text">
+                <button class="rs-btn" data-ng-click="showErrors(response)">Show</button>
+              </td>
+              <td class="rs-table-text">
+                <button class="rs-btn" data-ng-click="removeOneFromList(responses, $index)">Remove</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

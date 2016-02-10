@@ -19,7 +19,10 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.router',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'checklist-model',
+    'ui.bootstrap-slider',
+    'prettyXml'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $logProvider) {
     var $log =  angular.injector(['ng']).get('$log');
@@ -64,7 +67,7 @@ angular
   })
   .run(function ($rootScope, $location, Auth, $log) {
     $log.info('in run method for bootstrap', $location, $rootScope, $location.$$path);
-    
+
     $rootScope.$on('$stateChangeStart', function (event, next) {
       //check if user is logged in
       $log.info('run::executed state change check.  Check to validate we are logged in.', event, next)
@@ -75,7 +78,7 @@ angular
           $location.path('/login');
         } else if (next.landing && loggedIn) {
           $log.info('run::Next state has a landing page as true and we are logged in');
-          $location.path('/internal')
+          $location.path('/main')
           //check if repose instances exist
         } else if(next.authenticate && loggedIn) {
           $log.info('run::Next state has authentication on and we are logged in');
@@ -83,6 +86,7 @@ angular
           $log.info('run::logged in user ', user, $location.$$path);
           $rootScope.raxTenant = user.raxTenant;
           $rootScope.username = user.username;
+          $location.path($location.$$path);
         } else {
           $log.error('run::Some other combination.  Bail out to login');
           $location.path('/login');
