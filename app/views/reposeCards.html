@@ -1,0 +1,41 @@
+<div class="repose-cards" data-ng-show="!ui.reposeFetchError && !ui.waitingForLoad">
+  <div class="repose-card add-new" data-ui-sref="create">
+    Add Repose Instance&hellip;
+  </div>
+  <div class="repose-card" data-ng-repeat="repose in reposes track by repose.repose_name">
+    <div class="card-header">
+      <div class="card-subtitle">Repose Instance</div>
+      <h3 class="card-title">{{ repose.repose_name }}</h3>
+    </div>
+    <div class="card-body">
+      <div class="details-trio">
+        <div class="repose-configs">
+          <div class="details-header">Version</div>
+          <span>{{ repose.version }}</span>
+        </div>
+        <div class="repose-autoscale">
+          <div class="details-header">Status</div>
+          <span class="rs-status rs-status-ok" data-ng-show="repose.status=='Running'">{{ repose.status }}</span>
+          <span class="rs-status rs-status-error" data-ng-show="repose.status!=='Running'">{{ repose.status }}</span>
+        </div>
+        <div class="repose-metrics">
+          <div class="details-header">Data</div>
+          <span>{{ repose.message }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer rs-btn-group">
+      <div class="button-wrap">
+        <!-- TODO: add ui route for configuration -->
+        <button class="rs-btn btn-footer rs-btn-primary" data-ng-class="{'disabled': repose.status!=='Running'}" data-ng-click="viewConfiguration(repose)">Configuration</button>
+        <!-- TODO: add button function for start -->
+        <button class="rs-btn btn-footer rs-btn-login" data-ng-show="repose.status=='Running'" data-ng-click="stop(repose)">Stop</button>
+        <button class="rs-btn btn-footer rs-btn-login" data-ng-show="repose.status!=='Running'" data-ng-click="start(repose)">Start</button>
+        <button class="rs-btn btn-footer" data-ng-class="{'disabled': repose.status!=='Running'}" data-ui-sref="test({repose_id: repose.id})">Test</button>
+        <!-- TODO: add ui route for benchmark -->
+        <button class="rs-btn btn-footer" data-ng-class="{'disabled': repose.status!=='Running'}" data-ng-click="benchmark()">Benchmark</button>
+      </div>
+      </button>
+    </div>
+  </div>
+</div>

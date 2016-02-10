@@ -1,0 +1,14 @@
+<div class="modal-header">
+</div>
+<h3 class="modal-title">Repose Progress!</h3>
+<div class="modal-body">
+  <div ng-switch="status">
+    <span class="rs-status rs-status-error" ng-switch-when="error">Error</span>
+    <span class="rs-status rs-status-processing" ng-switch-when="building">Building</span>
+    <span class="rs-status rs-status-ok" ng-switch-when="success">Active</span>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="ok()" data-ng-if="status=='success'">Go to Detail</button>
+  <button class="btn btn-warning" type="button" ng-click="cancel()" data-ng-if="status!=='success'">Cancel</button>
+</div>

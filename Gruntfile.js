@@ -437,6 +437,18 @@ module.exports = function (grunt) {
             cwd: 'bower_components/bootstrap/dist',
             src: 'fonts/*',
             dest: '<%= yeoman.dist %>'
+          }, {
+            expand: true,
+            nonull:true,
+            cwd: '<%= yeoman.app %>/client/bower_components/canon/lib/fonts',
+            src: '*',
+            dest: '<%= yeoman.app %>/styles'
+          }, {
+            expand: true,
+            nonull:true,
+            cwd: '<%= yeoman.app %>/client/bower_components/canon/lib/images',
+            src: '*',
+            dest: '<%= yeoman.app %>/styles'
           }]
       },
       styles: {
@@ -457,6 +469,7 @@ module.exports = function (grunt) {
       ],
       dist: [
         'copy:styles',
+        'copy:dist'
         //'imagemin',
         //'svgmin'
       ]

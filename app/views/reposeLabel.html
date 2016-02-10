@@ -1,0 +1,5 @@
+<label class="rs-control-label" ng-class="{'rs-detail-section-title': reposetitle === 'true' }"> <!-- repose label -->
+    {{ value }}
+    <span style="color:red" ng-if="required == 'true'">*</span>
+    <i ng-if="doc && doc !== 'undefined'" class="rs-icon-help" title="{{ doc }}"></i>
+</label>

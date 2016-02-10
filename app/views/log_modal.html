@@ -1,0 +1,9 @@
+<div class="modal-header">
+</div>
+<h3 class="modal-title">{{ header }}</h3>
+<div class="modal-body" data-ng-repeat="log_entry in data track by $index">
+  <p>{{ log_entry }}</p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="dismiss()">Dismiss</button>
+</div>

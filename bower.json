@@ -18,7 +18,11 @@
     "canon": "https://github.com/rackerlabs/canon.git#v1.8.1",
     "angular-bootstrap": "~0.13.3",
     "json3": "~3.3.2",
-    "angular-socket-io": "~0.7.0"
+    "angular-socket-io": "~0.7.0",
+    "checklist-model": "~0.8.0",
+    "angular-bootstrap-slider": "0.1.21",
+    "angular-pretty-xml": "~0.1.1",
+    "vkBeautify-wrapper": "vkbeautify-wrapper#*"
   },
   "devDependencies": {
     "angular-mocks": "^1.3.0"

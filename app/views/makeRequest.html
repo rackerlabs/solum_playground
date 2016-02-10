@@ -1,0 +1,35 @@
+<div class="rs-detail-section-header">
+  <h2 class="rs-page-title">Request</h2>
+</div>
+<div class="rs-detail-section-body">
+  <div class="rs-control-group">
+    <label class="rs-control-label">URI</label>
+    <div class="rs-controls">
+      <input type="url" name="url" id="url" value="/">
+      <span class="rs-validation-inline">Example, /v2/servers to make a request to v2/servers URI (don't worry about the domain)!</span>
+    </div>
+  </div>
+  <div class="rs-control-group">
+    <label class="rs-control-label">Method</label>
+    <div class="rs-controls">
+      <select class="rs-input-medium" name="method" id="method" required>
+        <option data-ng-repeat="method in methods" value="{{method}}">{{method}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="rs-control-group">
+    <label class="rs-control-label">Headers</label>
+    <div class="rs-controls" data-ng-repeat="header in headers">
+      <input type="text" placeholder="header name" name="header_names[{{ $index }}]"/>
+      <input type="text" placeholder="header value" name="header_values[{{ $index }}]"/>
+      <button class="rs-btn rs-btn-primary" data-ng-click="addOneToList(headers)" ng-if="$last">Add another</button>
+      <button class="rs-btn" data-ng-click="removeOneFromList(headers, $index)" ng-if="!$first">Remove</button>
+    </div>
+  </div>
+  <div class="rs-control-group">
+    <label class="rs-control-label">Body</label>
+    <div class="rs-controls">
+      <textarea type="url" name="body" id="body" value="/"></textarea>
+    </div>
+  </div>
+</div>

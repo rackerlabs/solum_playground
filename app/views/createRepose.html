@@ -1,0 +1,16 @@
+<div class="rs-detail-section-header">
+  <h2 class="rs-page-title">Create Instance</h2>
+</div>
+<div class="rs-detail-section-body">
+  <div class="rs-control-group error" data-ng-show="create.errorMessage !== ''">
+    <strong class="rs-help-block">{{ ui.errorMessage }}</strong>
+  </div>
+  <div class="rs-control-group" data-ng-class="{'error': createForm.$submitted && createForm.name.$invalid}">
+    <label for="version" class="rs-control-label">Repose Version</label>
+    <div class="rs-controls">
+      <select class="rs-input-medium" name="version" id="version" required data-ng-model="newInstance.version" data-ng-change="getFilters()">
+        <option data-ng-repeat="version in repose.availableVersions" value="{{version}}">{{version}}</option>
+      </select>
+    </div>
+  </div>
+</div>

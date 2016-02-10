@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="client/bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="client/bower_components/canon-bootstrap/build/css/canon-bootstrap.css" />
     <link rel="stylesheet" href="client/bower_components/canon/dist/canon.css" />
+    <link rel="stylesheet" href="client/bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -25,17 +26,6 @@
 
     <!-- Add your site or application content here -->
     <div ui-view=""></div>
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -56,22 +46,42 @@
     <script src="client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="client/bower_components/json3/lib/json3.js"></script>
     <script src="client/bower_components/angular-socket-io/socket.js"></script>
+    <script src="client/bower_components/checklist-model/checklist-model.js"></script>
+    <script src="client/bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
+    <script src="client/bower_components/angular-bootstrap-slider/slider.js"></script>
+    <script src="client/bower_components/angular-pretty-xml/src/angular-pretty-xml.js"></script>
+    <script src="client/bower_components/vkBeautify-wrapper/dist/vkbeautify.0.99.00.beta.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/routes/login.js"></script>
-        <script src="scripts/routes/internal.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/contact.js"></script>
-        <script src="scripts/controllers/login.js"></script>
-        <script src="scripts/controllers/internal.js"></script>
+        <script src="scripts/routes/create.js"></script>
+        <script src="scripts/routes/main.js"></script>
+    <script src="scripts/routes/test.js"></script>
         <script src="scripts/services/auth.js"></script>
         <script src="scripts/services/user.js"></script>
         <script src="scripts/services/repose.js"></script>
+    <script src="scripts/filters/headers.js"></script>
         <script src="scripts/directives/mainMenu.js"></script>
+        <script src="scripts/directives/reposeCards.js"></script>
+        <script src="scripts/directives/createRepose.js"></script>
+        <script src="scripts/directives/getFilters.js"></script>
+        <script src="scripts/directives/component.js"></script>
+        <script src="scripts/directives/reposeLabel.js"></script>
+        <script src="scripts/directives/reposeTable.js"></script>
+        <script src="scripts/directives/reposeFilter.js"></script>
+        <script src="scripts/directives/reposeItem.js"></script>
+    <script src="scripts/directives/makeRequest.js"></script>
+    <script src="scripts/directives/testResponse.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/contact.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/internal.js"></script>
+    <script src="scripts/controllers/create.js"></script>
+    <script src="scripts/controllers/test.js"></script>
+    <script src="scripts/controllers/utility-nav.js"></script>
         <!-- endbuild -->
 </body>
 </html>

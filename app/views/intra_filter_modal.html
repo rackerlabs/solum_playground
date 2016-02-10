@@ -1,0 +1,38 @@
+<div class="modal-header">
+</div>
+<h3 class="modal-title">Intra Filter Logs!</h3>
+<div class="modal-body">
+  <div class="rs-control-group rs-embedded-list-table-wrapper rs-embedded-medium">
+    <table class="rs-list-table rs-embedded-list-table">
+      <thead>
+      <tr>
+        <th><span class="rs-table-sort-text">Filter Direction</span></th>
+        <th><span class="rs-table-sort-text">Timestamp</span></th>
+        <th><span class="rs-table-sort-text">Current Filter</span></th>
+        <th><span class="rs-table-sort-text">Request Method</span></th>
+        <th><span class="rs-table-sort-text">Request URI</span></th>
+        <th><span class="rs-table-sort-text">Request Body</span></th>
+        <th><span class="rs-table-sort-text">Response Code</span></th>
+        <th><span class="rs-table-sort-text">Response Body</span></th>
+        <th><span class="rs-table-sort-text">Headers</span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="filter in filters">
+        <td class="rs-table-text"><p ng-bind-html="filter['preamble'] | filterDirection"></p></td>
+        <td class="rs-table-text">{{filter['timestamp']}}</td>
+        <td class="rs-table-text">{{filter['currentFilter']}}</td>
+        <td class="rs-table-text">{{filter['httpMethod']}}</td>
+        <td class="rs-table-text">{{filter['requestURI']}}</td>
+        <td class="rs-table-text">{{filter['requestBody']}}</td>
+        <td class="rs-table-text">{{filter['httpResponseCode']}}</td>
+        <td class="rs-table-text">{{filter['responseBody']}}</td>
+        <td class="rs-table-text"><p ng-bind-html="filter['headers'] | responseHeaders "></p></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="dismiss()">Dismiss</button>
+</div>
