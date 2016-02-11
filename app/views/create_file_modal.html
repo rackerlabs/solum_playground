@@ -2,6 +2,14 @@
 </div>
 <h3 class="modal-title">Repose Progress!</h3>
 <div class="modal-body">
+  <label class="rs-control-label" data-ng-show="isUploading">Upload progress:</label>
+  <div class="rs-progress" data-ng-show="isUploading">
+    <div class="rs-progress-inner">
+      <div class="rs-segment" style="width: {{ progressPercentage }}%">
+        <div class="rs-bar rs-status-ok"></div>
+      </div>
+    </div>
+  </div>
   <div ng-switch="status">
     <span class="rs-status rs-status-error" ng-switch-when="error">Error</span>
     <span class="rs-status rs-status-processing" ng-switch-when="building">Building</span>

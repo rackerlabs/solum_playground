@@ -7,6 +7,7 @@ angular.module('reposePlaygroundApp')
       restrict: 'E',
       link: function (scope, element, attrs) {
         console.log('In create Repose: ', scope, element, attrs);
+        scope.ui.VersionSelected = false;
 
 
         ReposeService.getVersions()
@@ -20,6 +21,10 @@ angular.module('reposePlaygroundApp')
           $log.error('createRepose directive ReposeService.getVersions::Got an error: ', err);
 
         });
+
+        scope.selectVersion = function(){
+          scope.ui.VersionSelected = true;
+        }
 
         function cleanErrors(){
           scope.ui.errorMessage = "";

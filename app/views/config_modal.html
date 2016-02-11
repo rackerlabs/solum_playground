@@ -3,7 +3,7 @@
 <h3 class="modal-title">Configuration files!</h3>
 <div class="modal-body">
   <div class="rs-control-group rs-embedded-list-table-wrapper rs-embedded-medium">
-    <table class="rs-list-table rs-embedded-list-table">
+    <table class="rs-list-table rs-embedded-list-table" ng-show="configsLoaded">
       <thead>
       <tr>
         <th><span class="rs-table-sort-text">Name</span></th>
@@ -17,8 +17,19 @@
       </tr>
       </tbody>
     </table>
+    <div class="rs-table-overlay rs-table-overlay-loading" ng-show="configsLoading">
+      <div class="rs-table-overlay-content">
+        <div class="rs-table-overlay-message">Loading&hellip;</div>
+      </div>
+    </div>
+    <div class="rs-table-overlay rs-table-overlay-error" ng-show="configsErrored">
+      <div class="rs-table-overlay-content">
+        <div class="rs-table-overlay-message"><i class="rs-icon-error-indicator"></i>{{ errorMessage }}</div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" type="button" ng-click="cancel()">Dismiss</button>
+  <button class="btn btn-login" type="button" ng-click="download()">Download</button>
+  <button class="btn btn-primary" type="button" ng-click="dismiss()">Dismiss</button>
 </div>

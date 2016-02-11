@@ -141,3 +141,10 @@
 .modal-dialog td.dialog-td{
   max-width: 100px !important;
 }
+
+.modal-dialog td.dialog-td ul{
+  list-style-type: none;
+}
+.rs-list-table, table {
+  word-wrap: break-word;
+}

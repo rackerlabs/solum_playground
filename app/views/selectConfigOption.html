@@ -1,0 +1,11 @@
+<div class="rs-control-group"  data-ng-show="ui.VersionSelected">
+  <div class="rs-control-group">
+    <label for="configOption" class="rs-control-label">How do you want to configure?</label>
+    <div class="rs-controls">
+      <select class="rs-input-medium" name="configOption" id="configOption" required data-ng-model="newInstance.configOption" data-ng-change="selectConfigOption()">
+        <option value="upload">Upload configurations</option>
+        <option value="build">Build repose</option>
+      </select>
+    </div>
+  </div>
+</div>

@@ -8,9 +8,14 @@
   <div class="rs-control-group" data-ng-class="{'error': createForm.$submitted && createForm.name.$invalid}">
     <label for="version" class="rs-control-label">Repose Version</label>
     <div class="rs-controls">
-      <select class="rs-input-medium" name="version" id="version" required data-ng-model="newInstance.version" data-ng-change="getFilters()">
+      <select class="rs-input-medium" name="version" id="version" required data-ng-model="newInstance.version"
+              data-ng-change="selectVersion()">
         <option data-ng-repeat="version in repose.availableVersions" value="{{version}}">{{version}}</option>
       </select>
     </div>
   </div>
+  <select-config-option></select-config-option>
+  <upload-configs></upload-configs>
+  <get-filters></get-filters>
+  <component></component>
 </div>

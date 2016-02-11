@@ -26,14 +26,14 @@
     </div>
     <div class="card-footer rs-btn-group">
       <div class="button-wrap">
-        <!-- TODO: add ui route for configuration -->
         <button class="rs-btn btn-footer rs-btn-primary" data-ng-class="{'disabled': repose.status!=='Running'}" data-ng-click="viewConfiguration(repose)">Configuration</button>
-        <!-- TODO: add button function for start -->
         <button class="rs-btn btn-footer rs-btn-login" data-ng-show="repose.status=='Running'" data-ng-click="stop(repose)">Stop</button>
         <button class="rs-btn btn-footer rs-btn-login" data-ng-show="repose.status!=='Running'" data-ng-click="start(repose)">Start</button>
         <button class="rs-btn btn-footer" data-ng-class="{'disabled': repose.status!=='Running'}" data-ui-sref="test({repose_id: repose.id})">Test</button>
         <!-- TODO: add ui route for benchmark -->
         <button class="rs-btn btn-footer" data-ng-class="{'disabled': repose.status!=='Running'}" data-ng-click="benchmark()">Benchmark</button>
+        <!-- TODO: add ui route for monitor -->
+        <button class="rs-btn btn-footer" data-ng-class="{'disabled': repose.status!=='Running'}" data-ng-click="monitor()">Monitor</button>
       </div>
       </button>
     </div>

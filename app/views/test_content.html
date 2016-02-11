@@ -27,7 +27,7 @@
           <label class="rs-control-label">Responses</label>
         </div>
         <div class="rs-control-group rs-embedded-list-table-wrapper rs-embedded-medium">
-          <table class="rs-list-table rs-embedded-list-table">
+          <table class="rs-list-table rs-embedded-list-table" data-ng-show="requestLoaded">
             <thead>
             <tr>
               <th><span class="rs-table-sort-text">Request Id</span></th>
@@ -71,6 +71,16 @@
             </tr>
             </tbody>
           </table>
+          <div class="rs-table-overlay rs-table-overlay-loading" ng-show="requestLoading">
+            <div class="rs-table-overlay-content">
+              <div class="rs-table-overlay-message">Loading&hellip;</div>
+            </div>
+          </div>
+          <div class="rs-table-overlay rs-table-overlay-error" ng-show="requestErrored">
+            <div class="rs-table-overlay-content">
+              <div class="rs-table-overlay-message"><i class="rs-icon-error-indicator"></i>{{ errorMessage }}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
