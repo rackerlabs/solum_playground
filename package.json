@@ -2,6 +2,8 @@
   "name": "reposeplayground",
   "private": true,
   "devDependencies": {
+    "cdnjs-cdn-data": "^0.1.2",
+    "google-cdn": "^1.0.0",
     "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
     "grunt-autoprefixer": "^2.0.0",
