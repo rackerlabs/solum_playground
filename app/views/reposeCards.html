@@ -13,14 +13,11 @@
           <div class="details-header">Version</div>
           <span>{{ repose.version }}</span>
         </div>
-        <div class="repose-autoscale">
+        <div class="repose-status">
           <div class="details-header">Status</div>
           <span class="rs-status rs-status-ok" data-ng-show="repose.status=='Running'">{{ repose.status }}</span>
           <span class="rs-status rs-status-error" data-ng-show="repose.status!=='Running'">{{ repose.status }}</span>
-        </div>
-        <div class="repose-metrics">
-          <div class="details-header">Data</div>
-          <span>{{ repose.message }}</span>
+          <span class="rs-help-block">({{ repose.message }})</span>
         </div>
       </div>
     </div>

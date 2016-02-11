@@ -280,7 +280,7 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              js: ['concat', 'uglifyjs'],
+              js: ['concat'],// 'uglifyjs'],
               css: ['cssmin']
             },
             post: {}
@@ -298,7 +298,8 @@ module.exports = function (grunt) {
         assetsDirs: [
           '<%= yeoman.dist %>',
           '<%= yeoman.dist %>/images',
-          '<%= yeoman.dist %>/styles'
+          '<%= yeoman.dist %>/styles',
+          '<%= yeoman.dist %>/scripts'
         ],
         patterns: {
           js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
@@ -319,18 +320,15 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
+    uglify: {
+       dist: {
+         files: {
+           '<%= yeoman.dist %>/scripts/scripts.js': [
+             '<%= yeoman.dist %>/scripts/scripts.js'
+           ]
+         }
+       }
+     },
 
     imagemin: {
       dist: {
@@ -397,8 +395,11 @@ module.exports = function (grunt) {
       }
     },
 
-    // Replace Google CDN references
+    // Replace Google CDN references (use cdnjs)
     cdnify: {
+      options: {
+        cdn: require('cdnjs-cdn-data')
+      },
       dist: {
         html: ['<%= yeoman.dist %>/*.html']
       }
@@ -529,12 +530,12 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
+    //'cdnify',
     'cssmin',
-    'uglify',
+    //'uglify',
     'filerev',
-    'usemin',
-    'htmlmin'
+    'usemin'
+    //'htmlmin'
   ]);
 
   grunt.registerTask('default', [
