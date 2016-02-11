@@ -15,23 +15,15 @@ angular.module('reposePlaygroundApp')
 
         scope.viewConfiguration = function(repose) {
           $log.info('view configuration: ', repose);
-          ReposeService.viewConfiguration(repose.id)
-          .then(function(data){
-            $modal.open({
-                  templateUrl: '/views/config_modal.html',
-                  backdrop: 'static',
-                  controller: 'ConfigModalInstanceCtrl',
-                  resolve: {
-                    data: function () {
-                      return data;
-                    }
-                  }
-                });
-            })
-          .catch(function(err){
-            scope.ui.errorMessage = err;
-            $log.error('ReposeCards ReposeService.viewConfiguration::Got an error: ', err);
-
+          $modal.open({
+            templateUrl: '/views/config_modal.html',
+            backdrop: 'static',
+            controller: 'ConfigModalInstanceCtrl',
+            resolve: {
+              repose: function() {
+                return repose;
+              }
+            }
           });
         }
 

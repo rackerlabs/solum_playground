@@ -10,7 +10,7 @@ angular.module('reposePlaygroundApp')
         scope.repose.renderedFilters = [];
 
         scope.removeFilter = function(component) {
-        $log.info('removeFilter', component)
+          $log.info('removeFilter', component)
           scope.newInstance.selectedFilters.splice(scope.repose.componentData.splice(component, 1))
         }
 
@@ -51,18 +51,21 @@ angular.module('reposePlaygroundApp')
                   },
                   newInstance: function () {
                     return scope.newInstance;
-                  }
+                  },
+                   isUploading: function() {
+                     return false;
+                   }
                 }
               });
 
-              modalInstance.result.then(function (status) {
-                $log.info('selected item: ', status, $location);
+              /*modalInstance.result.then(function (status, reposeId) {
+                $log.info('selected item: ', status, reposeId, $location);
                 if(status === "success") {
-                  $location.path("/test");
+                  $location.path("/test/" + reposeId);
                 }
               }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
-              });
+              });*/
           });
         }
 

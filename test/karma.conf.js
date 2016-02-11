@@ -44,6 +44,11 @@ module.exports = function(config) {
       'client/bower_components/angular-bootstrap-slider/slider.js',
       'client/bower_components/angular-pretty-xml/src/angular-pretty-xml.js',
       'client/bower_components/vkBeautify-wrapper/dist/vkbeautify.0.99.00.beta.js',
+      'client/bower_components/jszip/dist/jszip.js',
+      'client/bower_components/blob-polyfill/Blob.js',
+      'client/bower_components/file-saver.js/FileSaver.js',
+      'client/bower_components/angular-file-saver/dist/angular-file-saver.bundle.js',
+      'client/bower_components/ng-file-upload/ng-file-upload.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

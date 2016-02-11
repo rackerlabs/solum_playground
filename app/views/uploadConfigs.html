@@ -1,0 +1,13 @@
+<div class="rs-control-group" data-ng-show="ui.UploadConfigsSelected">
+  <div class="rs-control-group">
+    <label class="rs-control-label">Upload your configurations zip</label>
+    <div class="rs-controls">
+      <form name="uploadForm" novalidate>
+        <button class="rs-btn" ngf-select ng-model="file" name="file" ngf-pattern="'*/zip'"
+             ngf-accept="'*/zip'" ngf-max-size="20MB" ngf-min-height="100"
+             ngf-resize="{width: 100, height: 100}">Select</button>
+        <button class="rs-btn rs-btn-primary" type="button"  data-ng-click="uploadFiles()">Upload Files</button>
+      </form>
+    </div>
+  </div>
+</div>

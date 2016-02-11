@@ -22,7 +22,9 @@ angular
     'ui.bootstrap',
     'checklist-model',
     'ui.bootstrap-slider',
-    'prettyXml'
+    'prettyXml',
+    'ngFileSaver',
+    'ngFileUpload'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $logProvider) {
     var $log =  angular.injector(['ng']).get('$log');

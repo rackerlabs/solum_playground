@@ -12,11 +12,17 @@ angular.module('reposePlaygroundApp')
     $log.info('In Test Ctrl', $scope, $stateParams);
     $scope.id = $stateParams.repose_id;
     $scope.responses = [];
+    $scope.requestLoading = false;
+    $scope.requestLoaded = true;
+    $scope.requestErrored = false;
 
 
 
     $scope.testReposeInstance = function() {
       $log.info('Make request');
+      $scope.requestLoading = true;
+      $scope.requestLoaded = false;
+      $scope.requestErrored = false;
       $scope.request = {
         url: '',
         headers: [],
@@ -39,9 +45,13 @@ angular.module('reposePlaygroundApp')
       ReposeService.makeRequest($scope.id, $scope.request)
       .then(function(result){
         $scope.responses.push(result)
+        $scope.requestLoading = false;
+        $scope.requestLoaded = true;
+        $scope.requestErrored = false;
         $log.info(result);
       })
       .catch(function(err){
+        $scope.errorMessage = err;
         $log.error(err);
       });
 
