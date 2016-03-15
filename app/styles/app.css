@@ -3629,7 +3629,8 @@ html, body {
   margin-bottom: 30px;
   position: relative; }
   .repose-card .card-header {
-    padding: 8px 20px 0; }
+    padding: 8px 20px 0;
+    text-align:center;}
   .repose-card .card-body {
     padding: 8px 20px; }
   .repose-card .card-footer {

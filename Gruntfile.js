@@ -33,17 +33,17 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+
     sass: {
       options: {
         sourcemap: true
       },
-			dist: {
-				files: {
-					'<%= yeoman.app %>/styles/app.css' : '<%= yeoman.app %>/styles/app.scss'
-				}
-			}
-		},
-
+	dist: {
+	  files: {
+	    '<%= yeoman.app %>/styles/app.css' : '<%= yeoman.app %>/styles/app.scss'
+	  }
+	}
+      },
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -115,7 +115,7 @@ module.exports = function (grunt) {
       proxies: [
         {
           context: '/app', // the context of the data service
-          host: 'localhost', // wherever the data service is running
+          host: '127.0.0.1', // wherever the data service is running
           port: 9000, // the port that the data service is running on
           changeOrigin: true
         }
@@ -495,7 +495,6 @@ module.exports = function (grunt) {
       'clean:server',
       'copy:debug',
       'wiredep',
-      'sass',
       'concurrent:server',
       'autoprefixer:server',
       'configureProxies:server',
@@ -521,7 +520,6 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
-    'sass',
     //'imagemin',
     'useminPrepare',
     'concurrent:dist',

@@ -181,6 +181,67 @@ angular.module('reposePlaygroundApp')
       return deferred.promise;
     },
 
+showApp: function(id, callback) {
+      $log.info('In ReposeService.showApp().  Try to remove: ', id);
+      var cb = callback || angular.noop;
+      var deferred = $q.defer();
+
+      $http.get('/app/repose/show/' + id).
+      success(function(resp){
+        $log.info('ReposeService.showApp)::Got back a "successful" response with: ', resp);
+        deferred.resolve(resp)
+        return cb();
+      }).
+      error(function(err) {
+       $log.error('ReposeService.showApp()::Got back a "failed" response with: ', err);
+       deferred.reject(err);
+       return cb(err);
+     }.bind(this));
+
+      return deferred.promise;
+    },
+    
+     deployApp: function(id, callback) {
+      $log.info('In ReposeService.deployApp().  Try to remove: ', id);
+      var cb = callback || angular.noop;
+      var deferred = $q.defer();
+
+      $http.post('/app/repose/deploy/' + id + '/workflows').
+      success(function(resp){
+        $log.info('ReposeService.deployApp)::Got back a "successful" response with: ', resp);
+        deferred.resolve(resp)
+        return cb();
+      }).
+      error(function(err) {
+       $log.error('ReposeService.deployApp()::Got back a "failed" response with: ', err);
+       deferred.reject(err);
+       return cb(err);
+     }.bind(this));
+
+      return deferred.promise;
+    },
+
+
+     deleteInstance: function(id, callback) {
+      $log.info('In ReposeService.deleteInstance().  Try to remove: ', id);
+      var cb = callback || angular.noop;
+      var deferred = $q.defer();
+
+      $http.delete('/app/repose/delete/' + id).
+      success(function(resp){
+        $log.info('ReposeService.deleteInstance()::Got back a "successful" response with: ', resp);
+        deferred.resolve(resp)
+        return cb();
+      }).
+      error(function(err) {
+       $log.error('ReposeService.deleteInstance()::Got back a "failed" response with: ', err);
+       deferred.reject(err);
+       return cb(err);
+     }.bind(this));
+
+      return deferred.promise;
+    },
+    
     startInstance: function(id, callback) {
      $log.info('In ReposeService.startInstance().  Try to start: ', id);
      var cb = callback || angular.noop;

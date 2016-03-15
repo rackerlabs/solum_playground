@@ -1,36 +1,49 @@
 <div class="repose-cards" data-ng-show="!ui.reposeFetchError && !ui.waitingForLoad">
   <div class="repose-card add-new" data-ui-sref="create">
-    Add Repose Instance&hellip;
+    Deploy Application&hellip;
   </div>
-  <div class="repose-card" data-ng-repeat="repose in reposes track by repose.repose_name">
-    <div class="card-header">
-      <div class="card-subtitle">Repose Instance</div>
-      <h3 class="card-title">{{ repose.repose_name }}</h3>
+  <div class="repose-card" data-ng-repeat="repose in reposes track by repose.id">
+    <div class="card-header row">
+      <div class="card-subtitle ">Application Name</div>
+      <div class=""><h3 class="card-title">{{ repose.name }}</h3></div>
     </div>
     <div class="card-body">
       <div class="details-trio">
-        <div class="repose-configs">
-          <div class="details-header">Version</div>
-          <span>{{ repose.version }}</span>
+        <div class="row">
+          <div class="details-header col-xs-3">App ID</div>
+          <div class="col-xs-9">{{ repose.id }}</div>
         </div>
-        <div class="repose-status">
-          <div class="details-header">Status</div>
-          <span class="rs-status rs-status-ok" data-ng-show="repose.status=='Running'">{{ repose.status }}</span>
-          <span class="rs-status rs-status-error" data-ng-show="repose.status!=='Running'">{{ repose.status }}</span>
-          <span class="rs-help-block">({{ repose.message }})</span>
+        <div class="row">
+          <div class="details-header col-xs-3">Languagepack</div>
+          <div class="col-xs-9">{{ repose.languagepack }}</div>
+        </div>
+        <div class="row">
+          <div class="details-header col-xs-3">Description</div>
+          <div class="col-xs-9">{{ repose.description }}</div>
+        </div>
+        <div class="row">
+          <div class="details-header col-xs-3">App Url</div>
+          <div class="col-xs-9">{{ repose.app_url }}</div>
+        </div>
+        
+        <div class="row">
+          <div class="details-header col-xs-3">Status</div>
+          <div class="col-xs-9">
+          <span class="rs-status rs-status-ok" data-ng-show="repose.status=='READY' || repose.status == 'SCALING_COMPLETE'">{{ repose.status }}</span>
+          <span class="rs-status rs-status-error" data-ng-show="repose.status!=='READY' && repose.status !== 'SCALING_COMPLETE'">{{ repose.status }}</span>
+          </div>
         </div>
       </div>
     </div>
     <div class="card-footer rs-btn-group">
       <div class="button-wrap">
-        <button class="rs-btn btn-footer rs-btn-primary" data-ng-class="{'disabled': repose.status!=='Running'}" data-ng-click="viewConfiguration(repose)">Configuration</button>
-        <button class="rs-btn btn-footer rs-btn-login" data-ng-show="repose.status=='Running'" data-ng-click="stop(repose)">Stop</button>
-        <button class="rs-btn btn-footer rs-btn-login" data-ng-show="repose.status!=='Running'" data-ng-click="start(repose)">Start</button>
-        <button class="rs-btn btn-footer" data-ng-class="{'disabled': repose.status!=='Running'}" data-ui-sref="test({repose_id: repose.id})">Test</button>
+        <button class="rs-btn btn-footer rs-btn-primary" data-ng-show="['READY', 'SCALING_COMPLETE'].indexOf(repose.status)!==-1" data-ng-click="deploy(repose)">Redeploy</button>
+        <button class="rs-btn btn-footer rs-btn-primary" data-ng-show="['READY', 'SCALING_COMPLETE'].indexOf(repose.status)==-1" data-ng-click="deploy(repose)">Deploy</button>
+        <!--<button class="rs-btn btn-footer rs-btn-login" data-ng-show="repose.status=='Running'" data-ng-click="stop(repose)">Stop</button>-->
+        <button class="rs-btn btn-footer rs-btn-login" data-ng-click="deleteapp(repose)">Delete</button>
+        <button class="rs-btn btn-footer" data-ng-class="{'disabled': ['READY', 'SCALING_COMPLETE'].indexOf(repose.status)==-1}" data-ui-sref="test({repose_id: repose.id})">Scale</button>
         <!-- TODO: add ui route for benchmark -->
-        <button class="rs-btn btn-footer" data-ng-class="{'disabled': repose.status!=='Running'}" data-ng-click="benchmark()">Benchmark</button>
-        <!-- TODO: add ui route for monitor -->
-        <button class="rs-btn btn-footer" data-ng-class="{'disabled': repose.status!=='Running'}" data-ng-click="monitor()">Monitor</button>
+        <button class="rs-btn btn-footer" data-ng-click="showapp(repose)">App Details</button>
       </div>
       </button>
     </div>
