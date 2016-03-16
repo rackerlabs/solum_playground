@@ -2,20 +2,40 @@
   <h2 class="rs-page-title">Application Details</h2>
 </div>
 <div class="rs-detail-section-body">
-  <div class="rs-control-group error" data-ng-show="create.errorMessage !== ''">
-    <strong class="rs-help-block">{{ ui.errorMessage }}</strong>
-  </div>
-  <div class="rs-control-group" data-ng-class="{'error': createForm.$submitted && createForm.name.$invalid}">
-    <label for="version" class="rs-control-label">Select languagepack</label>
-    <div class="rs-controls">
-      <select class="rs-input-medium" name="version" id="version" required data-ng-model="newInstance.version"
-              data-ng-change="selectVersion()">
-        <option data-ng-repeat="version in repose.availableVersions" value="{{version}}">{{version}}</option>
-      </select>
-    </div>
-  </div>
-  <select-config-option></select-config-option>
-  <upload-configs></upload-configs>
-  <get-filters></get-filters>
-  <component></component>
+<div class="row">
+  <div class="col-xs-3">Name: </div>
+  <div class="col-xs-9">{{ solumapp.name }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-3">Id: </div>
+  <div class="col-xs-9">{{ solumapp.id }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-3">Languagepack: </div>
+  <div class="col-xs-9">{{ solumapp.languagepack }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-3">Status: </div>
+  <div class="col-xs-9">{{ solumapp.status }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-3">Description: </div>
+  <div class="col-xs-9">{{ solumapp.description }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-3">Creation Time: </div>
+  <div class="col-xs-9">{{ solumapp.created_at }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-3">Repository: </div>
+  <div class="col-xs-9">{{ solumapp.source.repository }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-3">Ports: </div>
+  <div class="col-xs-9">{{ solumapp.ports }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-3">Raw Content: </div>
+  <div class="col-xs-9">{{ solumapp.raw_content }}</div>
+</div>
 </div>

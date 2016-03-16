@@ -181,19 +181,19 @@ angular.module('reposePlaygroundApp')
       return deferred.promise;
     },
 
-showApp: function(id, callback) {
-      $log.info('In ReposeService.showApp().  Try to remove: ', id);
+getApp: function(id, callback) {
+      $log.info('In ReposeService.getApp().  Try to remove: ', id);
       var cb = callback || angular.noop;
       var deferred = $q.defer();
 
       $http.get('/app/repose/show/' + id).
       success(function(resp){
-        $log.info('ReposeService.showApp)::Got back a "successful" response with: ', resp);
+        $log.info('ReposeService.getApp)::Got back a "successful" response with: ', resp);
         deferred.resolve(resp)
         return cb();
       }).
       error(function(err) {
-       $log.error('ReposeService.showApp()::Got back a "failed" response with: ', err);
+       $log.error('ReposeService.getApp()::Got back a "failed" response with: ', err);
        deferred.reject(err);
        return cb(err);
      }.bind(this));

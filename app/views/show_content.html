@@ -1,0 +1,18 @@
+<div class="rs-container">
+  <div class="rs-back-link">
+    <a data-ui-sref="main" data-ng-show="ui.isChildState">Back to Applications</a>
+  </div>
+  <div class="rs-main rs-panel">
+    <div class="rs-content rs-panel">
+      <form name="createForm" data-ng-submit="createForm.$valid && createInstance()" class="rs-form-horizontal" novalidate>
+        <div class="rs-detail-section">
+          <show-app app-id="{{ app_id }}"></show-app>
+        </div>
+        <div class="rs-detail-section">
+          <div class="rs-detail-section-header rs-btn-group">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -8,8 +8,9 @@
  * Controller of the reposePlaygroundApp
  */
 angular.module('reposePlaygroundApp')
-  .controller('CreateCtrl', function ($scope, $log, ReposeService, $filter) {
-    $log.info('In Create Ctrl');
+  .controller('CreateCtrl', function ($scope, $log, ReposeService, $filter, $stateParams) {
+    $log.info('In Create Ctrl', $stateParams);
+    $scope.app_id = $stateParams.app_id
     $scope.ui = {
       waitingForLoad: false,
       reposeFetchError: false,

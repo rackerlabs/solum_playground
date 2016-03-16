@@ -50,7 +50,7 @@ def app_show(app_id):
     headers['X-Auth-Token'] = request.headers['token']
     resp = requests.get(SOLUM_URL+"/v1/apps/%s" % app_id,
                          headers=headers)
-    import pdb;pdb.set_trace()
+    #import pdb;pdb.set_trace()
     return json.dumps(resp.json())
 
 auth_token = None

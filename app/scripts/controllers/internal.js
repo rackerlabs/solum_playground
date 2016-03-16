@@ -31,6 +31,12 @@ angular.module('reposePlaygroundApp')
 
     });
 
+    $scope.logout = function() {
+    console.log("Hello,world");
+      Auth.logout();
+      $location.path('/');
+    }
+
     $scope.forceFetchInstances = function(){
       $scope.ui.waitingForLoad = true;
       $scope.ui.reposeFetchError = false;

@@ -47,18 +47,18 @@ angular.module('reposePlaygroundApp')
         }
   
   
-        scope.showapp = function(repose){
-          $log.info('showapp called: ', repose);
-          $modal.open({
-            templateUrl: '/views/showApp.html',
-            backdrop: 'static',
-            controller: 'ConfigModalInstanceCtrl',
-            resolve: {
-              repose: function() {
-                return repose;
-              }
-            }
-          });
+        //scope.showapp = function(repose){
+          //$log.info('showapp called: ', repose);
+          //$modal.open({
+            //templateUrl: '/views/showApp.html',
+            //backdrop: 'static',
+            //controller: 'ConfigModalInstanceCtrl',
+            //resolve: {
+              //repose: function() {
+                //return repose;
+              //}
+            //}
+          //});
           //ReposeService.showApp(repose.id)
           //.then(function(data){
             //console.log('reposeCards:',scope.reposes);
@@ -74,7 +74,7 @@ angular.module('reposePlaygroundApp')
             //$log.error('ReposeCards ReposeService.stopInstance::Got an error: ', err);
 
           //});
-        }
+        //}
   
         scope.deleteapp = function(repose){
           $log.info('deleteapp called: ', repose);
