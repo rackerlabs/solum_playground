@@ -181,6 +181,28 @@ angular.module('reposePlaygroundApp')
       return deferred.promise;
     },
 
+
+  getLanguagepacks: function(callback) {
+        $log.info('In ReposeService.getLanguagepacks().  Try to retrieve');
+        var cb = callback || angular.noop;
+        var deferred = $q.defer();
+
+        $http.get('/app/language_packs').
+        success(function(data) {
+          $log.info('ReposeService.getLanguagepacks()::Got back a "successful" response with: ', data);
+          deferred.resolve(data);
+          return cb();
+        }).
+        error(function(err) {
+          $log.error('ReposeService.getLanguagepacks()::Got back a "failed" response with: ', err);
+          deferred.reject(err);
+          return cb(err);
+        }.bind(this));
+
+        return deferred.promise;
+      },
+      
+  
 getApp: function(id, callback) {
       $log.info('In ReposeService.getApp().  Try to remove: ', id);
       var cb = callback || angular.noop;
@@ -201,6 +223,28 @@ getApp: function(id, callback) {
       return deferred.promise;
     },
     
+
+     createApp: function(data, callback) {
+      $log.info('In ReposeService.createApp().');
+      var cb = callback || angular.noop;
+      var deferred = $q.defer();
+
+      $http.post('/app/repose/create/', data).
+      success(function(resp){
+        $log.info('ReposeService.createApp)::Got back a "successful" response with: ', resp);
+        deferred.resolve(resp)
+        return cb();
+      }).
+      error(function(err) {
+       $log.error('ReposeService.createApp()::Got back a "failed" response with: ', err);
+       deferred.reject(err);
+       return cb(err);
+     }.bind(this));
+
+      return deferred.promise;
+    },
+
+
      deployApp: function(id, callback) {
       $log.info('In ReposeService.deployApp().  Try to remove: ', id);
       var cb = callback || angular.noop;
@@ -221,6 +265,25 @@ getApp: function(id, callback) {
       return deferred.promise;
     },
 
+     createLanguagepack: function(data, callback) {
+      $log.info('In ReposeService.createLanguagepack(). ');
+      var cb = callback || angular.noop;
+      var deferred = $q.defer();
+
+      $http.post('/app/language_packs', data).
+      success(function(resp){
+        $log.info('ReposeService.createLanguagepack::Got back a "successful" response with: ', resp);
+        deferred.resolve(resp)
+        return cb();
+      }).
+      error(function(err) {
+       $log.error('ReposeService.createLanguagepack()::Got back a "failed" response with: ', err);
+       deferred.reject(err);
+       return cb(err);
+     }.bind(this));
+
+      return deferred.promise;
+    },
 
      deleteInstance: function(id, callback) {
       $log.info('In ReposeService.deleteInstance().  Try to remove: ', id);

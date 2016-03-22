@@ -21,19 +21,74 @@ headers = {'Content-Type': 'application/json',
 
 SOLUM_URL = "https://dfw.solum.api.rackspacecloud.com"
 
+@app.route("/app/language_packs", methods=["GET"])
+def language_packs_list():
+    headers['X-Auth-Token'] = request.headers['token']
+    resp = requests.get(SOLUM_URL+"/v1/language_packs", headers=headers)
+    return json.dumps(resp.json())
+
+@app.route("/app/language_packs", methods=["POST"])
+def language_pack_create():
+    headers['X-Auth-Token'] = request.headers['token']
+    try:
+        data = json.loads(request.data)
+    except ValueError:
+        data = {}
+    
+    lp_data = {
+        "source_uri": data.get("uri", ""),
+        "base_url": "/v1",
+        "name": data.get("name", "")
+    }
+    resp = requests.post(SOLUM_URL+"/v1/language_packs",
+                         headers=headers,
+                         data=json.dumps(lp_data))
+    if resp.status_code != 201:
+        raise Exception(resp.json())
+    return json.dumps(resp.json())
+
 @app.route("/app/repose/list", methods=["POST", "GET"])
 def app_list():
     headers['X-Auth-Token'] = request.headers['token']
     resp = requests.get(SOLUM_URL+"/v1/apps", headers=headers)
     return json.dumps(resp.json())
-    #return json.dumps({"test": "Test"})
-
 
 @app.route("/app/repose/delete/<app_id>", methods=["DELETE"])
 def app_delete(app_id):
     headers['X-Auth-Token'] = request.headers['token']
     resp = requests.delete(SOLUM_URL+"/v1/apps/%s" % app_id, headers=headers)
     return json.dumps({"test": "Test"})
+
+@app.route("/app/repose/create/", methods=["POST"])
+def app_create():
+    headers['X-Auth-Token'] = request.headers['token']
+    try:
+        data = json.loads(request.data)
+    except ValueError:
+        data = {}
+    app_data = {
+        "repo_token": "",
+        "name": data.get("name", "TestApp"),
+        "parameters": {},
+        "description": data.get("description", "unknown description"),
+        "base_url": "/v1",
+        "languagepack": data.get("lp", "lp unknown"),
+        "source": {
+            "repository": data.get("repo", "unkown"),
+            "revision": "master"
+        },
+        "version": 1,
+        "trigger_actions": ["unittest", "build", "deploy"],
+        "ports": [int(data.get('ports', 80))],
+        "workflow_config": {
+            "test_cmd": data.get("test_cmd", ""),
+            "run_cmd": data.get("run_cmd", "")
+        }
+    }
+    resp = requests.post(SOLUM_URL+"/v1/apps",
+                         headers=headers,
+                         data=json.dumps(app_data))
+    return json.dumps(resp.json())
 
 @app.route("/app/repose/deploy/<app_id>/workflows", methods=["POST"])
 def app_deploy(app_id):
@@ -42,7 +97,6 @@ def app_deploy(app_id):
     resp = requests.post(SOLUM_URL+"/v1/apps/%s/workflows" % app_id,
                          headers=headers,
                          data=json.dumps(data))
-    import pdb;pdb.set_trace()
     return json.dumps({"test": "Test"})
 
 @app.route("/app/repose/show/<app_id>", methods=["GET"])
@@ -50,7 +104,6 @@ def app_show(app_id):
     headers['X-Auth-Token'] = request.headers['token']
     resp = requests.get(SOLUM_URL+"/v1/apps/%s" % app_id,
                          headers=headers)
-    #import pdb;pdb.set_trace()
     return json.dumps(resp.json())
 
 auth_token = None

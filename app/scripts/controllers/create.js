@@ -8,7 +8,7 @@
  * Controller of the reposePlaygroundApp
  */
 angular.module('reposePlaygroundApp')
-  .controller('CreateCtrl', function ($scope, $log, ReposeService, $filter, $stateParams) {
+  .controller('CreateCtrl', function ($scope, $log, ReposeService, $filter, $stateParams, $location, flashservice) {
     $log.info('In Create Ctrl', $stateParams);
     $scope.app_id = $stateParams.app_id
     $scope.ui = {
@@ -18,6 +18,8 @@ angular.module('reposePlaygroundApp')
       versionSelected: false,
       componentSelected: false
     };
+    $scope.flashservice = flashservice;
+    $scope.message = "Hello,world";
     $scope.repose = {
       availableVersions: [],
       availableFilters: []
@@ -25,7 +27,58 @@ angular.module('reposePlaygroundApp')
     $scope.newInstance = {
       selectedFilters: []
     };
+    
+    $scope.app = {
+    }
+    
+    $scope.lp = {
+    }
 
+    $scope.createAlert = function() {
+    flashservice.setMessage("Hello,world");
+    }
+    
+    $scope.createApplication = function() {
+    ReposeService.createApp(JSON.stringify($scope.app))
+        .then(function(result){
+      $log.info('CreateCtrl::',result);
+      $scope.status = result.message;
+      $scope.app.id = result.id;
+      // Now deploy the app
+      ReposeService.deployApp(result.id)
+      .then(function(result){
+      $log.info('CreateCtrl::',result);
+      flashservice.setMessage("created");
+      $location.path('/main');
+    })
+    .catch(function(err){
+      $log.error('CreateCtrl::',err);
+      $scope.status = 'error';
+      alert(err);
+    });
+    })
+    .catch(function(err){
+      $log.error('CreateCtrl::',err);
+      $scope.status = 'error';
+      alert(err);
+    });
+    }
+    
+    $scope.createLanguagepack = function() {
+        ReposeService.createLanguagepack(JSON.stringify($scope.lp))
+        .then(function(result){
+      $log.info('CreateCtrl::',result);
+      $scope.status = result.message;
+      $scope.app.id = result.id;
+      $location.path('/main');
+    })
+    .catch(function(err){
+      $log.error('CreateCtrl::',err);
+      $scope.status = 'error';
+      alert(err);
+    });
+    }
+    
     function cleanErrors(){
       $scope.ui.errorMessage = "";
     }

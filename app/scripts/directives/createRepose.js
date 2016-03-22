@@ -10,17 +10,21 @@ angular.module('reposePlaygroundApp')
         scope.ui.VersionSelected = false;
 
 
-        ReposeService.getVersions()
-        .then(function(versions){
+        ReposeService.getLanguagepacks()
+        .then(function(languagepacks){
           cleanErrors();
-          scope.repose.availableVersions = versions;
-          $log.info('createRepose directive ReposeService.getVersions::got back repose versions: ', versions);
+          scope.repose.availableLanguagepacks = languagepacks;
+          $log.info('createRepose directive ReposeService.getVersions::got back languagepacks: ', languagepacks);
         })
         .catch(function(err){
           scope.ui.reposeFetchError = true;
           $log.error('createRepose directive ReposeService.getVersions::Got an error: ', err);
 
         });
+
+        scope.selectLanguagepack = function(){
+          scope.ui.LanguagepackSelected = true;
+        }
 
         scope.selectVersion = function(){
           scope.ui.VersionSelected = true;

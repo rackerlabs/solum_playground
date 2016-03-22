@@ -5,21 +5,21 @@
   <div class="rs-main rs-panel">
     <div class="rs-sidebar rs-pull-right">
       <div class="rs-inner">
-        <h3>Deploy an Application</h3>
+        <h3>Create a Languagepack</h3>
         <!--<h4>Solum Test Application</h4>-->
-        <p>To deploy an application, you need to provide following information. name to application, languagepack, application code repository(github url), port etc...</p>
+        <p>To create a languagepack, you need to provide following information. name of languagepack and it's repository(github url).</p>
         <p><a href="https://repose.atlassian.net/wiki/">Solum Docs</a></p>
       </div>
     </div>
     <div class="rs-content rs-panel">
-      <form name="createForm" data-ng-submit="createApplication()" class="rs-form-horizontal" >
+      <form name="createForm" data-ng-submit="createLanguagepack()" class="rs-form-horizontal" >
         <div class="rs-detail-section">
-          <create-repose></create-repose>
+          <create-languagepack></create-languagepack>
         </div>
         <div class="rs-detail-section">
           <div class="rs-detail-section-header rs-btn-group">
-            <button type="submit" class="save rs-btn rs-btn-primary">Deploy Application</button>
-            <div class="rs-btn rs-btn-link" data-ui-sref="main">Cancel</div>
+            <button type="submit" class="save rs-btn rs-btn-primary">Create Languagepack</button>
+            <button class="rs-btn rs-btn-link" data-ui-sref="main">Cancel</button>
           </div>
         </div>
       </form>
