@@ -8,7 +8,7 @@
  * Controller of the reposePlaygroundApp
  */
 angular.module('reposePlaygroundApp')
-  .controller('CreateCtrl', function ($scope, $log, ReposeService, $filter, $stateParams, $location, flashservice) {
+  .controller('CreateCtrl', function ($scope, $log, ReposeService, $filter, $stateParams, $location, flashservice, $rootScope) {
     $log.info('In Create Ctrl', $stateParams);
     $scope.app_id = $stateParams.app_id
     $scope.ui = {
@@ -18,6 +18,7 @@ angular.module('reposePlaygroundApp')
       versionSelected: false,
       componentSelected: false
     };
+    $rootScope.mainPage = false;
     $scope.flashservice = flashservice;
     $scope.message = "Hello,world";
     $scope.repose = {
@@ -31,6 +32,7 @@ angular.module('reposePlaygroundApp')
     $scope.app = {
     }
     
+    $scope.lp_name = "";
     $scope.lp = {
     }
 
@@ -39,6 +41,7 @@ angular.module('reposePlaygroundApp')
     }
     
     $scope.createApplication = function() {
+    $scope.app['lp_name'] = $scope.lp_name.name;
     ReposeService.createApp(JSON.stringify($scope.app))
         .then(function(result){
       $log.info('CreateCtrl::',result);

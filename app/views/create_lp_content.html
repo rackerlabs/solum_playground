@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="rs-content rs-panel">
-      <form name="createForm" data-ng-submit="createLanguagepack()" class="rs-form-horizontal" >
+      <form name="createForm" data-ng-submit="createForm.$valid  &&createLanguagepack()" class="rs-form-horizontal" >
         <div class="rs-detail-section">
           <create-languagepack></create-languagepack>
         </div>

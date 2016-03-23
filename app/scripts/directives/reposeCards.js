@@ -82,9 +82,9 @@ angular.module('reposePlaygroundApp')
           .then(function(data){
             console.log('reposeCards:',scope.reposes);
             scope.ui.waitingForLoad = false;
-            //repose.status = "Stopped";
+            repose.status = "DELETING";
             //repose.message = "";
-            scope.reposes.splice(repose, 1);
+            //scope.reposes.splice(repose, 1);
             $log.info('ReposeCards ReposeService.deleteapp::got back repose instances: ', scope.reposes);
           })
           .catch(function(err){

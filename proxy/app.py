@@ -72,7 +72,7 @@ def app_create():
         "parameters": {},
         "description": data.get("description", "unknown description"),
         "base_url": "/v1",
-        "languagepack": data.get("lp", "lp unknown"),
+        "languagepack": data.get("lp_name", "lp unknown"),
         "source": {
             "repository": data.get("repo", "unkown"),
             "revision": "master"
@@ -114,7 +114,7 @@ def get_auth_token(username, password):
     return token
 
 @app.route("/app/auth", methods=["POST", "GET"])
-def world():
+def authentication():
     if request.method == "POST":
         if not request.data:
             return "error"

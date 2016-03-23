@@ -14,12 +14,12 @@ angular.module('reposePlaygroundApp')
         .then(function(languagepacks){
           cleanErrors();
           scope.repose.availableLanguagepacks = languagepacks;
-          $log.info('createRepose directive ReposeService.getVersions::got back languagepacks: ', languagepacks);
+          $log.info('createRepose directive ReposeService.getLanguagepacks::got back languagepacks: ', languagepacks);
         })
         .catch(function(err){
           scope.ui.reposeFetchError = true;
-          $log.error('createRepose directive ReposeService.getVersions::Got an error: ', err);
-
+          $log.error('createRepose directive ReposeService.back::Got an error: ', err);
+          scope.ui.errorMessage = err;
         });
 
         scope.selectLanguagepack = function(){

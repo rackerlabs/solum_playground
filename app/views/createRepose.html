@@ -5,70 +5,77 @@
   <div class="rs-control-group error" data-ng-show="create.errorMessage !== ''">
     <strong class="rs-help-block">{{ ui.errorMessage }}</strong>
   </div>
+   <div class="rs-control-group" data-ng-class="{'error': createForm.$submitted && createForm.name.$invalid}">
 
-  <div class="row">
-    <div class="col-xs-3">
-      <label class="rs-control-label">Application name</label>
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="rs-control-label">Application name</label>
+      </div>
+      <div class="rs-controls col-xs-6">
+        <input class="col-xs-12" type="text" required placeholder="Provide application name" ng-model="app.name" name="app_name"/>
+      </div>  
     </div>
-    <div class="rs-controls col-xs-6">
-      <input class="col-xs-12" type="text" placeholder="Provide application name" ng-model="app.name" name="app_name"/>
-    </div>  
-  </div>
-
-  <div class="row">
-    <div class="col-xs-3">
-      <label class="rs-control-label">Application description</label>
+  
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="rs-control-label">Application description</label>
+      </div>
+      <div class="rs-controls col-xs-6">
+        <textarea  rows="5" class="col-xs-12" required placeholder="Provide a short description here" ng-model="app.description" name="app_description"/>
+      </div>  
     </div>
-    <div class="rs-controls col-xs-6">
-      <textarea  rows="5" class="col-xs-12" placeholder="Provide a short description here" ng-model="app.description" name="app_description"/>
-    </div>  
-  </div>
-
-  <div class="row">
-    <div class="col-xs-3">  
-      <label class="rs-control-label">Application respository</label>
+  
+    <div class="row">
+      <div class="col-xs-3">  
+        <label class="rs-control-label">Application respository</label>
+      </div>
+      <div class="rs-controls col-xs-6">
+        <input class="col-xs-12" type="text" required placeholder="Provide application URL here" ng-model="app.repo" name="app_url"/>
+      </div>  
     </div>
-    <div class="rs-controls col-xs-6">
-      <input class="col-xs-12" type="text" placeholder="Provide application URL here" ng-model="app.repo" name="app_url"/>
-    </div>  
-  </div>
-
-  <div class="row">
-    <div class="col-xs-3">
-      <label class="rs-control-label">Ports</label>
+  
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="rs-control-label">Ports</label>
+      </div>
+      <div class="rs-controls col-xs-6">
+        <input  class="col-xs-12" type="number" required placeholder="If there are more than one ports, separate them with a comma" ng-model="app.ports" name="app_port"/>
+      </div>  
     </div>
-    <div class="rs-controls col-xs-6">
-      <input  class="col-xs-12" type="text" placeholder="If there are more than one ports, separate them with a comma" ng-model="app.ports" name="app_port"/>
-    </div>  
-  </div>
-
-  <div class="row">
-    <div class="col-xs-3">
-      <label class="rs-control-label">Test command</label>
+  
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="rs-control-label">Test command</label>
+      </div>
+      <div class="rs-controls col-xs-6">
+        <input  class="col-xs-12" type="text" placeholder="Command to test the application. For example, ./unit_tests.sh. You can leave this blank" ng-model="app.test_cmd" name="app_testcmd"/>
+      </div>  
     </div>
-    <div class="rs-controls col-xs-6">
-      <input  class="col-xs-12" type="text" placeholder="Command to test the application. For example, ./unit_tests.sh. You can leave this blank" ng-model="app.test_cmd" name="app_testcmd"/>
-    </div>  
-  </div>
-
-  <div class="row">
-    <div class="col-xs-3">
-      <label class="rs-control-label">Run command</label>
+  
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="rs-control-label">Run command</label>
+      </div>
+      <div class="rs-controls col-xs-6">
+        <input  class="col-xs-12" type="text" required placeholder="Command to run the application. For example, python app.py" ng-model="app.run_cmd" name="app_runcmd"/>
+      </div>  
     </div>
-    <div class="rs-controls col-xs-6">
-      <input  class="col-xs-12" type="text" placeholder="Command to run the application. For example, python app.py" ng-model="app.run_cmd" name="app_runcmd"/>
-    </div>  
-  </div>
-
-  <div class="row" data-ng-class="{'error': createForm.$submitted && createForm.name.$invalid}">
-    <div class="col-xs-3">
-      <label for="lp" class="rs-control-label">Select languagepack</label>
-    </div>
-    <div class="rs-controls col-xs-6">
-      <select class="rs-input-medium" name="lp" id="lp" required data-ng-model="app.lp"
-              data-ng-change="selectLanguagepack()">
-        <option data-ng-repeat="lp in repose.availableLanguagepacks" value="{{lp.name}}">{{lp.name}}</option>
-      </select>
+  
+    <div class="row" data-ng-class="{'error': createForm.$submitted && createForm.name.$invalid}">
+      <div class="col-xs-3">
+        <label for="lp" class="rs-control-label">Select languagepack</label>
+      </div>
+      <div class="rs-controls col-xs-6">
+        <select class="rs-input-medium" name="lp_name" required ng-model="lp_name"
+                ng-options="lp.name for lp in repose.availableLanguagepacks" data-ng-change="selectLanguagepack()">
+                <option value="">Select a Languagepack</option>
+        </select>
+        <!--<span ng-show="createForm.lp_name.$error.required">Select service</span>-->
+        <!--<select class="rs-input-medium" name="lp" required ng-model="app.lp"-->
+                <!--data-ng-change="selectLanguagepack()">-->
+          <!--<option data-ng-repeat="lp in repose.availableLanguagepacks" value="{{lp.name}}">{{lp.name}}</option>-->
+        <!--</select>-->
+      </div>
     </div>
   </div>
 </div>
