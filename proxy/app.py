@@ -85,9 +85,27 @@ def app_create():
             "run_cmd": data.get("run_cmd", "")
         }
     }
+
     resp = requests.post(SOLUM_URL+"/v1/apps",
                          headers=headers,
                          data=json.dumps(app_data))
+    return json.dumps(resp.json())
+
+@app.route("/app/repose/scale/", methods=["POST"])
+def app_scale():
+    headers['X-Auth-Token'] = request.headers['token']
+    try:
+        data = json.loads(request.data)
+    except ValueError:
+        data = {}
+    scale_data = {
+        "scale_target": data.get("scale_target"),
+        "base_url": "/v1/apps/%s/workflows" % data.get("app_id"),
+        "actions": ["scale"]
+    }
+    resp = requests.post(SOLUM_URL+"/v1/apps/%s/workflows" % data.get("app_id"),
+                         headers=headers,
+                         data=json.dumps(scale_data))
     return json.dumps(resp.json())
 
 @app.route("/app/repose/deploy/<app_id>/workflows", methods=["POST"])
@@ -127,7 +145,13 @@ def authentication():
         return  json.dumps({'token': token})
 
     if request.method == "GET":
-        return json.dumps({'success': 'success'})
+        auth_url = url+"/"+request.headers['token']
+        headers['X-Auth-Token'] = request.headers['token']
+        resp = requests.get(auth_url, headers=headers)
+        if resp.status_code == 200:
+            return json.dumps({'ok': 'User token is valid.'})
+        else:
+            raise Exception("User token invalid.")
 
 @app.route("/")
 def hello():

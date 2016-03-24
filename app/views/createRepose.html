@@ -9,7 +9,7 @@
 
     <div class="row">
       <div class="col-xs-3">
-        <label class="rs-control-label">Application name</label>
+        <label class="rs-control-label">Application Name</label>
       </div>
       <div class="rs-controls col-xs-6">
         <input class="col-xs-12" type="text" required placeholder="Provide application name" ng-model="app.name" name="app_name"/>
@@ -18,7 +18,7 @@
   
     <div class="row">
       <div class="col-xs-3">
-        <label class="rs-control-label">Application description</label>
+        <label class="rs-control-label">Application Description</label>
       </div>
       <div class="rs-controls col-xs-6">
         <textarea  rows="5" class="col-xs-12" required placeholder="Provide a short description here" ng-model="app.description" name="app_description"/>
@@ -27,7 +27,7 @@
   
     <div class="row">
       <div class="col-xs-3">  
-        <label class="rs-control-label">Application respository</label>
+        <label class="rs-control-label">Application Respository</label>
       </div>
       <div class="rs-controls col-xs-6">
         <input class="col-xs-12" type="text" required placeholder="Provide application URL here" ng-model="app.repo" name="app_url"/>
@@ -45,7 +45,7 @@
   
     <div class="row">
       <div class="col-xs-3">
-        <label class="rs-control-label">Test command</label>
+        <label class="rs-control-label">Test Command</label>
       </div>
       <div class="rs-controls col-xs-6">
         <input  class="col-xs-12" type="text" placeholder="Command to test the application. For example, ./unit_tests.sh. You can leave this blank" ng-model="app.test_cmd" name="app_testcmd"/>
@@ -54,7 +54,7 @@
   
     <div class="row">
       <div class="col-xs-3">
-        <label class="rs-control-label">Run command</label>
+        <label class="rs-control-label">Run Command</label>
       </div>
       <div class="rs-controls col-xs-6">
         <input  class="col-xs-12" type="text" required placeholder="Command to run the application. For example, python app.py" ng-model="app.run_cmd" name="app_runcmd"/>
@@ -63,12 +63,12 @@
   
     <div class="row" data-ng-class="{'error': createForm.$submitted && createForm.name.$invalid}">
       <div class="col-xs-3">
-        <label for="lp" class="rs-control-label">Select languagepack</label>
+        <label for="lp" class="rs-control-label">Languagepack</label>
       </div>
       <div class="rs-controls col-xs-6">
-        <select class="rs-input-medium" name="lp_name" required ng-model="lp_name"
+        <select class="col-xs-12" name="lp_name" required ng-model="lp_name"
                 ng-options="lp.name for lp in repose.availableLanguagepacks" data-ng-change="selectLanguagepack()">
-                <option value="">Select a Languagepack</option>
+                <option value="">Select a languagepack</option>
         </select>
         <!--<span ng-show="createForm.lp_name.$error.required">Select service</span>-->
         <!--<select class="rs-input-medium" name="lp" required ng-model="app.lp"-->

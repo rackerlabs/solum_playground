@@ -42,9 +42,8 @@
       <div class="button-wrap">
         <button class="rs-btn btn-footer rs-btn-primary" data-ng-show="['READY', 'SCALING_COMPLETE'].indexOf(repose.status)!==-1" data-ng-click="deploy(repose)">Redeploy</button>
         <button class="rs-btn btn-footer rs-btn-primary" data-ng-show="['READY', 'SCALING_COMPLETE'].indexOf(repose.status)==-1" data-ng-click="deploy(repose)">Deploy</button>
-        <!--<button class="rs-btn btn-footer rs-btn-login" data-ng-show="repose.status=='Running'" data-ng-click="stop(repose)">Stop</button>-->
         <button class="rs-btn btn-footer rs-btn-login" data-ng-click="deleteapp(repose)">Delete</button>
-        <button class="rs-btn btn-footer" data-ng-class="{'disabled': ['READY', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE'].indexOf(repose.status)==-1}" data-ui-sref="test({repose_id: repose.id})">Scale</button>
+        <button class="rs-btn btn-footer" data-ng-class="{'disabled': ['READY', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE'].indexOf(repose.status)==-1}" data-ng-click="scaleApplication(repose)">Scale</button>
         <!-- TODO: add ui route for benchmark -->
         <button class="rs-btn btn-footer" data-ui-sref="showapp({app_id: repose.id})">App Details</button>
       </div>

@@ -13,6 +13,20 @@ angular.module('reposePlaygroundApp')
           $location.path('/');
         }
 
+        scope.scaleApplication = function(repose) {
+          $log.info('scale application: ', repose);
+          $modal.open({
+            templateUrl: '/views/scale_modal.html',
+            backdrop: 'static',
+            controller: 'ScaleModalInstanceCtrl',
+            resolve: {
+              repose: function() {
+                return repose;
+              }
+            }
+          });
+        }
+
         scope.viewConfiguration = function(repose) {
           $log.info('view configuration: ', repose);
           $modal.open({

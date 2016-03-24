@@ -44,6 +44,7 @@ angular.module('reposePlaygroundApp')
     $scope.logout = function() {
     console.log("Hello,world");
       Auth.logout();
+      $rootScope.mainPage = false;
       $location.path('/');
     }
 
@@ -113,4 +114,59 @@ angular.module('reposePlaygroundApp')
       var blob = zip.generate({type:"blob"});
       FileSaver.saveAs(blob, "repose.zip");
     };
+  })
+  .controller('ScaleModalInstanceCtrl', function (ReposeService, $scope, $modalInstance, repose, FileSaver, $log) {
+    $log.info('inside config modal instance ctrl', repose);
+    $scope.configsLoading = true;
+    $scope.configsLoaded = false;
+    $scope.configsErrored = false;
+    $scope.target_instance_count = "";
+    $scope.scale_data = {}
+
+    ReposeService.getApp(repose.id)
+    .then(function(data){
+      $scope.app = data;
+      $scope.appLoading = false;
+      $scope.appLoaded = true;
+      $scope.appErrored = false;
+    })
+    .catch(function(err){
+      $scope.app = data;
+      $scope.appLoading = false;
+      $scope.appLoaded = false;
+      $scope.appErrored = true;
+      scope.errorMessage = err;
+      $log.error('ReposeCards ReposeService.viewConfiguration::Got an error: ', err);
+
+    });
+
+    $scope.ok = function () {
+      $modalInstance.close($scope.status);
+    };
+
+    $scope.dismiss = function () {
+      $log.info("dismissed");
+      $modalInstance.dismiss('cancel');
+    };
+
+    $scope.scale = function() {
+    $scope.scale_data = {
+     "app_id" : $scope.app.id,
+     "scale_target": $scope.target_instance_count     
+    }
+
+    ReposeService.scaleApp(JSON.stringify($scope.scale_data))
+        .then(function(result){
+      $log.info('ScaleModalInstanceCtrl::',result);
+      $scope.status = result.message;
+      $scope.app.id = result.id;
+      $modalInstance.dismiss('cancel');
+    })
+    .catch(function(err){
+      $log.error('ScaleModalInstanceCtrl::',err);
+      $scope.status = 'error';
+      alert(err);
+    });
+    };
+    
   });

@@ -1,0 +1,39 @@
+<div class="modal-header">
+</div>
+<h3 class="modal-title text-center">Scale Application</h3>
+<form name="createForm" data-ng-submit="scale()">
+<div class="modal-body">
+  <div class="rs-control-group rs-embedded-medium" data-ng-class="{'error': createForm.$submitted && createForm.name.$invalid}">
+    <table class="rs-list-table rs-embedded-list-table" ng-show="appLoaded">
+      <thead>
+      <tr>
+        <th><span class="rs-table-sort-text">Application Name</span></th>
+        <th><span class="rs-table-sort-text">Current Instance Count</span></th>
+        <th><span class="rs-table-sort-text">Target Instance Count</span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="rs-table-text">{{ app.name }}</td>
+        <td class="rs-table-text">{{ app.scale_config[app.name].target }}</td>
+        <td class="rs-table-text"><input type="number" ng-model="target_instance_count" required placeholder="Enter an integer number."/></td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="rs-table-overlay rs-table-overlay-loading" ng-show="appLoading">
+      <div class="rs-table-overlay-content">
+        <div class="rs-table-overlay-message">Loading&hellip;</div>
+      </div>
+    </div>
+    <div class="rs-table-overlay rs-table-overlay-error" ng-show="appErrored">
+      <div class="rs-table-overlay-content">
+        <div class="rs-table-overlay-message"><i class="rs-icon-error-indicator"></i>{{ errorMessage }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-login" type="submit" >Scale</button>
+  <button class="btn btn-primary" type="button" ng-click="dismiss()">Dismiss</button>
+</div>
+</form>
