@@ -391,6 +391,11 @@ $icon-home: x y offset_x offset_y width height total_width total_height image_pa
 At the bottom of this section, we provide information about the spritesheet itself
 $spritesheet: width height image $spritesheet-sprites;
 */
+
+.rs-nav-item-horizontal {
+  display: inline;
+}
+
 .rs-icon-arrow-blue-right {
   background-color: transparent;
   background-image: url(icons.png);
@@ -2951,7 +2956,8 @@ td {
       display: none; }
 
 .rs-nav-brand {
-  float: left; }
+  float: left; 
+  margin-top: 13px;}
   .rs-nav-brand a, .rs-nav-brand .rs-facet-clear-link {
     background: transparent url(logo-rackspace.png) no-repeat center center;
     width: 132px;
