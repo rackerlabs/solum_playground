@@ -52,6 +52,18 @@
 </div>
 <div class="row">
   <div class="col-xs-3">
+    <label class="rs-control-label">Application Instance Count</label>
+  </div>
+  <div class="col-xs-9">{{ solumapp.scale_config[solumapp.name].target }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-3">
+    <label class="rs-control-label">Application URL</label>
+  </div>
+  <div class="col-xs-9"> <a ng-href="{{ solumapp.app_url }}" target = "_blank">{{ solumapp.app_url }}</a></div>
+</div>
+<div class="row">
+  <div class="col-xs-3">
     <label class="rs-control-label">Raw Content</label>
   </div>
   <div class="col-xs-9">{{ solumapp.raw_content }}</div>

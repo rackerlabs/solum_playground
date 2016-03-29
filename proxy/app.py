@@ -20,6 +20,8 @@ headers = {'Content-Type': 'application/json',
            'Accept': 'application/json'}
 
 SOLUM_URL = "https://dfw.solum.api.rackspacecloud.com"
+#SOLUM_URL = "https://vijendar-dfw-dev-api.dev.rs-paas.com"
+#SOLUM_URL = "https://dfw-staging-api.labs.rs-paas.com"
 
 @app.route("/app/language_packs", methods=["GET"])
 def language_packs_list():
@@ -69,7 +71,14 @@ def app_create():
     app_data = {
         "repo_token": "",
         "name": data.get("name", "TestApp"),
-        "parameters": {},
+        "parameters": {
+            "carina_params": {
+                "cluster_name": data.get("clustername"),
+                "api_key": data.get("apikey"),
+                "user_name": data.get("username")
+            },
+            "user_params": {}
+        },
         "description": data.get("description", "unknown description"),
         "base_url": "/v1",
         "languagepack": data.get("lp_name", "lp unknown"),

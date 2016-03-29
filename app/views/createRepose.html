@@ -39,7 +39,7 @@
         <label class="rs-control-label">Ports</label>
       </div>
       <div class="rs-controls col-xs-6">
-        <input  class="col-xs-12" type="number" required placeholder="If there are more than one ports, separate them with a comma" ng-model="app.ports" name="app_port"/>
+        <input  class="col-xs-12" type="number" min="0" required placeholder="If there are more than one ports, separate them with a comma" ng-model="app.ports" name="app_port"/>
       </div>  
     </div>
   
@@ -77,5 +77,34 @@
         <!--</select>-->
       </div>
     </div>
-  </div>
+
+
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="rs-control-label">Carina User Name</label>
+      </div>
+      <div class="rs-controls col-xs-6">
+        <input  class="col-xs-12" type="text" required placeholder="Provide getcarina.com username" ng-model="app.username" name="carina_username"/>
+      </div>  
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="rs-control-label">Carina API Key</label>
+      </div>
+      <div class="rs-controls col-xs-6">
+        <input  class="col-xs-12" type="text" required placeholder="Carina API Key" ng-model="app.apikey" name="carina_apikey"/>
+      </div>  
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="rs-control-label">Carina Cluster Name</label>
+      </div>
+      <div class="rs-controls col-xs-6">
+        <input  class="col-xs-12" type="text" required placeholder="Create a cluster from getcarina.com and provide it 's name here." ng-model="app.clustername" name="carina_clustername"/>
+      </div>  
+    </div>
+    
+    </div>
 </div>
