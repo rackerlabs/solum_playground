@@ -3644,7 +3644,7 @@ html, body {
     margin: 0;
     padding: 12px 20px; }
     .repose-card .card-footer > .button-wrap {
-      float: left;
+      /*float: left;*/
       margin-right: 10px; }
   .repose-card .card-title {
     font-size: 28px;

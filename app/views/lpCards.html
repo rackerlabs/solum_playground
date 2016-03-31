@@ -1,0 +1,42 @@
+<div class="repose-cards" data-ng-show="!ui.reposeFetchError && !ui.waitingForLoad">
+  <div class="repose-card add-new" data-ui-sref="createlp">
+    Create Languagepack&hellip;
+  </div>
+  <div class="repose-card" data-ng-repeat="repose in reposes track by repose.uuid">
+    <div class="card-header row">
+      <div class="card-subtitle ">Languagepack Name</div>
+      <div class=""><h3 class="card-title">{{ repose.name }}</h3></div>
+    </div>
+    <div class="card-body">
+      <div class="details-trio">
+        <div class="row">
+          <div class="details-header col-xs-3">ID</div>
+          <div class="col-xs-9">{{ repose.uuid }}</div>
+        </div>
+        <div class="row">
+          <div class="details-header col-xs-3">Source URI</div>
+          <div class="col-xs-9">{{ repose.source_uri }}</div>
+        </div>
+        
+        <div class="row">
+          <div class="details-header col-xs-3">Status</div>
+          <div class="col-xs-9">
+          <span class="rs-status rs-status-ok" data-ng-show="['UNIT_TESTING', 'BUILDING', 'READY', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE', 'DEPLOYING'].indexOf(repose.status)!==-1">{{ repose.status }}</span>
+          <span class="rs-status rs-status-error" data-ng-show="['UNIT_TESTING', 'BUILDING', 'READY', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE', 'DEPLOYING'].indexOf(repose.status)==-1">{{ repose.status }}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="details-header col-xs-3">Description</div>
+          <div class="col-xs-9">{{ repose.description }}</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="card-footer rs-btn-group">
+      <div class="button-wrap text-center">
+        <button class="rs-btn btn-footer rs-btn-login " data-ng-click="deleteLP(repose)">Delete</button>
+      </div>
+      </button>
+    </div>
+  </div>
+</div>

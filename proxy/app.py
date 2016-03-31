@@ -21,7 +21,7 @@ headers = {'Content-Type': 'application/json',
 
 SOLUM_URL = "https://dfw.solum.api.rackspacecloud.com"
 #SOLUM_URL = "https://vijendar-dfw-dev-api.dev.rs-paas.com"
-#SOLUM_URL = "https://dfw-staging-api.labs.rs-paas.com"
+SOLUM_URL = "https://dfw-staging-api.labs.rs-paas.com"
 
 @app.route("/app/language_packs", methods=["GET"])
 def language_packs_list():
@@ -131,7 +131,14 @@ def app_show(app_id):
     headers['X-Auth-Token'] = request.headers['token']
     resp = requests.get(SOLUM_URL+"/v1/apps/%s" % app_id,
                          headers=headers)
-    return json.dumps(resp.json())
+    json_resp = resp.json()
+    try:
+        json_resp['cluster_name'] = json.loads(json_resp['raw_content'])['parameters']['carina_params']['cluster_name']
+    except Exception:
+        # TODO
+        pass
+    
+    return json.dumps(json_resp)
 
 auth_token = None
 def get_auth_token(username, password):

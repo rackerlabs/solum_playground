@@ -47,7 +47,7 @@ angular.module('reposePlaygroundApp')
           .then(function(data){
             console.log('reposeCards:',scope.reposes);
             scope.ui.waitingForLoad = false;
-            repose.status = "deploying";
+            repose.status = "DEPLOYING";
             repose.message = "";
             //scope.reposes.splice(repose, 1);
             $log.info('ReposeCards ReposeService.deleteapp::got back repose instances: ', scope.reposes);
@@ -60,36 +60,6 @@ angular.module('reposePlaygroundApp')
           });
         }
   
-  
-        //scope.showapp = function(repose){
-          //$log.info('showapp called: ', repose);
-          //$modal.open({
-            //templateUrl: '/views/showApp.html',
-            //backdrop: 'static',
-            //controller: 'ConfigModalInstanceCtrl',
-            //resolve: {
-              //repose: function() {
-                //return repose;
-              //}
-            //}
-          //});
-          //ReposeService.showApp(repose.id)
-          //.then(function(data){
-            //console.log('reposeCards:',scope.reposes);
-            //scope.ui.waitingForLoad = false;
-            ////repose.status = "Stopped";
-            ////repose.message = "";
-            //scope.reposes.splice(repose, 1);
-            //$log.info('ReposeCards ReposeService.deleteapp::got back repose instances: ', scope.reposes);
-          //})
-          //.catch(function(err){
-            //scope.ui.waitingForLoad = false;
-            //scope.ui.reposeFetchError = true;
-            //$log.error('ReposeCards ReposeService.stopInstance::Got an error: ', err);
-
-          //});
-        //}
-  
         scope.deleteapp = function(repose){
           $log.info('deleteapp called: ', repose);
           ReposeService.deleteInstance(repose.id)
@@ -97,8 +67,6 @@ angular.module('reposePlaygroundApp')
             console.log('reposeCards:',scope.reposes);
             scope.ui.waitingForLoad = false;
             repose.status = "DELETING";
-            //repose.message = "";
-            //scope.reposes.splice(repose, 1);
             $log.info('ReposeCards ReposeService.deleteapp::got back repose instances: ', scope.reposes);
           })
           .catch(function(err){

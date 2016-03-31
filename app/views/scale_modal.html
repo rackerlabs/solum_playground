@@ -16,7 +16,7 @@
       <tr>
         <td class="rs-table-text">{{ app.name }}</td>
         <td class="rs-table-text">{{ app.scale_config[app.name].target }}</td>
-        <td class="rs-table-text"><input type="number" ng-model="target_instance_count" required placeholder="Enter an integer number."/></td>
+        <td class="rs-table-text"><input type="number" min="1" ng-model="target_instance_count" required placeholder="Enter an integer number."/></td>
       </tr>
       </tbody>
     </table>

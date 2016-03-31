@@ -2,9 +2,9 @@
   <div class="repose-card add-new" data-ui-sref="create">
     Deploy Application&hellip;
   </div>
-  <div class="repose-card add-new" data-ui-sref="createlp">
-    Create Languagepack&hellip;
-  </div>
+  <!--<div class="repose-card add-new" data-ui-sref="createlp">-->
+    <!--Create Languagepack&hellip;-->
+  <!--</div>-->
   <div class="repose-card" data-ng-repeat="repose in reposes track by repose.id">
     <div class="card-header row">
       <div class="card-subtitle ">Application Name</div>
@@ -32,14 +32,14 @@
         <div class="row">
           <div class="details-header col-xs-3">Status</div>
           <div class="col-xs-9">
-          <span class="rs-status rs-status-ok" data-ng-show="['UNIT_TESTING', 'BUILDING', 'READY', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE', 'DEPLOYING'].indexOf(repose.status)!==-1">{{ repose.status }}</span>
-          <span class="rs-status rs-status-error" data-ng-show="['UNIT_TESTING', 'BUILDING', 'READY', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE', 'DEPLOYING'].indexOf(repose.status)==-1">{{ repose.status }}</span>
+          <span class="rs-status rs-status-ok" data-ng-show="['UNIT_TESTING', 'BUILDING', 'READY', 'SCALING_STARTED', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE', 'DEPLOYING'].indexOf(repose.status)!==-1">{{ repose.status }}</span>
+          <span class="rs-status rs-status-error" data-ng-show="['UNIT_TESTING', 'BUILDING', 'READY', 'SCALING_STARTED', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE', 'DEPLOYING'].indexOf(repose.status)==-1">{{ repose.status }}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="card-footer rs-btn-group">
-      <div class="button-wrap">
+      <div class="button-wrap text-center">
         <button class="rs-btn btn-footer rs-btn-primary" data-ng-show="['READY', 'SCALING_COMPLETE'].indexOf(repose.status)!==-1" data-ng-click="deploy(repose)">Redeploy</button>
         <button class="rs-btn btn-footer rs-btn-primary" data-ng-show="['READY', 'SCALING_COMPLETE'].indexOf(repose.status)==-1" data-ng-click="deploy(repose)">Deploy</button>
         <button class="rs-btn btn-footer rs-btn-login" data-ng-click="deleteapp(repose)">Delete</button>

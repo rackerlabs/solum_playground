@@ -40,6 +40,12 @@
 </div>
 <div class="row">
   <div class="col-xs-3">
+    <label class="rs-control-label">Updated Time</label>
+  </div>
+  <div class="col-xs-9">{{ solumapp.updated_at }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-3">
     <label class="rs-control-label">Repository</label>
   </div>
   <div class="col-xs-9">{{ solumapp.source.repository }}</div>
@@ -52,7 +58,7 @@
 </div>
 <div class="row">
   <div class="col-xs-3">
-    <label class="rs-control-label">Application Instance Count</label>
+    <label class="rs-control-label">App Instance Count</label>
   </div>
   <div class="col-xs-9">{{ solumapp.scale_config[solumapp.name].target }}</div>
 </div>
@@ -64,8 +70,14 @@
 </div>
 <div class="row">
   <div class="col-xs-3">
+    <label class="rs-control-label">Carina Cluster Name</label>
+  </div>
+  <div class="col-xs-9">{{ solumapp.cluster_name  }} </div>
+</div>
+<div class="row">
+  <div class="col-xs-3">
     <label class="rs-control-label">Raw Content</label>
   </div>
-  <div class="col-xs-9">{{ solumapp.raw_content }}</div>
+  <div class="col-xs-9"><pre>{{ solumapp.raw_content |json}}</pre></div>
 </div>
 </div>

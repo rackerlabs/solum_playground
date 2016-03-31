@@ -325,6 +325,26 @@ getApp: function(id, callback) {
       return deferred.promise;
     },
     
+    deleteLP: function(id, callback) {
+      $log.info('In ReposeService.deleteLP().  Try to remove: ', id);
+      var cb = callback || angular.noop;
+      var deferred = $q.defer();
+
+      $http.delete('/app/language_packs/delete/' + id).
+      success(function(resp){
+        $log.info('ReposeService.deleteLP()::Got back a "successful" response with: ', resp);
+        deferred.resolve(resp)
+        return cb();
+      }).
+      error(function(err) {
+       $log.error('ReposeService.deleteLP()::Got back a "failed" response with: ', err);
+       deferred.reject(err);
+       return cb(err);
+     }.bind(this));
+
+      return deferred.promise;
+    },
+    
     startInstance: function(id, callback) {
      $log.info('In ReposeService.startInstance().  Try to start: ', id);
      var cb = callback || angular.noop;

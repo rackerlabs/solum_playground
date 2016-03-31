@@ -15,6 +15,7 @@ angular.module('reposePlaygroundApp')
         .then(function(solumapp){
           cleanErrors();
           scope.solumapp = solumapp;
+          scope.solumapp.raw_content = JSON.parse(solumapp.raw_content); 
           //scope.repose.availableVersions = versions;
           $log.info('showApp directive ReposeService.getApp::got back app details : ', solumapp);
         })
@@ -24,9 +25,6 @@ angular.module('reposePlaygroundApp')
 
         });
 
-        scope.selectVersion = function(){
-          //scope.ui.VersionSelected = true;
-        }
 
         function cleanErrors(){
           //scope.ui.errorMessage = "";
