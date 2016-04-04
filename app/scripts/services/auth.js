@@ -38,6 +38,9 @@ angular.module('reposePlaygroundApp')
         success(function(data) {
           $log.info('Auth.login()::Got back a "successful" response with: ', data);
           $cookieStore.put('token', data.token);
+          $cookieStore.put('username', user.username);
+          $cookieStore.put('apikey', data.apikey);
+          $cookieStore.put('cloud_files_url', data.cloud_files_url);
           currentUser = User.get();
           deferred.resolve(data);
           return cb();
@@ -60,6 +63,9 @@ angular.module('reposePlaygroundApp')
       logout: function() {
         $log.info('In Auth.logout().  Remove token from cookie store');
         $cookieStore.remove('token');
+        $cookieStore.remove('username');
+        $cookieStore.remove('apikey');
+        $cookieStore.remove('cloud_files_url');
         currentUser = {};
       },
 

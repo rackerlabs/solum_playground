@@ -8,7 +8,7 @@
  * Controller of the reposePlaygroundApp
  */
 angular.module('reposePlaygroundApp')
-  .controller('CreateCtrl', function ($scope, $log, ReposeService, $filter, $stateParams, $location, flashservice, $rootScope) {
+  .controller('CreateCtrl', function ($scope, $log, ReposeService, $cookieStore, $filter, $stateParams, $location, flashservice, $rootScope) {
     $log.info('In Create Ctrl', $stateParams);
     $scope.app_id = $stateParams.app_id
     $scope.ui = {
@@ -18,6 +18,8 @@ angular.module('reposePlaygroundApp')
       versionSelected: false,
       componentSelected: false
     };
+    $scope.apikey = $cookieStore.get('apikey');
+    $scope.username = $cookieStore.get('username');
     $rootScope.mainPage = false;
     $scope.flashservice = flashservice;
     $scope.message = "Hello,world";
@@ -34,14 +36,16 @@ angular.module('reposePlaygroundApp')
     
     $scope.lp_name = "";
     $scope.lp = {
-    }
+    };
 
     $scope.createAlert = function() {
     flashservice.setMessage("Hello,world");
-    }
+    };
     
     $scope.createApplication = function() {
     $scope.app['lp_name'] = $scope.lp_name.name;
+    $scope.app['username'] = $scope.username;
+    $scope.app['apikey'] = $scope.apikey;
     ReposeService.createApp(JSON.stringify($scope.app))
         .then(function(result){
       $log.info('CreateCtrl::',result);
@@ -86,6 +90,12 @@ angular.module('reposePlaygroundApp')
       $scope.ui.errorMessage = "";
     }
   })
+  .filter('split', function() {
+        return function(input) {
+            // do some bounds checking here to ensure it has that index
+            return input.split('/')[1];
+        }
+    })
   .controller('ModalInstanceCtrl', function (ReposeService, $scope, $modalInstance, data, newInstance, $log, $location) {
     $log.info('inside modal instance ctrl', newInstance, data);
     $scope.status = "building";

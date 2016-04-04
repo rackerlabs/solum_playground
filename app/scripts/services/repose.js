@@ -223,7 +223,46 @@ getApp: function(id, callback) {
       return deferred.promise;
     },
     
+getAppLogs: function(id, callback) {
+      $log.info('In ReposeService.getApp().  Try to remove: ', id);
+      var cb = callback || angular.noop;
+      var deferred = $q.defer();
 
+      $http.get('/app/repose/logs/' + id).
+      success(function(resp){
+        $log.info('ReposeService.getAppLogs()::Got back a "successful" response with: ', resp);
+        deferred.resolve(resp)
+        return cb();
+      }).
+      error(function(err) {
+       $log.error('ReposeService.getAppLogs()::Got back a "failed" response with: ', err);
+       deferred.reject(err);
+       return cb(err);
+     }.bind(this));
+
+      return deferred.promise;
+    },
+  
+  getLogFile: function(path, callback) {
+      $log.info('In ReposeService.getLogFile().  Try to remove: ', path);
+      var cb = callback || angular.noop;
+      var deferred = $q.defer();
+
+      $http.get('/app/repose/logs/show/' + path).
+      success(function(resp){
+        $log.info('ReposeService.getLogFile()::Got back a "successful" response with: ', resp);
+        deferred.resolve(resp)
+        return cb();
+      }).
+      error(function(err) {
+       $log.error('ReposeService.getLogFile()::Got back a "failed" response with: ', err);
+       deferred.reject(err);
+       return cb(err);
+     }.bind(this));
+
+      return deferred.promise;
+    },
+    
      createApp: function(data, callback) {
       $log.info('In ReposeService.createApp().');
       var cb = callback || angular.noop;

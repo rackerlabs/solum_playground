@@ -27,20 +27,6 @@ angular.module('reposePlaygroundApp')
           });
         }
 
-        scope.viewConfiguration = function(repose) {
-          $log.info('view configuration: ', repose);
-          $modal.open({
-            templateUrl: '/views/config_modal.html',
-            backdrop: 'static',
-            controller: 'ConfigModalInstanceCtrl',
-            resolve: {
-              repose: function() {
-                return repose;
-              }
-            }
-          });
-        }
-
         scope.deploy = function(repose){
           $log.info('deployApp called: ', repose);
           ReposeService.deployApp(repose.id)

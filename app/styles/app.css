@@ -392,6 +392,11 @@ At the bottom of this section, we provide information about the spritesheet itse
 $spritesheet: width height image $spritesheet-sprites;
 */
 
+.rs-log-content {
+    height: 500px;
+    overflow: auto;
+}
+
 .rs-nav-item-horizontal {
   display: inline;
 }

@@ -124,7 +124,7 @@ def app_deploy(app_id):
     resp = requests.post(SOLUM_URL+"/v1/apps/%s/workflows" % app_id,
                          headers=headers,
                          data=json.dumps(data))
-    return json.dumps({"test": "Test"})
+    return json.dumps(resp.json())
 
 @app.route("/app/repose/show/<app_id>", methods=["GET"])
 def app_show(app_id):
@@ -140,25 +140,94 @@ def app_show(app_id):
     
     return json.dumps(json_resp)
 
-auth_token = None
+@app.route("/app/repose/logs/<app_id>", methods=["GET"])
+def app_logs(app_id):
+    headers['X-Auth-Token'] = request.headers['token']
+    resp = requests.get(SOLUM_URL+"/v1/apps/%s/workflows" % app_id,
+                         headers=headers)
+    json_resp = resp.json()
+    logs = []
+    for wf in json_resp:
+        resp = requests.get(
+            SOLUM_URL+"/v1/apps/%s/workflows/%s/logs" % (app_id, wf['id']),
+            headers=headers)
+        logs.append({"wf": wf, "logs": resp.json()})
+    
+    return json.dumps(logs)
+
+
+@app.route("/app/repose/logs/show/<file_root>/<log_dir>/<log_file>", methods=["GET"])
+def get_log_file(file_root, log_dir, log_file):
+    headers['X-Auth-Token'] = request.headers['token']
+    #log_url = 'https://storage101.dfw1.clouddrive.com/v1/MossoCloudFS_cd7e91d2-fbdf-4fbd-be77-b24ae224d061/solum_logs/%s/%s'
+    log_url = 'https://storage101.dfw1.clouddrive.com/v1/%s/solum_logs/%s/%s'
+    resp = requests.get(log_url % (file_root, log_dir, log_file),
+                         headers=headers)
+    return resp.text
+
 def get_auth_token(username, password):
     data = {'auth': {'passwordCredentials': {'username': username,'password': password}}}
     resp = requests.post(url, data=json.dumps(data), headers=headers)
-    token = json.loads(resp.content)['access']['token']['id']
+    if resp.status_code != 200:
+        raise Exception("Failed to authenticate the user %s. " % username)
+    cloud_files_url = None
+    import pdb;pdb.set_trace()
+    try:
+        for item in resp.json()['access']['serviceCatalog']:
+            if item['name'] != 'cloudFiles':
+                continue
+            for endpoint in item['endpoints']:
+                if endpoint['region'] != 'DFW':
+                    continue
+                cloud_files_url = endpoint['publicURL'].rsplit('/', 1)[-1]
+                break
+            break
+    except Exception:
+        cloud_files_url = None
+
+    if cloud_files_url is None:
+        raise Exception("Failed to get cloud files url for %s. " % username)
+    token = resp.json()['access']['token']['id'], cloud_files_url
     return token
 
 @app.route("/app/auth", methods=["POST", "GET"])
 def authentication():
+    headers = {'Content-Type': 'application/json',
+               'Accept': 'application/json'}
+    
     if request.method == "POST":
         if not request.data:
             return "error"
         obj = json.loads(request.data)
         username = obj['username']
         password = obj['password']
-        token = get_auth_token(username, password)
-        auth_token = token
+        token, cloud_files_url = get_auth_token(username, password)
+        #auth_token = token
         print "Token:", token
-        return  json.dumps({'token': token})
+        
+        # Now get carina session ID, followed by apikey
+        carina_auth_url = 'https://app.getcarina.com/api/auth'
+        headers = {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json;charset=utf-8'}
+        data = {
+            'username': username,
+            'password': password}
+        resp = requests.post(carina_auth_url, headers=headers, data=json.dumps(data))
+        session_id = resp.json()['sessionId']
+        
+        # get carina apikey
+        carina_apikey_url = 'https://app.getcarina.com/api/auth/api-key'
+        headers['X-Session-Id'] = session_id
+        resp = requests.get(carina_apikey_url,
+                            headers=headers)
+        api_key = resp.json()['apiKey']
+        return  json.dumps(
+            {
+                'token': token,
+                'apikey': api_key,
+                'cloud_files_url': cloud_files_url
+            })
 
     if request.method == "GET":
         auth_url = url+"/"+request.headers['token']

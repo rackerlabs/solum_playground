@@ -1,8 +1,17 @@
 <div class="modal-header">
 </div>
 <h3 class="modal-title">{{ header }}</h3>
-<div class="modal-body" data-ng-repeat="log_entry in data track by $index">
-  <p>{{ log_entry }}</p>
+  <div class="rs-table-overlay rs-table-overlay-loading" ng-show="logLoading">
+    <div class="rs-table-overlay-content">
+      <div class="rs-table-overlay-message">Loading&hellip;</div>
+    </div>
+  </div>
+  <div class="rs-table-overlay rs-table-overlay-error" ng-show="logLoadError">
+    <div class="rs-table-overlay-content">
+      <div class="rs-table-overlay-message"><i class="rs-icon-error-indicator"></i>{{ errorMessage }}</div>
+    </div>
+  </div>  
+<div class="rs-log-content"> <pre>{{ log_contents }}</pre>
 </div>
 <div class="modal-footer">
   <button class="btn btn-primary" type="button" ng-click="dismiss()">Dismiss</button>

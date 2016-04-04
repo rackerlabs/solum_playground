@@ -116,10 +116,31 @@ angular.module('reposePlaygroundApp')
       $modalInstance.dismiss('cancel');
     };
   })
-  .controller('LogModalInstanceCtrl', function ($scope, $modalInstance, data, header, $log) {
+  .controller('LogModalInstanceCtrl', function ($scope, $modalInstance, data, header, $log, $cookieStore, ReposeService) {
     $log.info('inside log instance ctrl', data);
     $scope.data = data;
+    $scope.logLoading = true;
+    $scope.logLoadError = false;
+    $scope.errorMessage = '';
     $scope.header = header;
+    $scope.apikey = $cookieStore.get('apikey');
+    $scope.username = $cookieStore.get('username');
+    $scope.tenant_id = $cookieStore.get('tenant_id');
+    $scope.auth_token = $cookieStore.get('token');
+    $scope.cloud_files_url = $cookieStore.get('cloud_files_url');
+    $scope.log_contents = '';
+    ReposeService.getLogFile($cookieStore.get('cloud_files_url')+ "/" + data.location)
+      .then(function(result){
+        $scope.logLoading = false;
+        $log.error('Got log data');
+        $scope.log_contents = result;
+      })
+      .catch(function(err){
+        $scope.logLoading = false;
+        $scope.logLoadError = false;
+        $scope.errorMessage = err;
+        $log.error('Failed to get the log data');
+      });
 
     $scope.dismiss = function () {
       $modalInstance.dismiss('cancel');

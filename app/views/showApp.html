@@ -78,6 +78,34 @@
   <div class="col-xs-3">
     <label class="rs-control-label">Raw Content</label>
   </div>
-  <div class="col-xs-9"><pre>{{ solumapp.raw_content |json}}</pre></div>
+  <div class="col-xs-9" ng-init="show_appfile=false">
+  <a ng-show="show_appfile" ng-click="show_appfile=false;" href="#">Hide Raw App File Content</a>
+  <a ng-hide="show_appfile" ng-click="show_appfile=true;" href="#">Show Raw App File Content</a>  
+  <pre ng-show="show_appfile">{{ solumapp.raw_content |json}}</pre></div>
 </div>
+
+<h3>Application Deployment History</h3>
+  <div class="rs-control-group rs-embedded-medium">
+    <table class="rs-list-table rs-embedded-list-table">
+      <thead>
+      <tr>
+        <th><span class="rs-table-sort-text">Deployment ID</span></th>
+        <th><span class="rs-table-sort-text">Actions</span></th>
+        <th><span class="rs-table-sort-text">Status</span></th>
+        <th><span class="rs-table-sort-text">Time</span></th>
+        <th><span class="rs-table-sort-text">Logs</span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="wf in logs">
+        <td class="rs-table-text">{{ wf.wf.id }}</td>
+        <td class="rs-table-text">{{ wf.wf.actions }}</td>
+        <td class="rs-table-text">{{ wf.wf.status }}</td>
+        <td class="rs-table-text">{{ wf.wf.updated_at }}</td>
+        <td ><div ng-repeat="data in wf.logs"> <a ng-click="showLogDetails(data)">{{ data.location | split }}</a></div></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
