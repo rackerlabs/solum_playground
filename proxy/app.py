@@ -22,6 +22,7 @@ headers = {'Content-Type': 'application/json',
 SOLUM_URL = "https://dfw.solum.api.rackspacecloud.com"
 #SOLUM_URL = "https://vijendar-dfw-dev-api.dev.rs-paas.com"
 SOLUM_URL = "https://dfw-staging-api.labs.rs-paas.com"
+SOLUM_URL = "https://nick-dfw-dev-api.dev.rs-paas.com"
 
 @app.route("/app/language_packs", methods=["GET"])
 def language_packs_list():
@@ -59,7 +60,17 @@ def app_list():
 def app_delete(app_id):
     headers['X-Auth-Token'] = request.headers['token']
     resp = requests.delete(SOLUM_URL+"/v1/apps/%s" % app_id, headers=headers)
-    return json.dumps({"test": "Test"})
+    if resp.status_code != 204:
+        raise Exception("Failed to delete application")
+    return json.dumps({"status": "success"})
+
+@app.route("/app/language_packs/delete/<lp_id>", methods=["DELETE"])
+def lp_delete(lp_id):
+    headers['X-Auth-Token'] = request.headers['token']
+    resp = requests.delete(SOLUM_URL+"/v1/language_packs/%s" % lp_id, headers=headers)
+    if resp.status_code != 204:
+        raise Exception("Failed to delete the languagepack")
+    return json.dumps({"status": "success"})
 
 @app.route("/app/repose/create/", methods=["POST"])
 def app_create():

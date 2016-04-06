@@ -77,7 +77,7 @@ angular.module('reposePlaygroundApp')
       $log.info('CreateCtrl::',result);
       $scope.status = result.message;
       $scope.app.id = result.id;
-      $location.path('/main');
+      $location.path('/languagepacks');
     })
     .catch(function(err){
       $log.error('CreateCtrl::',err);
