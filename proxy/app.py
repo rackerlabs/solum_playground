@@ -182,7 +182,6 @@ def get_auth_token(username, password):
     if resp.status_code != 200:
         raise Exception("Failed to authenticate the user %s. " % username)
     cloud_files_url = None
-    import pdb;pdb.set_trace()
     try:
         for item in resp.json()['access']['serviceCatalog']:
             if item['name'] != 'cloudFiles':
