@@ -71,6 +71,10 @@ angular.module('reposePlaygroundApp')
     });
     }
     
+    $scope.$watch('lp.name',  function() {
+        $scope.lp.name = $scope.lp.name.toLowerCase();
+  });
+  
     $scope.createLanguagepack = function() {
         ReposeService.createLanguagepack(JSON.stringify($scope.lp))
         .then(function(result){
