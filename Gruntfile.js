@@ -441,13 +441,13 @@ module.exports = function (grunt) {
           }, {
             expand: true,
             nonull:true,
-            cwd: '<%= yeoman.app %>/client/bower_components/canon/lib/fonts',
+            cwd: '<%= yeoman.app %>/client/bower_components/canon/fonts',
             src: '*',
             dest: '<%= yeoman.app %>/styles'
           }, {
             expand: true,
             nonull:true,
-            cwd: '<%= yeoman.app %>/client/bower_components/canon/lib/images',
+            cwd: '<%= yeoman.app %>/client/bower_components/canon/images',
             src: '*',
             dest: '<%= yeoman.app %>/styles'
           }]

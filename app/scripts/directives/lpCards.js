@@ -16,7 +16,7 @@ angular.module('reposePlaygroundApp')
   
         scope.deleteLP = function(repose){
           $log.info('deleteapp called: ', repose);
-          ReposeService.deleteLP(repose.id)
+          ReposeService.deleteLP(repose.name)
           .then(function(data){
             console.log('lpCards:',scope.reposes);
             scope.ui.waitingForLoad = false;

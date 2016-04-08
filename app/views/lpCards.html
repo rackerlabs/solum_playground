@@ -35,6 +35,7 @@
     <div class="card-footer rs-btn-group">
       <div class="button-wrap text-center">
         <button class="rs-btn btn-footer rs-btn-login " data-ng-click="deleteLP(repose)">Delete</button>
+        <button class="rs-btn btn-footer rs-btn-login"  data-ng-show="['ERROR'].indexOf(repose.status)!==-1" data-ng-click="alert('not-implemented');">Show Log</button>
       </div>
       </button>
     </div>

@@ -105,6 +105,21 @@
         <input  class="col-xs-12" type="text" required placeholder="Create a cluster from getcarina.com and provide it 's name here." ng-model="app.clustername" name="carina_clustername"/>
       </div>  
     </div>
+
+    <div class="row text-center">
+      <div class="row" ng-model="param_count" ng-show="param_count" ng-repeat="i in params">
+        <div class="col-xs-3">
+          <input  name="app.param$index" class="col-xs-12" type="text" required placeholder="Enter parameter name." />
+        </div>
+        <div class="rs-controls col-xs-6">
+          <input  name="app.value$index" class="col-xs-12" type="text" required placeholder="Enter parameter value"/>
+        </div>  
+      </div>
+  
+      <div class="row"> 
+        <a href="#" ng-click="addNewParam(param_count)"> Add a parameter </a>
+      </div>
+    </div>    
     
     </div>
 </div>
