@@ -71,6 +71,7 @@ angular.module('reposePlaygroundApp')
     });
     }
     
+    $scope.lp.name = '';
     $scope.$watch('lp.name',  function() {
         $scope.lp.name = $scope.lp.name.toLowerCase();
   });

@@ -8,7 +8,7 @@
  * Controller of the reposePlaygroundApp
  */
 angular.module('reposePlaygroundApp')
-  .controller('InternalCtrl', function ($scope, $log, ReposeService, $timeout, $rootScope) {
+  .controller('InternalCtrl', function ($scope, $log, ReposeService, $timeout, $rootScope, $interval) {
     $log.info('In Internal Ctrl');
     $scope.ui = {
       waitingForLoad: true,
@@ -19,27 +19,29 @@ angular.module('reposePlaygroundApp')
      // Flag to enable/disable page refresh
     $rootScope.mainPage = true;
 
-  (function update() {
-    ReposeService.getInstances({
-        uiStates: $scope.ui
-      })
-      .then(function(reposes){
-        $scope.ui.waitingForLoad = false;
-        $scope.reposes = reposes;
-        $log.info('InternalCtrl ReposeService.getInstances::got back repose instances: ', reposes);
-      })
-      .catch(function(err){
-        $scope.ui.waitingForLoad = false;
-        $scope.ui.reposeFetchError = true;
-        $log.error('InternalCtrl ReposeService.getInstances::Got an error: ', err);
+    var stop_refresh = $interval(function() {
+      ReposeService.getInstances({
+          uiStates: $scope.ui
+        })
+        .then(function(reposes){
+          $scope.ui.waitingForLoad = false;
+          $scope.reposes = reposes;
+          $log.info('InternalCtrl ReposeService.getInstances::got back repose instances: ', reposes);
+        })
+        .catch(function(err){
+          $scope.ui.waitingForLoad = false;
+          $scope.ui.reposeFetchError = true;
+          $log.error('InternalCtrl ReposeService.getInstances::Got an error: ', err);
+    
+        });
+      },  3000);
   
-      });
-  
-     if ($rootScope.mainPage){
-      $timeout(update,  5000);
-     }
-  }());
-  
+    $scope.$on("$destroy", function() {
+      if (angular.isDefined(stop_refresh)) {      
+        $interval.cancel(stop_refresh);
+        stop_refresh = undefined;
+      }
+    });
   
     $scope.logout = function() {
     console.log("Hello,world");

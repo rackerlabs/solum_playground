@@ -1,3 +1,6 @@
+from functools import wraps
+from flask import abort
+from flask import jsonify
 from flask import Flask
 from flask import request
 app = Flask(__name__)
@@ -24,15 +27,60 @@ SOLUM_URL = "https://dfw.solum.api.rackspacecloud.com"
 SOLUM_URL = "https://nick-dfw-dev-api.dev.rs-paas.com"
 SOLUM_URL = "https://dfw-staging-api.labs.rs-paas.com"
 
+def get_headers():
+    headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'}    
+
+    try:
+        headers['X-Auth-Token'] = request.headers['token']
+    except Exception as exp:
+        return None
+    
+    return headers
+
+def auth_required_msg():
+    message = {
+        'status': 401,
+        'message': " Need auth token... please authenticate/login."}
+    resp = jsonify(message)
+    resp.status_code == 401
+    abort(401)
+    
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        try:
+            headers['X-Auth-Token'] = request.headers['token']
+            #message = {'message': " Need auth token... please authenticate/login."}
+            #resp = jsonify(message)
+            #resp.status_code == 401
+            #return resp
+        except Exception as exp:
+            message = {'message': " Need auth token... please authenticate/login."}
+            resp = jsonify(message)
+            resp.status_code == 401
+            return resp
+        return f(*args, **kwargs)
+
+    return decorated
+
 @app.route("/app/language_packs", methods=["GET"])
 def language_packs_list():
     headers = get_headers()
+    if not headers:
+        return auth_required_msg()
     resp = requests.get(SOLUM_URL+"/v1/language_packs", headers=headers)
+    if resp.status_code == 401:
+        return auth_required_msg()
+        
     return json.dumps(resp.json())
 
 @app.route("/app/language_packs", methods=["POST"])
 def language_pack_create():
     headers = get_headers()
+    if not headers:
+        return auth_required_msg()
     try:
         data = json.loads(request.data)
     except ValueError:
@@ -46,6 +94,9 @@ def language_pack_create():
     resp = requests.post(SOLUM_URL+"/v1/language_packs",
                          headers=headers,
                          data=json.dumps(lp_data))
+    if resp.status_code == 401:
+        return auth_required_msg()
+
     if resp.status_code != 201:
         raise Exception(resp.json())
     return json.dumps(resp.json())
@@ -53,32 +104,37 @@ def language_pack_create():
 @app.route("/app/repose/list", methods=["POST", "GET"])
 def app_list():
     headers = get_headers()
+    if not headers:
+        return auth_required_msg()
     resp = requests.get(SOLUM_URL+"/v1/apps", headers=headers)
+    if resp.status_code == 401:
+        return auth_required_msg()
+
     return json.dumps(resp.json())
 
 @app.route("/app/repose/delete/<app_id>", methods=["DELETE"])
 def app_delete(app_id):
     headers = get_headers()
+    if not headers:
+        return auth_required_msg()
     resp = requests.delete(SOLUM_URL+"/v1/apps/%s" % app_id, headers=headers)
+    if resp.status_code == 401:
+        return auth_required_msg()
+
     #if resp.status_code != 204:
         #raise Exception("Failed to delete application")
     return json.dumps({"status": "success"})
 
-def get_headers():
-    headers = {'Content-Type': 'application/json',
-               'Accept': 'application/json'}
-    
-    try:
-        headers['X-Auth-Token'] = request.headers['token']
-    except Exception:
-        raise Exception("Auth token not found")
-    
-    return headers
 
 @app.route("/app/language_packs/delete/<lp_id>", methods=["DELETE"])
 def lp_delete(lp_id):
     headers = get_headers()
+    if not headers:
+        return auth_required_msg()
     resp = requests.delete(SOLUM_URL+"/v1/language_packs/%s" % lp_id, headers=headers)
+    if resp.status_code == 401:
+        return auth_required_msg()
+
     if resp.status_code != 204:
         raise Exception("Failed to delete the languagepack")
     return json.dumps({"status": "success"})
@@ -86,6 +142,8 @@ def lp_delete(lp_id):
 @app.route("/app/repose/create/", methods=["POST"])
 def app_create():
     headers = get_headers()
+    if not headers:
+        return auth_required_msg()
     try:
         data = json.loads(request.data)
     except ValueError:
@@ -120,11 +178,16 @@ def app_create():
     resp = requests.post(SOLUM_URL+"/v1/apps",
                          headers=headers,
                          data=json.dumps(app_data))
+    if resp.status_code == 401:
+        return auth_required_msg()
+
     return json.dumps(resp.json())
 
 @app.route("/app/repose/scale/", methods=["POST"])
 def app_scale():
     headers = get_headers()
+    if not headers:
+        return auth_required_msg()
     try:
         data = json.loads(request.data)
     except ValueError:
@@ -137,22 +200,37 @@ def app_scale():
     resp = requests.post(SOLUM_URL+"/v1/apps/%s/workflows" % data.get("app_id"),
                          headers=headers,
                          data=json.dumps(scale_data))
+    if resp.status_code == 401:
+        return auth_required_msg()
+
     return json.dumps(resp.json())
 
 @app.route("/app/repose/deploy/<app_id>/workflows", methods=["POST"])
 def app_deploy(app_id):
-    data = {"actions": ["unittest", "build", "deploy"]}
     headers = get_headers()
+    if not headers:
+        return auth_required_msg()
+
+    data = {"actions": ["unittest", "build", "deploy"]}
     resp = requests.post(SOLUM_URL+"/v1/apps/%s/workflows" % app_id,
                          headers=headers,
                          data=json.dumps(data))
+    if resp.status_code == 401:
+        return auth_required_msg()
+
     return json.dumps(resp.json())
 
 @app.route("/app/repose/show/<app_id>", methods=["GET"])
 def app_show(app_id):
     headers = get_headers()
+    if not headers:
+        return auth_required_msg()
+
     resp = requests.get(SOLUM_URL+"/v1/apps/%s" % app_id,
                          headers=headers)
+    if resp.status_code == 401:
+        return auth_required_msg()
+
     json_resp = resp.json()
     try:
         json_resp['cluster_name'] = json.loads(json_resp['raw_content'])['parameters']['carina_params']['cluster_name']
@@ -165,8 +243,14 @@ def app_show(app_id):
 @app.route("/app/repose/logs/<app_id>", methods=["GET"])
 def app_logs(app_id):
     headers = get_headers()
+    if not headers:
+        return auth_required_msg()
+
     resp = requests.get(SOLUM_URL+"/v1/apps/%s/workflows" % app_id,
                          headers=headers)
+    if resp.status_code == 401:
+        return auth_required_msg()
+
     json_resp = resp.json()
     logs = []
     for wf in json_resp:
@@ -181,10 +265,16 @@ def app_logs(app_id):
 @app.route("/app/repose/logs/show/<file_root>/<log_dir>/<log_file>", methods=["GET"])
 def get_log_file(file_root, log_dir, log_file):
     headers = get_headers()
+    if not headers:
+        return auth_required_msg()
+
     #log_url = 'https://storage101.dfw1.clouddrive.com/v1/MossoCloudFS_cd7e91d2-fbdf-4fbd-be77-b24ae224d061/solum_logs/%s/%s'
     log_url = 'https://storage101.dfw1.clouddrive.com/v1/%s/solum_logs/%s/%s'
     resp = requests.get(log_url % (file_root, log_dir, log_file),
                          headers=headers)
+    if resp.status_code == 401:
+        return auth_required_msg()
+
     return resp.text
 
 def get_auth_token(username, password):

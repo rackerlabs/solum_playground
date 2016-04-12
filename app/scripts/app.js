@@ -55,7 +55,8 @@ angular
         $log.warn('authInterceptor::failed response', response)
         if (response.status === 401) {
           $log.warn('authInterceptor::got back a 401.  gotta redirect and remove some cookies');
-          $location.path('/login');
+          window.location = '/login';
+          //$location.path('/login');
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
