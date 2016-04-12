@@ -97,8 +97,8 @@ def language_pack_create():
     if resp.status_code == 401:
         return auth_required_msg()
 
-    if resp.status_code != 201:
-        raise Exception(resp.json())
+    #if resp.status_code != 201:
+        #raise Exception(resp.json())
     return json.dumps(resp.json())
 
 @app.route("/app/repose/list", methods=["POST", "GET"])
@@ -135,8 +135,8 @@ def lp_delete(lp_id):
     if resp.status_code == 401:
         return auth_required_msg()
 
-    if resp.status_code != 204:
-        raise Exception("Failed to delete the languagepack")
+    #if resp.status_code != 204:
+        #raise Exception("Failed to delete the languagepack")
     return json.dumps({"status": "success"})
 
 @app.route("/app/repose/create/", methods=["POST"])
@@ -281,7 +281,9 @@ def get_auth_token(username, password):
     data = {'auth': {'passwordCredentials': {'username': username,'password': password}}}
     resp = requests.post(url, data=json.dumps(data), headers=headers)
     if resp.status_code != 200:
-        raise Exception("Failed to authenticate the user %s. " % username)
+        print("Failed to authenticate the user %s. " % username)
+        return None, None
+
     cloud_files_url = None
     try:
         for item in resp.json()['access']['serviceCatalog']:
@@ -297,7 +299,9 @@ def get_auth_token(username, password):
         cloud_files_url = None
 
     if cloud_files_url is None:
-        raise Exception("Failed to get cloud files url for %s. " % username)
+        # TODO: Return useful error message
+        return None, None
+        #raise Exception("Failed to get cloud files url for %s. " % username)
     token = resp.json()['access']['token']['id'], cloud_files_url
     return token
 
@@ -313,6 +317,9 @@ def authentication():
         username = obj['username']
         password = obj['password']
         token, cloud_files_url = get_auth_token(username, password)
+        if token is None:
+            #raise Exception("Auth required")
+            return auth_required_msg()
         #auth_token = token
         print "Token:", token
         
@@ -347,7 +354,7 @@ def authentication():
         if resp.status_code == 200:
             return json.dumps({'ok': 'User token is valid.'})
         else:
-            raise Exception("User token invalid.")
+            return auth_required_msg()
 
 @app.route("/")
 def hello():

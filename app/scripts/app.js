@@ -53,12 +53,12 @@ angular
       // Intercept 401s and redirect you to login
       responseError: function (response) {
         $log.warn('authInterceptor::failed response', response)
-        if (response.status === 401) {
+        if (response.status === 401 && location.pathname != '/login') {
           $log.warn('authInterceptor::got back a 401.  gotta redirect and remove some cookies');
-          window.location = '/login';
           //$location.path('/login');
           // remove any stale tokens
           $cookieStore.remove('token');
+          window.location = '/login';
           return $q.reject(response);
         }
         else {
