@@ -11,15 +11,15 @@
               </div>
               <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" class="form-control" ng-model="user.username" ng-required placeholder="Please enter your Rax cloud user id.">
+                <input type="text" class="form-control" ng-model="user.username" required  name="username" placeholder="Please enter your Rax cloud user id.">
               </div>
               <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" class="form-control" ng-model="user.password" ng-required placeholder="Please enter your Rax cloud password.">
+                <input type="password" class="form-control" ng-model="user.password" required name="password" placeholder="Please enter your Rax cloud password.">
               </div>
               <div class="form-group has-error">
-                <p class="help-block" ng-show="form.username.$error.required && form.password.$error.required && submitted">Please enter your username and password.</p>
-                <p class="help-block" ng-show="form.username.$error.username && submitted">Please enter a valid username.</p>
+                <p class="help-block" ng-show="form.username.$error.required && form.$submitted">Please enter your username.</p>
+                <p class="help-block" ng-show="form.password.$error.required && form.$submitted">Please enter a valid password.</p>
                 <p class="help-block" ng-repeat="err in errors.other">{{ err }}</p>
               </div>
               <div>
