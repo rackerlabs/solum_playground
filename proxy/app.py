@@ -40,12 +40,12 @@ def get_headers():
     return headers
 
 def auth_required_msg():
-    message = {
-        'status': 401,
-        'message': " Need auth token... please authenticate/login."}
-    resp = jsonify(message)
-    resp.status_code == 401
-    abort(401)
+    message = ("The server could not verify that you are authorized to access "
+               "the URL requested. You either supplied the wrong credentials "
+               "(e.g. a bad password), or your browser doesn't understand how "
+               "to supply the credentials required.")
+    return message, 401
+    #abort(401)
     
 def requires_auth(f):
     @wraps(f)
