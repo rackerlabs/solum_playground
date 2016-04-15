@@ -32,8 +32,9 @@
         <div class="row">
           <div class="details-header col-xs-3">Status</div>
           <div class="col-xs-9">
-          <span class="rs-status rs-status-ok" data-ng-show="['UNIT_TESTING', 'BUILDING', 'READY', 'SCALING_STARTED', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE', 'DEPLOYING'].indexOf(repose.status)!==-1">{{ repose.status }}</span>
-          <span class="rs-status rs-status-error" data-ng-show="['UNIT_TESTING', 'BUILDING', 'READY', 'SCALING_STARTED', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE', 'DEPLOYING'].indexOf(repose.status)==-1">{{ repose.status }}</span>
+          <span class="rs-status rs-status-processing" data-ng-show="['UNIT_TESTING', 'BUILDING', 'SCALING_STARTED', 'DEPLOYING', 'DELETING'].indexOf(repose.status)!==-1">{{ repose.status }}</span>
+          <span class="rs-status rs-status-ok" data-ng-show="['READY', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE'].indexOf(repose.status)!==-1">{{ repose.status }}</span>
+          <span class="rs-status rs-status-error" data-ng-show="['UNIT_TESTING', 'BUILDING', 'DELETING', 'READY', 'SCALING_STARTED', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE', 'DEPLOYING'].indexOf(repose.status)==-1">{{ repose.status }}</span>
           </div>
         </div>
       </div>

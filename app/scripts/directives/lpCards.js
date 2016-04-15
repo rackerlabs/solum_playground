@@ -13,9 +13,35 @@ angular.module('reposePlaygroundApp')
           $location.path('/');
         }
 
-  
+        scope.showLogDetails = function(data) {
+          ReposeService.getLanguagepackLogs(data.uuid)
+          .then(function(data){
+            scope.ui.waitingForLoad = false;
+            $log.info('show languagepack logs: ', data);
+            $modal.open({
+              templateUrl: '/views/log_modal.html',
+              backdrop: 'static',
+              controller: 'LogModalInstanceCtrl',
+              resolve: {
+                header: function() {
+                  return 'Log file:' + data.location;
+                },
+                data: function() {
+                  return data;
+                }
+              }
+            });            
+          })
+        .catch(function(err){
+          alert("Failed to get languagepack logs");
+          scope.ui.waitingForLoad = false;
+          scope.ui.reposeFetchError = true;
+          $log.error('lpCards ReposeService.deleteLP::Got an error: ', err);
+        });
+      }
+        
         scope.deleteLP = function(repose){
-          $log.info('deleteapp called: ', repose);
+          $log.info('deleteLP called: ', repose);
           ReposeService.deleteLP(repose.name)
           .then(function(data){
             console.log('lpCards:',scope.reposes);

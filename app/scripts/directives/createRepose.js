@@ -11,14 +11,8 @@ angular.module('reposePlaygroundApp')
         scope.params = [];
         scope.param_count = 0;
         
-        scope.getParamCount = function(param_count) {
-        //alert(param_count);
-          return new Array(scope._param_count);
-        }
         
         scope.addNewParam = function() {
-          scope.param_count += 1;
-        //alert("Test"+scope.param_count);
           scope.params.push({"test": scope.param_count});
         }
 

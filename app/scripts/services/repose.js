@@ -222,9 +222,29 @@ getApp: function(id, callback) {
 
       return deferred.promise;
     },
+
+getLanguagepackLogs: function(id, callback) {
+      $log.info('In ReposeService.getLanguagepackLogs().  Try to remove: ', id);
+      var cb = callback || angular.noop;
+      var deferred = $q.defer();
+
+      $http.get('/app/language_packs/logs/' + id).
+      success(function(resp){
+        $log.info('ReposeService.getLanguagepackLogs()::Got back a "successful" response with: ', resp);
+        deferred.resolve(resp)
+        return cb();
+      }).
+      error(function(err) {
+       $log.error('ReposeService.getAppLogs()::Got back a "failed" response with: ', err);
+       deferred.reject(err);
+       return cb(err);
+     }.bind(this));
+
+      return deferred.promise;
+    },
     
 getAppLogs: function(id, callback) {
-      $log.info('In ReposeService.getApp().  Try to remove: ', id);
+      $log.info('In ReposeService.getAppLogs().  Try to remove: ', id);
       var cb = callback || angular.noop;
       var deferred = $q.defer();
 

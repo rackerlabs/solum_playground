@@ -139,6 +139,21 @@ def lp_delete(lp_id):
         #raise Exception("Failed to delete the languagepack")
     return json.dumps({"status": "success"})
 
+@app.route("/app/language_packs/logs/<lp_id>", methods=["GET"])
+def lp_logs(lp_id):
+    headers = get_headers()
+    if not headers:
+        return auth_required_msg()
+
+    resp = requests.get(
+        SOLUM_URL+"/v1/language_packs/%s/logs" % lp_id,
+        headers=headers)
+
+    if resp.status_code == 401:
+        return auth_required_msg()
+    
+    return json.dumps(resp.json()[0])
+
 @app.route("/app/repose/create/", methods=["POST"])
 def app_create():
     headers = get_headers()
