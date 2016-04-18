@@ -102,7 +102,9 @@
         <label class="rs-control-label">Carina Cluster Name</label>
       </div>
       <div class="rs-controls col-xs-6">
-        <input  class="col-xs-12" type="text" required placeholder="Create a cluster from getcarina.com and provide it 's name here." ng-model="app.clustername" name="carina_clustername"/>
+        <input  class="col-xs-12" type="text" 
+          required placeholder="Carina cluster name. New one will be created if given cluster does not exist."
+          ng-model="app.clustername" name="carina_clustername"/>
       </div>  
     </div>
 
@@ -110,19 +112,19 @@
       <div class="col-xs-3"></div>
       <div class="rs-controls col-xs-6">
         <input   type="checkbox" ng-init="app.create_cluster=true"
-          ng-model="app.create_cluster" name="create_cluster">
+          ng-model="app.create_cluster" ng-disabled="app.create_cluster" name="create_cluster">
           Create a new carina cluster if it does not exist.
         </input>
       </div>
     </div>
 
-    <div class="row" ng-repeat="i in params">
+    <div class="row" ng-repeat="p in params">
         <div class="col-xs-3">
-          <input  name="app.param{{$index}}" class="col-xs-12" type="text"
+          <input  name="app.param{{$index}}" ng-model="p.param_name" class="col-xs-12" type="text"
             required placeholder="Enter parameter name." />
         </div>
         <div class="rs-controls col-xs-5">
-          <input  name="app.value{{$index}}" class="col-xs-12" type="text"
+          <input  name="app.value{{$index}}" ng-model="p.param_value" class="col-xs-12" type="text"
             required placeholder="Enter parameter value" />
         </div>
         <div class="rs-btn rs-btn-link" ng-click="params.splice($index,1)">remove </div>

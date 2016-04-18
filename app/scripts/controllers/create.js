@@ -46,6 +46,12 @@ angular.module('reposePlaygroundApp')
     $scope.app['lp_name'] = $scope.lp_name.name;
     $scope.app['username'] = $scope.username;
     $scope.app['apikey'] = $scope.apikey;
+    
+    $scope.app['user_params'] = {};   
+    angular.forEach($scope.params, function(value, key) {
+      $scope.app['user_params'][value.param_name] = value.param_value;
+    });
+    
     ReposeService.createApp(JSON.stringify($scope.app))
         .then(function(result){
       $log.info('CreateCtrl::',result);

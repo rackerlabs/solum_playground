@@ -13,7 +13,7 @@ angular.module('reposePlaygroundApp')
         
         
         scope.addNewParam = function() {
-          scope.params.push({"test": scope.param_count});
+          scope.params.push({param_name: '',  param_value: ''});
         }
 
         ReposeService.getLanguagepacks()

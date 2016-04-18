@@ -163,6 +163,7 @@ def app_create():
         data = json.loads(request.data)
     except ValueError:
         data = {}
+
     app_data = {
         "repo_token": "",
         "name": data.get("name", "TestApp"),
@@ -172,7 +173,7 @@ def app_create():
                 "api_key": data.get("apikey"),
                 "user_name": data.get("username")
             },
-            "user_params": {}
+            "user_params":  data.get('user_params', {})
         },
         "description": data.get("description", "unknown description"),
         "base_url": "/v1",
@@ -189,7 +190,7 @@ def app_create():
             "run_cmd": data.get("run_cmd", "")
         }
     }
-
+    
     resp = requests.post(SOLUM_URL+"/v1/apps",
                          headers=headers,
                          data=json.dumps(app_data))
