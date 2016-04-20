@@ -115,8 +115,8 @@ module.exports = function (grunt) {
       proxies: [
         {
           context: '/app', // the context of the data service
-          host: '104.130.22.53', // wherever the data service is running
-          port: 80, // the port that the data service is running on
+          host: '127.0.0.1', // wherever the data service is running
+          port: 9000, // the port that the data service is running on
           changeOrigin: true
         }
       ],
