@@ -17,7 +17,8 @@ angular.module('reposePlaygroundApp')
             controller: 'CreateCtrl'
           },
           'secondary-nav@create': { templateUrl: 'views/secondaryNav.html'},
-          'main-nav@create': { templateUrl: 'views/mainNav.html'}
+          'main-nav@create': { templateUrl: 'views/mainNav.html'},
+          'footer@create': { templateUrl: 'views/footer.html', controller: 'FooterCtrl'}
         }
       });
   });

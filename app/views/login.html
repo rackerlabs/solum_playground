@@ -1,9 +1,22 @@
+<!--<div class="alert alert-info text-center alert-dismissible text-uppercase" role="alert">-->
+  <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+  <!--SOLUM by Rackspace is in public beta.-->
+  <!--See the <a href="http://www.rackspace.com/information/legal/solumtestterms" target="_blank">Terms of Service</a>. Bugs &amp; feature enhancements can be filed on <a href="https://github.com/trysolum/feedback/issues" target="_blank">GitHub</a>.-->
+<!--</div>-->
+<!--<div class="message">-->
+<!--</div>-->
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-xs-offset-3 vertical-align">
       <div id="login_wrapper">
         <div class="row">
+          <!--<div class="col-md-6">-->
+            <!--<img height="100px" src="http://ab71bc6cbe6c47bb5705-e80e692ba07dc44a759d7d5967b76d8a.r90.cf1.rackcdn.com/solum.png" alt="Solum Logo">-->
+          <!--</div>-->
+        
           <div class="col-md-6" id="rackspace_logo_container"></div>
+          <!--<div class="col-md-6" id="solum_logo_container"></div>-->
           <div class="col-md-6" id="auth_login_block">
             <form ng-submit="login(form)" class="form" name="form" novalidate>
               <div class="rs-control-group error" ng-if="result">
@@ -24,8 +37,9 @@
               </div>
               <div>
                 <button type="submit" class="btn btn-danger">Submit</button>
-              </div>
+              </div>              
             </form>
+            <!--<p><strong>This is a public Beta:<a href="http://www.rackspace.com/information/legal/solumtestterms"> see the Terms of Service</a></strong></p>-->
           </div>
         </div>
       </div>

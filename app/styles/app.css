@@ -3609,6 +3609,15 @@ html, body {
   margin-top: 95px;
   padding: 40px 49px; }
 
+#solum_logo_container {
+  background: transparent url("/images/solum.png") no-repeat;
+  background-position: center center;
+  width: 250px;
+  height: 57px;
+  display: inline-block;
+  margin-top: 95px;
+  padding: 40px 49px; }
+
 #auth_login_block {
   padding: 30px 0 30px 49px;
   float: left;

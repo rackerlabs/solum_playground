@@ -8,7 +8,9 @@ import json
 
 import getpass
 import json
+import os
 import requests
+import socket
 
 username = None # raw_input('Username: ')
 password = None #getpass.getpass('Password: ')
@@ -26,6 +28,9 @@ SOLUM_URL = "https://dfw.solum.api.rackspacecloud.com"
 #SOLUM_URL = "https://vijendar-dfw-dev-api.dev.rs-paas.com"
 SOLUM_URL = "https://nick-dfw-dev-api.dev.rs-paas.com"
 SOLUM_URL = "https://dfw-staging-api.labs.rs-paas.com"
+
+if os.environ.get('SOLUM_URL', None) is not None:
+    SOLUM_URL = os.environ.get('SOLUM_URL')
 
 def get_headers():
     headers = {
@@ -371,6 +376,10 @@ def authentication():
             return json.dumps({'ok': 'User token is valid.'})
         else:
             return auth_required_msg()
+
+@app.route("/app/hostname")
+def hostname():
+    return json.dumps({'hostname': socket.gethostname()})
 
 @app.route("/")
 def hello():

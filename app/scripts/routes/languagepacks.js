@@ -17,7 +17,8 @@ angular.module('reposePlaygroundApp')
             controller: 'LangpackCtrl'
           },
           'secondary-nav@languagepacks': { templateUrl: 'views/secondaryNav.html'},
-          'main-nav@languagepacks': { templateUrl: 'views/mainNav.html'}
+          'main-nav@languagepacks': { templateUrl: 'views/mainNav.html'},
+          'footer@languagepacks': { templateUrl: 'views/footer.html', controller: 'FooterCtrl'}          
         },
       });
   });
