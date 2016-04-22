@@ -232,7 +232,10 @@ def app_deploy(app_id):
     if not headers:
         return auth_required_msg()
 
-    data = {"actions": ["unittest", "build", "deploy"]}
+    try:
+        data = json.loads(request.data)
+    except ValueError:
+        data = {"actions": ["build", "deploy"]}
     resp = requests.post(SOLUM_URL+"/v1/apps/%s/workflows" % app_id,
                          headers=headers,
                          data=json.dumps(data))

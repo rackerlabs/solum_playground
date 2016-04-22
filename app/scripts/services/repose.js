@@ -324,12 +324,12 @@ getAppLogs: function(id, callback) {
     },
 
 
-     deployApp: function(id, callback) {
+     deployApp: function(id, data, callback) {
       $log.info('In ReposeService.deployApp().  Try to remove: ', id);
       var cb = callback || angular.noop;
       var deferred = $q.defer();
 
-      $http.post('/app/repose/deploy/' + id + '/workflows').
+      $http.post('/app/repose/deploy/' + id + '/workflows', data).
       success(function(resp){
         $log.info('ReposeService.deployApp)::Got back a "successful" response with: ', resp);
         deferred.resolve(resp)

@@ -52,13 +52,17 @@ angular.module('reposePlaygroundApp')
       $scope.app['user_params'][value.param_name] = value.param_value;
     });
     
+    var deploy_data = {"actions": ["build", "deploy"]}
+    if ($scope.app.test_cmd) {
+      deploy_data = {"actions": ["unittest", "build", "deploy"]}
+    }
     ReposeService.createApp(JSON.stringify($scope.app))
         .then(function(result){
       $log.info('CreateCtrl::',result);
       $scope.status = result.message;
       $scope.app.id = result.id;
       // Now deploy the app
-      ReposeService.deployApp(result.id)
+      ReposeService.deployApp(result.id, JSON.stringify(deploy_data))
       .then(function(result){
       $log.info('CreateCtrl::',result);
       flashservice.setMessage("created");
