@@ -12,6 +12,8 @@ import os
 import requests
 import socket
 
+import github
+
 username = None # raw_input('Username: ')
 password = None #getpass.getpass('Password: ')
 
@@ -50,8 +52,11 @@ def auth_required_msg():
                "(e.g. a bad password), or your browser doesn't understand how "
                "to supply the credentials required.")
     return message, 401
-    #abort(401)
-    
+
+def webhook_create_failed(msg):
+    message = ("Failed to create webhook %s" % msg)
+    return message, 400
+
 def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -195,12 +200,33 @@ def app_create():
             "run_cmd": data.get("run_cmd", "")
         }
     }
-    
+
     resp = requests.post(SOLUM_URL+"/v1/apps",
                          headers=headers,
                          data=json.dumps(app_data))
     if resp.status_code == 401:
         return auth_required_msg()
+
+    # Check if github trigger enabled
+    github_trigger = data.pop('github_trigger', None)
+    if not github_trigger:
+        return json.dumps(resp.json())
+
+    github_username = data.pop('github_username', None)
+    github_password = data.pop('github_password', None)
+    try:
+        git_url = app_data['source']['repository']
+        repo_token = app_data['repo_token']
+        workflow = app_data['trigger_actions']
+        trigger_uri = resp.json()['trigger_uri']
+        gha = github.GitHubAuth(
+            git_url,
+            username=github_username,
+            password=github_password,
+            repo_token=repo_token)
+        gha.create_webhook(trigger_uri, workflow=workflow)
+    except github.GitHubException as ghe:
+        return webhook_create_failed(str(ghe))
 
     return json.dumps(resp.json())
 
