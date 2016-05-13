@@ -252,6 +252,34 @@ def app_scale():
 
     return json.dumps(resp.json())
 
+@app.route("/app/repose/webhook/", methods=["POST"])
+def create_webhook():
+    headers = get_headers()
+    if not headers:
+        return auth_required_msg()
+    try:
+        data = json.loads(request.data)
+    except ValueError:
+        data = {}
+    github_url = data.get("github_url")
+    github_username = data.get("github_username")
+    github_password = data.get("github_password")
+    github_trigger_uri = data.get("github_trigger_url")
+    workflow = data.get("trigger_actions")
+    twofactor_auth_token = data.get("twofactor_auth_token")
+    
+    gha = github.GitHubAuth(
+        github_url,
+        username=github_username,
+        password=github_password,
+        twofactor_auth_token=twofactor_auth_token)
+    
+    resp, content = gha.create_webhook(github_trigger_uri, workflow=workflow)
+    if resp.get('status') == '401':
+        return content, 200
+        
+    return content, 200
+
 @app.route("/app/repose/deploy/<app_id>/workflows", methods=["POST"])
 def app_deploy(app_id):
     headers = get_headers()

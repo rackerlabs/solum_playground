@@ -118,40 +118,6 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-xs-3">
-              <label class="rs-control-label">Setup GitHub Trigger</label>
-      </div>
-      <div class="rs-controls col-xs-6">
-        <input   type="checkbox" ng-init="app.github_trigger=false"
-          ng-model="app.github_trigger" name="github_trigger">
-          select this checkbox to setup GitHub to trigger workflows on pull requests
-        </input>
-      </div>
-    </div>
-
-    <div class="row" ng-show="app.github_trigger">
-      <div class="col-xs-3">
-              <label class="rs-control-label">GitHub Username</label>
-      </div>
-      <div class="rs-controls col-xs-6">
-        <input  class="col-xs-12" type="text"
-          required placeholder="Must provide your GitHub account username"
-          ng-model="app.github_username" name="github_username"/>
-      </div>
-    </div>
-
-    <div class="row" ng-show="app.github_trigger">
-      <div class="col-xs-3">
-              <label class="rs-control-label">GitHub Password</label>
-      </div>
-      <div class="rs-controls col-xs-6">
-        <input  class="col-xs-12" type="text"
-          required placeholder="Must provide your GitHub account password"
-          ng-model="app.github_password" name="github_password"/>
-      </div>
-    </div>
-
     <div class="row" ng-repeat="p in params">
         <div class="col-xs-3">
           <input  name="app.param{{$index}}" ng-model="p.param_name" class="col-xs-12" type="text"

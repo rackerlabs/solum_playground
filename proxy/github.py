@@ -40,7 +40,8 @@ class GitHubAuth(object):
     _github_user_key_url = 'https://api.github.com/user/keys'
     _github_repo_regex = r'github\.com[:/](.+?)/(.+?)($|/$|\.git$|\.git/$)'
 
-    def __init__(self, git_url, username=None, password=None, repo_token=None):
+    def __init__(self, git_url, username=None, password=None, repo_token=None,
+                 twofactor_auth_token=None):
         self.git_url = git_url
 
         user_org_name, repo = '', ''
@@ -60,6 +61,7 @@ class GitHubAuth(object):
         self._username = username
         self._password = password
         self._otp_required = False
+        self._twofactor_auth_token = twofactor_auth_token
 
     @property
     def username(self):
@@ -110,9 +112,9 @@ class GitHubAuth(object):
         basic_auth = basic_auth.strip()
         header['Authorization'] = 'Basic %s' % basic_auth
 
-        # This will prompt for the OTP.
-        if self._otp_required:
-            header['x-github-otp'] = self.onetime_password
+        # If two factor auth token is provided, add it to headers
+        if self._twofactor_auth_token:
+            header['x-github-otp'] = self._twofactor_auth_token
 
         return header
 
@@ -124,13 +126,13 @@ class GitHubAuth(object):
             headers=self.auth_header,
             body=body_text)
 
-        if resp.get('status') in ['401']:
-            if resp.get('x-github-otp', '').startswith('required'):
-                self._otp_required = True
-                resp, content = httplib2.Http().request(
-                    url, 'POST',
-                    headers=self.auth_header,
-                    body=body_text)
+        #if resp.get('status') in ['401']:
+            #if resp.get('x-github-otp', '').startswith('required'):
+                #self._otp_required = True
+                #resp, content = httplib2.Http().request(
+                    #url, 'POST',
+                    #headers=self.auth_header,
+                    #body=body_text)
 
         return resp, content
 
@@ -176,10 +178,11 @@ class GitHubAuth(object):
             }
         }
         resp, content = self._send_authed_request(hook_url, hook_info)
-        if resp.get('status') in ['200', '201']:
-            print("Successfully created webhook.")
-        else:
-            print("Error creating webhook.")
+        return resp, content
+        #if resp.get('status') in ['200', '201']:
+            #print("Successfully created webhook.")
+        #else:
+            #print("Error creating webhook.")
 
     def add_ssh_key(self, public_key=None):
         if not public_key:

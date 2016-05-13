@@ -27,6 +27,20 @@ angular.module('reposePlaygroundApp')
           });
         }
 
+        scope.setupGithubTrigger = function(repose) {
+          $log.info('Setup application Github trigger: ', repose);
+          $modal.open({
+            templateUrl: '/views/githubtrigger_modal.html',
+            backdrop: 'static',
+            controller: 'GithubTriggerModalInstanceCtrl',
+            resolve: {
+              repose: function() {
+                return repose;
+              }
+            }
+          });
+        }
+
         scope.deploy = function(repose){
           $log.info('deployApp called: ', repose);
           ReposeService.deployApp(repose.id)

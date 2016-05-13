@@ -364,7 +364,27 @@ getAppLogs: function(id, callback) {
       return deferred.promise;
     },
     
-     createLanguagepack: function(data, callback) {
+    createGithubWebhook: function(data, callback) {
+      $log.info('In ReposeService.scaleApp().');
+      var cb = callback || angular.noop;
+      var deferred = $q.defer();
+
+      $http.post('/app/repose/webhook/', data).
+      success(function(resp){
+        $log.info('ReposeService.scaleApp)::Got back a "successful" response with: ', resp);
+        deferred.resolve(resp)
+        return cb();
+      }).
+      error(function(err) {
+       $log.error('ReposeService.scaleApp()::Got back a "failed" response with: ', err);
+       deferred.reject(err);
+       return cb(err);
+     }.bind(this));
+
+      return deferred.promise;
+    },
+    
+    createLanguagepack: function(data, callback) {
       $log.info('In ReposeService.createLanguagepack(). ');
       var cb = callback || angular.noop;
       var deferred = $q.defer();

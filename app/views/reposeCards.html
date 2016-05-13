@@ -45,6 +45,7 @@
         <button class="rs-btn btn-footer rs-btn-primary" data-ng-show="['READY', 'SCALING_COMPLETE'].indexOf(repose.status)==-1" data-ng-click="deploy(repose)">Deploy</button>
         <button class="rs-btn btn-footer rs-btn-login" data-ng-click="deleteapp(repose)">Delete</button>
         <button class="rs-btn btn-footer" data-ng-class="{'disabled': ['READY', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE'].indexOf(repose.status)==-1}" data-ng-click="scaleApplication(repose)">Scale</button>
+        <button class="rs-btn btn-footer" data-ng-class="{'disabled': ['READY', 'SCALING_COMPLETE', 'DEPLOYMENT_COMPLETE'].indexOf(repose.status)==-1}" data-ng-click="setupGithubTrigger(repose)">Github Trigger</button>
         <!-- TODO: add ui route for benchmark -->
         <button class="rs-btn btn-footer" data-ui-sref="showapp({app_id: repose.id})">App Details</button>
       </div>
