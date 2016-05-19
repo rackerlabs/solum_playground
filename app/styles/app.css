@@ -3593,7 +3593,6 @@ html, body {
   -moz-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15);
   -webkit-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15);
   -ms-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15);
-  padding: 48px 0;
   position: relative;
   top: 30%; }
 
@@ -3603,7 +3602,7 @@ html, body {
 #rackspace_logo_container {
   background: transparent url("/images/logo-rackspace-managed-cloud-company.png") no-repeat;
   background-position: center center;
-  width: 250px;
+  width: 40%;
   height: 57px;
   display: inline-block;
   margin-top: 95px;
@@ -3621,9 +3620,10 @@ html, body {
 #auth_login_block {
   padding: 30px 0 30px 49px;
   float: left;
-  margin: 28px 0;
+  margin: 30px 30px;
   border-left: 1px solid #ddd;
-  font-size: 13px; }
+  font-size: 13px;
+  width: 50%; }
 
 .repose-cards {
   display: block;
@@ -3764,7 +3764,7 @@ h2.rs-page-title, .rs-page-title {
 #main-navbar {
   position: relative;
   margin: 0 auto;
-  width: 80%; }
+  width: 90%; }
 
 .rs-container {
   padding: 0;
