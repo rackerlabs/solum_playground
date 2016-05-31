@@ -5,119 +5,144 @@
   <div class="rs-control-group error" data-ng-show="create.errorMessage !== ''">
     <strong class="rs-help-block">{{ ui.errorMessage }}</strong>
   </div>
-   <div class="rs-control-group" data-ng-class="{'error': createForm.$submitted && createForm.name.$invalid}">
+ 
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="rs-control-group"
+         ng-class="{ 'error' : createForm.app_name.$invalid && createForm.$submitted }">
+          <label for="app_name">Application Name</label>
+          <input type="text" class="form-control" required 
+            placeholder="Provide application name"
+            ng-model="app.name" name="app_name"/>
+        </div>
+  
+        <div class="rs-control-group"
+         ng-class="{ 'error' : createForm.app_url.$invalid && createForm.$submitted }">
+          <label for="app_url">Application Respository</label>
+          <input class="form-control" type="text" required
+            placeholder="Provide application GIT URL here"
+            ng-model="app.repo" name="app_url"/>
+        </div>
+        <div class="rs-control-group">
+          <input type="checkbox" ng-init="app.private_repo=false"
+            ng-model="app.private_repo" name="private_repo">
+            Select this checkbox if application repository is private
+          </input>        
+        </div>
+      </div>
 
-    <div class="row">
-      <div class="col-xs-3">
-        <label class="rs-control-label">Application Name</label>
+      <div class="col-sm-6">
+        <div class="rs-control-group"
+         ng-class="{ 'error' : createForm.app_description.$invalid && createForm.$submitted }">
+          <label for="app_description">Application Description</label>
+          <textarea  rows="5" class="form-control" required
+            placeholder="Provide a short description of your application here"
+            ng-model="app.description" name="app_description"/>
+        </div>
       </div>
-      <div class="rs-controls col-xs-6">
-        <input class="col-xs-12" type="text" required placeholder="Provide application name" ng-model="app.name" name="app_name"/>
-      </div>  
     </div>
-  
-    <div class="row">
-      <div class="col-xs-3">
-        <label class="rs-control-label">Application Description</label>
+    <div class="row" ng-show="app.private_repo">
+      <div class="col-sm-6">
+        <div class="rs-control-group"
+          ng-class="{ 'error' : createForm.github_username.$invalid && createForm.$submitted }">
+          <label for="github_username">Github Username</label>
+          <input type="text" class="form-control" ng-required="app.private_repo"
+            placeholder="Github account username"
+            ng-model="app.github_username" name="github_username"/>
+        </div>
       </div>
-      <div class="rs-controls col-xs-6">
-        <textarea  rows="5" class="col-xs-12" required placeholder="Provide a short description here" ng-model="app.description" name="app_description"/>
-      </div>  
-    </div>
-  
-    <div class="row">
-      <div class="col-xs-3">  
-        <label class="rs-control-label">Application Respository</label>
-      </div>
-      <div class="rs-controls col-xs-6">
-        <input class="col-xs-12" type="text" required placeholder="Provide application URL here" ng-model="app.repo" name="app_url"/>
-      </div>  
-    </div>
-  
-    <div class="row">
-      <div class="col-xs-3">
-        <label class="rs-control-label">Ports</label>
-      </div>
-      <div class="rs-controls col-xs-6">
-        <input  class="col-xs-12" type="number" min="0" required placeholder="If there are more than one ports, separate them with a comma" ng-model="app.ports" name="app_port"/>
-      </div>  
-    </div>
-  
-    <div class="row">
-      <div class="col-xs-3">
-        <label class="rs-control-label">Test Command</label>
-      </div>
-      <div class="rs-controls col-xs-6">
-        <input  class="col-xs-12" type="text" placeholder="Command to test the application. For example, ./unit_tests.sh. You can leave this blank" ng-model="app.test_cmd" name="app_testcmd"/>
-      </div>  
-    </div>
-  
-    <div class="row">
-      <div class="col-xs-3">
-        <label class="rs-control-label">Run Command</label>
-      </div>
-      <div class="rs-controls col-xs-6">
-        <input  class="col-xs-12" type="text" required placeholder="Command to run the application. For example, python app.py" ng-model="app.run_cmd" name="app_runcmd"/>
-      </div>  
-    </div>
-  
-    <div class="row" data-ng-class="{'error': createForm.$submitted && createForm.name.$invalid}">
-      <div class="col-xs-3">
-        <label for="lp" class="rs-control-label">Languagepack</label>
-      </div>
-      <div class="rs-controls col-xs-6">
-        <select class="col-xs-12" name="lp_name" required ng-model="lp_name"
-                ng-options="lp.name for lp in repose.availableLanguagepacks" data-ng-change="selectLanguagepack()">
-                <option value="">Select a languagepack</option>
-        </select>
-        <!--<span ng-show="createForm.lp_name.$error.required">Select service</span>-->
-        <!--<select class="rs-input-medium" name="lp" required ng-model="app.lp"-->
-                <!--data-ng-change="selectLanguagepack()">-->
-          <!--<option data-ng-repeat="lp in repose.availableLanguagepacks" value="{{lp.name}}">{{lp.name}}</option>-->
-        <!--</select>-->
+      <div class="col-sm-6">
+        <div class="rs-control-group"
+          ng-class="{ 'error' : createForm.github_password.$invalid && createForm.$submitted }">
+          <label for="github_password">Github Gassword</label>
+          <input type="password" class="form-control" ng-required="app.private_repo"
+            placeholder="Github account password"
+            ng-model="app.github_password" name="github_password"/>
+        </div>
       </div>
     </div>
 
-
-    <!--<div class="row">-->
-      <!--<div class="col-xs-3">-->
-        <!--<label class="rs-control-label">Carina User Name</label>-->
-      <!--</div>-->
-      <!--<div class="rs-controls col-xs-6">-->
-        <!--<input  class="col-xs-12" type="text" required placeholder="Provide getcarina.com username" ng-model="app.username" name="carina_username"/>-->
-      <!--</div>  -->
-    <!--</div>-->
-
-    <!--<div class="row">-->
-      <!--<div class="col-xs-3">-->
-        <!--<label class="rs-control-label">Carina API Key</label>-->
-      <!--</div>-->
-      <!--<div class="rs-controls col-xs-6">-->
-        <!--<input  class="col-xs-12" type="text" required placeholder="Carina API Key" ng-model="app.apikey" name="carina_apikey"/>-->
-      <!--</div>  -->
-    <!--</div>-->
+    <div class="row" ng-show="app.private_repo">
+      <div class="col-sm-12 rs-control-group"
+        ng-class="{ 'error' : createForm.private_ssh_key.$invalid && createForm.$submitted }">
+        <label for="private_ssh_key">Application Repository Private SSH key</label>
+        <textarea  rows="2" class="form-control" ng-required="app.private_repo"
+          placeholder="Provide repository private SSH key here.(Please make sure that you have added public key to your github account)"
+          ng-model="app.private_ssh_key" name="private_ssh_key"/>
+      </div>
+    </div>
     
-    <div class="row">
-      <div class="col-xs-3">
-        <label class="rs-control-label">Carina Cluster Name</label>
+    <!--<div class="col-sm-6">
+      <div class="form-group">
+        <label for="app_port">Ports</label>
+        <input  class="form-control" type="number" min="0" required
+         placeholder="If there are more than one ports, separate them with a comma"
+         ng-model="app.ports" name="app_port"/>
       </div>
-      <div class="rs-controls col-xs-6">
-        <input  class="col-xs-12" type="text" 
-          required placeholder="Carina cluster name. New one will be created if given cluster does not exist."
-          ng-model="app.clustername" name="carina_clustername"/>
-      </div>  
+      </div>-->     
+  
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="rs-control-group" ng-class="{'error': createForm.$submitted && createForm.lp_name.$invalid}">
+          <label for="lp_name">Languagepack</label>
+          <select class="form-control" name="lp_name" required ng-model="lp_name"
+                  ng-options="lp.name for lp in repose.availableLanguagepacks"
+                  data-ng-change="selectLanguagepack()">
+                  <option class="form-control" value="">Select a languagepack</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="rs-control-group"
+         ng-class="{ 'error' : createForm.carina_clustername.$invalid && createForm.$submitted }">
+          <label for="carina_clustername">Carina Cluster Name</label>
+          <input  class="form-control" type="text" 
+            required placeholder="Carina cluster name. New one will be created if given cluster does not exist."
+            ng-model="app.clustername" name="carina_clustername"/>
+          <div>
+            <input type="checkbox" ng-init="app.create_cluster=true"
+              ng-model="app.create_cluster" ng-disabled="app.create_cluster" name="create_cluster">
+              Create a new carina cluster if it does not exist.
+            </input>
+          </div>
+            
+        </div>        
+      </div>
     </div>
 
     <div class="row">
-      <div class="col-xs-3"></div>
-      <div class="rs-controls col-xs-6">
-        <input   type="checkbox" ng-init="app.create_cluster=true"
-          ng-model="app.create_cluster" ng-disabled="app.create_cluster" name="create_cluster">
-          Create a new carina cluster if it does not exist.
-        </input>
+      <div class="col-sm-12" ng-init="deploy=true;">Select pipeline options (you can select one or more)
+        <input type="checkbox" value="option1" ng-model="unittest" name="unittest"> Unit Test </input>
+        <input type="checkbox" value="option2" ng-model="deploy" name="deploy"> Deploy</input>
+        <p class="has-warning" ng-hide="deploy || unittest"
+        class="help-block">Must select at least one pipeline option.</p>
       </div>
     </div>
-
+    <div ng-hide="deploy || unittest" class="row alert alert-info" role="alert">
+      Must select at least one pipeline option.
+    </div>    
+    <div class="row">
+      <div ng-show="unittest" class="col-sm-6">
+        <div class="rs-control-group"
+         ng-class="{ 'error' : createForm.app_testcmd.$invalid && createForm.$submitted }">
+          <label for="app_testcmd">Unit Test Command</label>
+          <input  class="form-control" type="text" ng-required="unittest"
+           placeholder="Command to test your application. For example, ./unit_tests.sh."
+           ng-model="app.test_cmd" name="app_testcmd"/>
+        </div>
+      </div>
+    
+      <div ng-show="deploy" class="col-sm-6">
+        <div class="rs-control-group"
+         ng-class="{ 'error' : createForm.app_runcmd.$invalid && createForm.$submitted }">
+          <label for="app_runcmd">Run Command</label>
+          <input  class="form-control" type="text" ng-required="deploy"
+           placeholder="Command to run the application. For example, python app.py"
+           ng-model="app.run_cmd" name="app_runcmd"/>
+        </div>
+      </div>
+    </div>
+    
     <div class="row" ng-repeat="p in params">
         <div class="col-xs-3">
           <input  name="app.param{{$index}}" ng-model="p.param_name" class="col-xs-12" type="text"
@@ -136,5 +161,4 @@
       </div>
     </div>
     
-    </div>
 </div>
