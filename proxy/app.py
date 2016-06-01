@@ -447,7 +447,11 @@ def authentication():
         headers['X-Auth-Token'] = request.headers['token']
         resp = requests.get(auth_url, headers=headers)
         if resp.status_code == 200:
-            return json.dumps({'ok': 'User token is valid.'})
+            username = resp.json().get('access', {}).get('user', {}).get('name')
+            tenant = resp.json().get('access', {}).get('token', {}).get('tenant', {}).get('id')
+            return json.dumps({'ok': 'User token is valid.',
+            'username': username,
+            'tenant': tenant})
         else:
             return auth_required_msg()
 

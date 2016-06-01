@@ -8,7 +8,7 @@
  * Controller of the reposePlaygroundApp
  */
 angular.module('reposePlaygroundApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $log) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, $log, $rootScope) {
     $log.info('in Login controller');
     $scope.user = {};
     $scope.errors = {};
@@ -25,6 +25,7 @@ angular.module('reposePlaygroundApp')
         })
         .then( function() {
           // Logged in, redirect to home
+          $rootScope.username = $scope.user.username;
           $log.info('LoginCtrl::Successful response', $location);
           $location.path('/main');
         })

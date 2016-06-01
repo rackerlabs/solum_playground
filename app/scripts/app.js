@@ -87,8 +87,8 @@ angular
           $log.info('run::Next state has authentication on and we are logged in');
           var user = Auth.getCurrentUser();
           $log.info('run::logged in user ', user, $location.$$path);
-          $rootScope.raxTenant = user.raxTenant;
           $rootScope.username = user.username;
+          $rootScope.tenant = user.tenant;
           $location.path($location.$$path);
         } else {
           $log.error('run::Some other combination.  Bail out to login');
