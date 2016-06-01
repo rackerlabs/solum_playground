@@ -3620,7 +3620,7 @@ html, body {
 #auth_login_block {
   padding: 30px 0 30px 49px;
   float: left;
-  margin: 30px 30px;
+  margin: 0px;
   border-left: 1px solid #ddd;
   font-size: 13px;
   width: 50%; }
