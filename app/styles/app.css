@@ -2349,7 +2349,8 @@ textarea {
 .rs-form-create .rs-detail-item.error .rs-validation-inline,
 .rs-control-group.error .rs-validation-block,
 .rs-form-create .rs-detail-item.error .rs-validation-block {
-  color: #c40022; }
+  color: #c40022;
+  overflow: hidden; }
 .rs-control-group.error .rs-validation-indicator, .rs-form-create .rs-detail-item.error .rs-validation-indicator {
   display: inline-block;
   width: 13px;

@@ -69,10 +69,20 @@ angular.module('reposePlaygroundApp')
       $log.info('CreateCtrl::',result);
       $scope.status = result.message;
       $scope.app.id = result.id;
+      if (result.faultstring) {
+        $scope.ui.errorMessage = result.faultstring;
+        return;
+      }
+      cleanErrors();      
       // Now deploy the app
       ReposeService.deployApp(result.id, JSON.stringify(deploy_data))
       .then(function(result){
       $log.info('CreateCtrl::',result);
+      if (result.faultstring) {
+        $scope.ui.errorMessage = result.faultstring;
+        return;
+      }
+      cleanErrors();      
       flashservice.setMessage("created");
       $location.path('/main');
     })
@@ -98,6 +108,11 @@ angular.module('reposePlaygroundApp')
         ReposeService.createLanguagepack(JSON.stringify($scope.lp))
         .then(function(result){
       $log.info('CreateCtrl::',result);
+      if (result.faultstring) {
+        $scope.ui.errorMessage = result.faultstring;
+        return;
+      }
+      cleanErrors();
       $scope.status = result.message;
       $scope.app.id = result.id;
       $location.path('/languagepacks');

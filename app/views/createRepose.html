@@ -114,11 +114,9 @@
       <div class="col-sm-12" ng-init="deploy=true;">Select pipeline options (you can select one or more)
         <input type="checkbox" value="option1" ng-model="unittest" name="unittest"> Unit Test </input>
         <input type="checkbox" value="option2" ng-model="deploy" name="deploy"> Deploy</input>
-        <p class="has-warning" ng-hide="deploy || unittest"
-        class="help-block">Must select at least one pipeline option.</p>
       </div>
     </div>
-    <div ng-hide="deploy || unittest" class="row alert alert-info" role="alert">
+    <div ng-hide="deploy || unittest" class="row alert alert-warning" role="alert">
       Must select at least one pipeline option.
     </div>    
     <div class="row">
