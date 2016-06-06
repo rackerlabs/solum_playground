@@ -5,8 +5,8 @@ node_modules
 .tmp
 .idea
 client/bower_components
-app/client/bower_components
-dist
+#app/client/bower_components
+#dist
 /server/config/local.env.js
 coverage
 npm-debug.log

@@ -1,0 +1,32 @@
+{
+  "name": "angular-pretty-xml",
+  "main": "./src/angular-pretty-xml.js",
+  "description": "Angular filter that makes XML pretty",
+  "homepage": "https://krtnio.github.io/angular-pretty-xml",
+  "keywords": [
+    "angular",
+    "xml",
+    "prettyprint"
+  ],
+  "authors": [
+    {
+      "name": "v12",
+      "email": "dr.evil@krtn.eu"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/krtnio/angular-pretty-xml.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": ">=1.0.1"
+  }
+}

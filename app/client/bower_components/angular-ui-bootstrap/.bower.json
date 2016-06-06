@@ -8,7 +8,7 @@
     "tag": "0.13.4",
     "commit": "eec160855fd7df720851c921681fddb5982d32ae"
   },
-  "_source": "git://github.com/angular-ui/bootstrap.git",
+  "_source": "https://github.com/angular-ui/bootstrap.git",
   "_target": "~0.13.3",
   "_originalSource": "angular-ui-bootstrap"
 }
