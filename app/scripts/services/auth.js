@@ -39,6 +39,7 @@ angular.module('reposePlaygroundApp')
           $log.info('Auth.login()::Got back a "successful" response with: ', data);
           $cookieStore.put('token', data.token);
           $cookieStore.put('username', user.username);
+          $cookieStore.put('tenant', user.tenant);
           $cookieStore.put('apikey', data.apikey);
           $cookieStore.put('cloud_files_url', data.cloud_files_url);
           currentUser = User.get();
@@ -64,6 +65,7 @@ angular.module('reposePlaygroundApp')
         $log.info('In Auth.logout().  Remove token from cookie store');
         $cookieStore.remove('token');
         $cookieStore.remove('username');
+        $cookieStore.remove('tenant');
         $cookieStore.remove('apikey');
         $cookieStore.remove('cloud_files_url');
         currentUser = {};

@@ -5,19 +5,23 @@
   <div class="rs-main rs-panel">
     <div class="rs-sidebar rs-pull-right">
       <div class="rs-inner">
-        <h3>Deploy an Application</h3>
-        <!--<h4>Solum Test Application</h4>-->
-        <p>To deploy an application, you need to provide following information. name of the application, languagepack, application code repository(github url), port etc... For more information refer to Openstack Docs.</p>
+        <h4>Deploy an Application</h4>
+        <p>To deploy an application, you must provide name of the app, languagepack, 
+          app code repository(GIT url) and command to run the app. For more information
+          refer to Openstack Docs.</p>
         <p><a href="http://docs.openstack.org/developer/solum/getting_started/#create-your-app">Go to Docs</a></p>
 
-        <h5>Application Parameters</h5>
-        <p>Optionally you can pass parameters to application, for example database connection string, username/password etc..
-        These parameters will be available as environment variables to your application. Please make sure you are providing correct parameter names which translates to environment variable name.</p>
+        <h5>Application Environment Variables</h5>
+        <p>Optionally you can pass parameters to application, for example database
+           connection string, username/password etc...
+        These parameters will be available as environment variables to the application.
+        Please note that environment variable names are case sensitive.</p>
         <p><a href="http://docs.openstack.org/developer/solum/getting_started/#app-configuration-and-environment-variables">Go to Docs</a></p>
       </div>
     </div>
     <div class="rs-content rs-panel">
-      <form name="createForm" data-ng-submit="createApplication()" class="rs-form-horizontal" >
+      <form name="createForm" data-ng-submit="createApplication()"
+         class="rs-form-horizontal" novalidate>
         <div class="rs-detail-section">
           <create-repose></create-repose>
         </div>

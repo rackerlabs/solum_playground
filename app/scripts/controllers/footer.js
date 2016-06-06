@@ -8,7 +8,7 @@
  * Controller of the reposePlaygroundApp
  */
 angular.module('reposePlaygroundApp')
-  .controller('FooterCtrl', function ($scope, ReposeService) {
+  .controller('FooterCtrl', function ($scope, $log, ReposeService) {
 
     ReposeService.getHostname()
     .then(function(resp){

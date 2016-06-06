@@ -8,7 +8,8 @@
  * Controller of the reposePlaygroundApp
  */
 angular.module('reposePlaygroundApp')
-  .controller('CreateCtrl', function ($scope, $log, ReposeService, $cookieStore, $filter, $stateParams, $location, flashservice, $rootScope) {
+  .controller('CreateCtrl', function ($scope, $log, ReposeService,
+   $cookieStore, $filter, $stateParams, $location, flashservice, $rootScope) {
     $log.info('In Create Ctrl', $stateParams);
     $scope.app_id = $stateParams.app_id
     $scope.ui = {
@@ -43,6 +44,13 @@ angular.module('reposePlaygroundApp')
     };
     
     $scope.createApplication = function() {
+      if ($scope.createForm.$valid) {
+        cleanErrors();
+      }
+      else {
+        $scope.ui.errorMessage = "Some input data is not valid.";
+        return;
+      }
     $scope.app['lp_name'] = $scope.lp_name.name;
     $scope.app['username'] = $scope.username;
     $scope.app['apikey'] = $scope.apikey;
@@ -61,10 +69,20 @@ angular.module('reposePlaygroundApp')
       $log.info('CreateCtrl::',result);
       $scope.status = result.message;
       $scope.app.id = result.id;
+      if (result.faultstring) {
+        $scope.ui.errorMessage = result.faultstring;
+        return;
+      }
+      cleanErrors();      
       // Now deploy the app
       ReposeService.deployApp(result.id, JSON.stringify(deploy_data))
       .then(function(result){
       $log.info('CreateCtrl::',result);
+      if (result.faultstring) {
+        $scope.ui.errorMessage = result.faultstring;
+        return;
+      }
+      cleanErrors();      
       flashservice.setMessage("created");
       $location.path('/main');
     })
@@ -90,6 +108,11 @@ angular.module('reposePlaygroundApp')
         ReposeService.createLanguagepack(JSON.stringify($scope.lp))
         .then(function(result){
       $log.info('CreateCtrl::',result);
+      if (result.faultstring) {
+        $scope.ui.errorMessage = result.faultstring;
+        return;
+      }
+      cleanErrors();
       $scope.status = result.message;
       $scope.app.id = result.id;
       $location.path('/languagepacks');
