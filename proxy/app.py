@@ -29,7 +29,7 @@ headers = {'Content-Type': 'application/json',
 SOLUM_URL = "https://dfw.solum.api.rackspacecloud.com"
 #SOLUM_URL = "https://vijendar-dfw-dev-api.dev.rs-paas.com"
 SOLUM_URL = "https://nick-dfw-dev-api.dev.rs-paas.com"
-#SOLUM_URL = "https://dfw-staging-api.labs.rs-paas.com"
+SOLUM_URL = "https://dfw-staging-api.labs.rs-paas.com"
 
 if os.environ.get('SOLUM_URL', None) is not None:
     SOLUM_URL = os.environ.get('SOLUM_URL')
@@ -95,11 +95,18 @@ def language_pack_create():
         data = json.loads(request.data)
     except ValueError:
         data = {}
-    
+
     lp_data = {
         "source_uri": data.get("uri", ""),
         "base_url": "/v1",
-        "name": data.get("name", "")
+        "name": data.get("name", ""),
+        "lp_params": {
+            "carina_params": {
+                "api_key": data.get("apikey"),
+                "user_name": data.get("username"),
+                "cluster_name": data.get("clustername", "lp_build_cluster")
+            }
+        }
     }
     resp = requests.post(SOLUM_URL+"/v1/language_packs",
                          headers=headers,

@@ -105,6 +105,8 @@ angular.module('reposePlaygroundApp')
   });
   
     $scope.createLanguagepack = function() {
+        $scope.lp['username'] = $scope.username;
+        $scope.lp['apikey'] = $scope.apikey;
         ReposeService.createLanguagepack(JSON.stringify($scope.lp))
         .then(function(result){
       $log.info('CreateCtrl::',result);
