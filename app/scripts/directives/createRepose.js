@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('reposePlaygroundApp')
-  .directive('createRepose', function ($log, ReposeService) {
+  .directive('createRepose', function ($log, ReposeService, $filter) {
     return {
       templateUrl: 'views/createRepose.html',
       restrict: 'E',
@@ -19,7 +19,7 @@ angular.module('reposePlaygroundApp')
         ReposeService.getLanguagepacks()
         .then(function(languagepacks){
           cleanErrors();
-          scope.repose.availableLanguagepacks = languagepacks;
+          scope.repose.availableLanguagepacks = $filter('filter')(languagepacks, {status: 'READY'});
           $log.info('createRepose directive ReposeService.getLanguagepacks::got back languagepacks: ', languagepacks);
         })
         .catch(function(err){
