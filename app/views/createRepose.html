@@ -144,17 +144,17 @@
     <div class="row" ng-repeat="p in params">
         <div class="col-xs-3">
           <input  name="app.param{{$index}}" ng-model="p.param_name" class="col-xs-12" type="text"
-            required placeholder="Enter parameter name." />
+            required placeholder="Environment variable name" />
         </div>
         <div class="rs-controls col-xs-5">
           <input  name="app.value{{$index}}" ng-model="p.param_value" class="col-xs-12" type="text"
-            required placeholder="Enter parameter value" />
+            required placeholder="Enter environment variable value" />
         </div>
         <div class="rs-btn rs-btn-link" ng-click="params.splice($index,1)">remove </div>
     </div>
 
     <div class="row">
-      <div class="col-xs-3">
+      <div class="col-xs-6">
          <a href="#" ng-click="addNewParam();"> Add an application environment variable </a>
       </div>
     </div>
